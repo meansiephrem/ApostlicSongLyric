@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Apostlic Songs</string>
+    <string name="action_settings">Settings</string>
+    <string name="SongSelect">Songs</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Album</string>
+
+
+</resources>

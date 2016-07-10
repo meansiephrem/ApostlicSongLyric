@@ -1,0 +1,30 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".hebretFragmnt">
+
+
+    <ListView
+        android:id="@+id/allLyric"
+
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+    </ListView>
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text=""
+        android:id="@+id/noFav"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+
+</RelativeLayout>
