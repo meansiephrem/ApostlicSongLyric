@@ -66,10 +66,18 @@ public class OneAlbum extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
-               Intent intent = new Intent(OneAlbum.this,Lyric.class).putExtra(Intent.EXTRA_TEXT,
-                       Songs.get(position-1));
-                startActivity(intent);
-                   }
+                if (position==0){
+                    Intent intent = new Intent(OneAlbum.this,AlbumArt.class).putExtra(Intent.EXTRA_TEXT,
+                            albumID);
+                    startActivity(intent);
+                }
+                else{
+                        Intent intent = new Intent(OneAlbum.this,Lyric.class).putExtra(Intent.EXTRA_TEXT,
+                                            Songs.get(position-1));
+                        startActivity(intent);
+                }
+            }
+
         });
     }
 

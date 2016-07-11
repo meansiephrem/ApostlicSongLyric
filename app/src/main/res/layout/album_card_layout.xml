@@ -30,7 +30,8 @@
                 android:id="@+id/CardAlbumName"
                 android:layout_below="@+id/CardAlbumArt"
                 android:layout_centerHorizontal="true"
-                android:textSize="13dp"/>
+                android:textSize="13dp"
+                android:maxLength="12"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -41,6 +42,7 @@
                 android:layout_below="@+id/CardAlbumName"
                 android:textSize="13dp"
                 android:layout_centerHorizontal="true"
+                android:maxLength="14"
                 />
 
 

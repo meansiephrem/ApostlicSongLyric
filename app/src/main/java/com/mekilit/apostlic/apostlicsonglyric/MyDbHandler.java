@@ -77,7 +77,7 @@ public class MyDbHandler extends SQLiteOpenHelper {
             db.insert(TABLE_LYRIC, null, ALL_Lyric);
         }
 
-        db.close();
+   
 
     }
 

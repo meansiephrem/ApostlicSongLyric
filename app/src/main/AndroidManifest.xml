@@ -18,7 +18,8 @@
         >
         <activity android:name=".DisplayALbums" />
         <activity android:name=".OneAlbum" />
-        <activity android:name=".Lyric"></activity>
+        <activity android:name=".Lyric" />
+        <activity android:name=".AlbumArt"></activity>
     </application>
 
 </manifest>
