@@ -5,21 +5,22 @@
 
     android:background="#fff">
 
-    <include android:id="@+id/appBar"
-        layout="@layout/app_bar"
-        />
-    <android.support.v7.widget.RecyclerView
-        android:layout_below="@id/appBar"
-        android:paddingTop="4dp"
-        android:paddingLeft="10dp"
+    <include
+        android:id="@+id/appBar"
+        layout="@layout/app_bar" />
 
-        android:layout_margin="10dp"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/RC"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:id="@+id/RC"
 
-        android:clickable="true">
+        android:layout_below="@id/appBar"
+        android:layout_margin="10dp"
+        android:clickable="true"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+
+        android:paddingTop="4dp">
 
 
     </android.support.v7.widget.RecyclerView>

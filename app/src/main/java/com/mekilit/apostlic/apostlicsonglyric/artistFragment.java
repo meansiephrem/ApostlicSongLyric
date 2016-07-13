@@ -2,8 +2,11 @@ package com.mekilit.apostlic.apostlicsonglyric;
 
 
 import android.app.Activity;
+import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +16,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.security.spec.ECField;
 import java.util.ArrayList;
 
 /**
@@ -46,24 +50,44 @@ public class artistFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final MyDbHandler helper = new MyDbHandler(getContext(),null,null,1);
-        View view= inflater.inflate(R.layout.fragment_album_fragmnt,container,false);
+        View view= inflater.inflate(R.layout.fragment_album_fragmnt, container, false);
         ListView listView =(ListView) view.findViewById(R.id.allLyric);
-        ArrayList<String> listAlbum = helper.SelectAllArtist();
-        final String [] albumsArtist = new String[listAlbum.size()];
-        for (int i=0; i< listAlbum.size() ;i++)
-        {
-            albumsArtist[i]= listAlbum.get(i);
-        }
+        final ArrayList<String> listAlbum = helper.SelectAllArtist();
 
-        ListAdapter adapter = new ArtistAdapter(getContext(),albumsArtist);
-        listView.setAdapter(adapter);
+        ArtistLoder loder = new ArtistLoder();
+        loder.execute();
+        try {
+            listView.setAdapter(loder.get()) ;
+        }catch (Exception e)
+        {};
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                albumListner.goToAlbum('D',albumsArtist[position]);
+                albumListner.goToAlbum('D',listAlbum.get(position));
             }
         });
         return view;
+    }
+
+    public class ArtistLoder extends AsyncTask<Void,Integer,ListAdapter> {
+        @Override
+        protected ListAdapter doInBackground(Void... params) {
+            final MyDbHandler helper = new MyDbHandler(getContext(), null, null, 1);
+            ArrayList<String> listAlbum = helper.SelectAllArtist();
+            final String[] albumsArtist = new String[listAlbum.size()];
+            for (int i = 0; i < listAlbum.size(); i++) {
+                albumsArtist[i] = listAlbum.get(i);
+            }
+            ListAdapter adapter = new ArtistAdapter(getContext(), albumsArtist);
+
+            return adapter;
+
+        }
+
+
+
+
     }
 
 }
