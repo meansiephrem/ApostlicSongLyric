@@ -3,8 +3,10 @@
     <string name="action_settings">Settings</string>
     <string name="SongSelect">Songs</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Album</string>
+
+    <string name="hello_blank_fragment">New Fragment Hello World</string>
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
 
 
 </resources>
