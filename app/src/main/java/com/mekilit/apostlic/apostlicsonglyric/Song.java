@@ -5,45 +5,6 @@ package com.mekilit.apostlic.apostlicsonglyric;
  */
 public class Song {
 
-    private int _id;
-    private String _title;
-    private String _albumId;
-    private String _actualLyric;
-    private int _isFav;
-
-    public int get_isFav() {
-        return _isFav;
-    }
-
-    public Song() {
-    }
-
-    public Song(String _titleAmahric, String _album, String _actualLyric, int _isFav) {
-
-        this._title = _titleAmahric;
-        this._albumId = _album;
-        this._actualLyric = _actualLyric;
-        this._isFav = _isFav;
-    }
-
-
-    public String get_title() {
-        return _title;
-    }
-
-    public String get_albumId() {
-        return _albumId;
-    }
-
-    public String get_actualLyric() {
-        return _actualLyric;
-
-    }
-
-    public int get_id() {
-        return _id;
-    }
-
     static public Song[] InsertQuery = {
 
             new Song("ትመለካለህ ከሁሉ በላይ", "Aylew1", "በክብርህ ላይ ክብርን ደርበህ\nከፍ ካለው በላይ ከፍ በል\nትመለካለህ ከሁሉ በላይ\nየለም ሚመስልህ የሱስ ኤልሻዳይ /2/ 2\n\nጌታ ነህ ከሁሉ በላይ ኤልሻዳይ\nእኩያ አቻ የለህም አንተን መሳይ\nዙፋንህ አይገረሰስ እስከዘላለም\nበሰማይ በምድር እንዳተ የለም /2/\n\nስልጣኑ በሰማይ በምድር ያንተ ነው\nከእጅህ የሚወስድብህ ኧረማን ነው\nያሰብከውና የፈቀድከውን ታደርጋለህ\nተው ባይ የለህም ሚከለክልህ /2/\n\nየክብር የምስጋና ዘውድ ተጭነህ\nጸንተህ ትኖራለህ የሱስ በዙፋንህ\nብዙ ነገስታት ከምድር ወጥቷል\nኢየሱስ አንተ ብቻህን ጸንተሃል /2/\n", 0),
@@ -1582,5 +1543,42 @@ public class Song {
 
 
     };
+    private int _id;
+    private String _title;
+    private String _albumId;
+    private String _actualLyric;
+    private int _isFav;
+
+    public Song() {
+    }
+
+    public Song(String _titleAmahric, String _album, String _actualLyric, int _isFav) {
+
+        this._title = _titleAmahric;
+        this._albumId = _album;
+        this._actualLyric = _actualLyric;
+        this._isFav = _isFav;
+    }
+
+    public int get_isFav() {
+        return _isFav;
+    }
+
+    public String get_title() {
+        return _title;
+    }
+
+    public String get_albumId() {
+        return _albumId;
+    }
+
+    public String get_actualLyric() {
+        return _actualLyric;
+
+    }
+
+    public int get_id() {
+        return _id;
+    }
 
 }

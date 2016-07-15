@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_width="wrap_content" android:layout_height="wrap_content"
+    android:orientation="horizontal">
 
     <android.support.v7.widget.CardView
+        android:id="@+id/cv"
         android:layout_width="120dp"
-        android:layout_height="180dp"
-        android:id="@+id/cv">
+        android:layout_height="180dp">
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -14,35 +14,35 @@
 
 
             <ImageView
+                android:id="@+id/CardAlbumArt"
                 android:layout_width="fill_parent"
                 android:layout_height="135dp"
-                android:id="@+id/CardAlbumArt"
-                android:src="@drawable/aberhama1"
+                android:layout_alignParentEnd="true"
 
                 android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+                android:src="@drawable/aberhama1" />
 
             <TextView
+                android:id="@+id/CardAlbumName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Large Text"
-                android:id="@+id/CardAlbumName"
                 android:layout_below="@+id/CardAlbumArt"
                 android:layout_centerHorizontal="true"
-                android:textSize="13dp"
-                android:maxLength="12"/>
+                android:maxLength="12"
+                android:text="Large Text"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="13dp"/>
 
             <TextView
+                android:id="@+id/CardAlbumArtist"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Medium Text"
-                android:id="@+id/CardAlbumArtist"
                 android:layout_below="@+id/CardAlbumName"
-                android:textSize="13dp"
                 android:layout_centerHorizontal="true"
                 android:maxLength="14"
+                android:text="Medium Text"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="13dp"
                 />
 
 
