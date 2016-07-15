@@ -54,8 +54,8 @@
         android:layout_width="280dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        app:layout="@layout/fragment_navigation_drawer"
-        tools:layout="@layout/fragment_navigation_drawer"
+        app:layout="@layout/nav_bar_header"
+        tools:layout="@layout/nav_bar_header"
         >
 
     </fragment>

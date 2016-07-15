@@ -325,5 +325,39 @@ public class MyDbHandler extends SQLiteOpenHelper {
         return buffer.toString();
     }
 
+    public String CountAlL(char x) {//a for album b for songs and c for artists
+        String ret ="";
+        ArrayList<String> album = new ArrayList();
+
+        SQLiteDatabase db = getWritableDatabase();
+        String[] co0 = {MyDbHandler.ALBUM_ID};
+        String[] co1 = {MyDbHandler.ALBUM_ARTIST};
+        String[] co2 = {MyDbHandler.LYRIC_ID};
+        Cursor cursor ;
+        int index ;
+        if(x=='a')
+        {//count all albm
+            cursor = db.query(true,MyDbHandler.TABLE_ALBUM, co0,null, null, null, null, null,null);
+             index = cursor.getColumnIndex(MyDbHandler.ALBUM_ID);
+        }
+        else if (x=='b')
+        {//count all Songs
+             cursor = db.query(true,MyDbHandler.TABLE_LYRIC, co2,null, null, null, null, null,null);
+             index = cursor.getColumnIndex(MyDbHandler.LYRIC_ID);
+        }
+        else
+        {//count all Artists
+            cursor = db.query(true,MyDbHandler.TABLE_ALBUM, co1,MyDbHandler.ALBUM_IS_SOLO+"="+1, null, null, null, null,null);
+             index = cursor.getColumnIndex(MyDbHandler.ALBUM_ARTIST);
+        }
+
+        while (cursor.moveToNext()) {
+            album.add(cursor.getString(index));
+        }
+
+            ret= album.size()+"";
+
+        return ret;
+    }
 }
 

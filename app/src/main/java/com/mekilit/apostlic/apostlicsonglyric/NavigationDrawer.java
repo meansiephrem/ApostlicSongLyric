@@ -11,6 +11,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+import android.widget.TextView;
 
 
 /**
@@ -20,9 +22,13 @@ public class NavigationDrawer extends Fragment {
 
     public final static String PERF_FILE_NAME = "testperf";
     public final static String KEY_USER_LEARN_DRAWER = "uselernkey";
+    String albumCount;
+    String songCount;
+    String ArtistCount;
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
     private View viewContainer;
+    private View header;
     private boolean mUserLearnNavBar;
     private boolean mFromSavedIns = false;
 
@@ -61,7 +67,23 @@ public class NavigationDrawer extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
+        MyDbHandler helper = new MyDbHandler(getActivity(), null, null, 1);
+        View view = inflater.inflate(R.layout.nav_bar_header, container, false);
+        ListView navListView = (ListView) view.findViewById(R.id.navList);
+        TextView AllAlbum = (TextView) view.findViewById(R.id.totalAlbum);
+        TextView AllArtist = (TextView) view.findViewById(R.id.totalSingers);
+        TextView AllSong = (TextView) view.findViewById(R.id.totalSongs);
+
+        AllAlbum.setText(helper.CountAlL('a'));
+        AllArtist.setText(helper.CountAlL('c'));
+        AllSong.setText(helper.CountAlL('b'));
+
+
+        Integer[] array = {1, 2, 3, 4};
+        navListView.setAdapter(new NavBarList(getContext(), array));
+        return view;
+
+
     }
 
     public void setUp(int viewById, DrawerLayout drawerLayout, Toolbar toolbar) {
@@ -94,7 +116,7 @@ public class NavigationDrawer extends Fragment {
         mDrawerLayout.post(new Runnable() {
             @Override
             public void run() {
-           mDrawerToggle.syncState();
+                mDrawerToggle.syncState();
             }
         });
     }

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/cardview_dark_background"
+    android:orientation="vertical">
+ <RelativeLayout
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:clickable="true"
+     android:paddingBottom="10dp"
+     >
+    <RelativeLayout
+        android:id="@+id/hederNavImg"
+        android:layout_width="280dp"
+        android:layout_height="150dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/btn_star_big_on_selected" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageView"
+            android:layout_centerHorizontal="true"
+            android:paddingBottom="5dp"
+            android:paddingTop="15dp"
+            android:text="የፂሆን መዝሙሮች"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#fff"
+            android:textSize="18dp"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/hederNavImg"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="93dp"
+            android:layout_height="47dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:text="መዝሙሮች"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="#ccc"/>
+
+            <TextView
+                android:id="@+id/totalSongs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:text="20"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#fff"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="93dp"
+            android:layout_height="47dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:text="አልበሞች"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="#ccc"/>
+
+            <TextView
+                android:id="@+id/totalAlbum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:text="120"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#fff"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="93dp"
+            android:layout_height="47dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:text="ዘማሪዎች"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="#ccc"/>
+
+            <TextView
+                android:id="@+id/totalSingers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:text="20"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#fff"/>
+        </RelativeLayout>
+    </LinearLayout>
+ </RelativeLayout>
+
+    <ListView
+        android:id="@+id/navList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/heder"
+
+        />
+</LinearLayout>
