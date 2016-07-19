@@ -1,14 +1,12 @@
 package com.mekilit.apostlic.apostlicsonglyric;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-
-import java.util.ArrayList;
 
 public class DisplayALbums extends AppCompatActivity {
     MyDbHandler helper = new MyDbHandler(this,null,null,1);
@@ -40,8 +38,9 @@ public class DisplayALbums extends AppCompatActivity {
             adaptor =new AlbumAdaptor(this,helper.getAlbum(ArtistName));
         }
         else {
-            toolbar.setTitle("All");
-            adaptor = new AlbumAdaptor(this,helper.SelectAllArtist());
+            toolbar.setTitle("ሁሉም አልበሞች");
+            toolbar.setSubtitle(helper.CountAlL('a') + " አልበሞች");
+            adaptor = new AlbumAdaptor(this,helper.SelectAll());
         }
         recyclerView.setAdapter(adaptor);
 
@@ -49,8 +48,11 @@ public class DisplayALbums extends AppCompatActivity {
                 new RecyclerItemClickListener(this, new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
-                        Intent intent = new Intent(DisplayALbums.this, OneAlbum.class).
-                            putExtra(Intent.EXTRA_TEXT, helper.getAlbum(ArtistName).get(position));
+                        Intent intent = new Intent(DisplayALbums.this, OneAlbum.class);
+                        if (!all)
+                            intent.putExtra(Intent.EXTRA_TEXT, helper.getAlbum(ArtistName).get(position));
+                        else
+                            intent.putExtra(Intent.EXTRA_TEXT, helper.SelectAll().get(position));
                         startActivity(intent);
                     }
                 })

@@ -2,6 +2,7 @@ package com.mekilit.apostlic.apostlicsonglyric;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,8 +12,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 /**
@@ -22,13 +25,9 @@ public class NavigationDrawer extends Fragment {
 
     public final static String PERF_FILE_NAME = "testperf";
     public final static String KEY_USER_LEARN_DRAWER = "uselernkey";
-    String albumCount;
-    String songCount;
-    String ArtistCount;
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
     private View viewContainer;
-    private View header;
     private boolean mUserLearnNavBar;
     private boolean mFromSavedIns = false;
 
@@ -57,7 +56,7 @@ public class NavigationDrawer extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mUserLearnNavBar = Boolean.
-                getBoolean(readToPerfence(getActivity(), KEY_USER_LEARN_DRAWER, "false"));
+                valueOf(readToPerfence(getActivity(), KEY_USER_LEARN_DRAWER, "false"));
         if (!mFromSavedIns) {
             mFromSavedIns = true;
         }
@@ -81,10 +80,22 @@ public class NavigationDrawer extends Fragment {
 
         Integer[] array = {1, 2, 3, 4};
         navListView.setAdapter(new NavBarList(getContext(), array));
-        return view;
 
-
-    }
+      navListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+          @Override
+          public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+              if (position == 0) {
+                  Intent intent = new Intent(getContext(),DisplayALbums.class);
+                  intent.putExtra(Intent.EXTRA_TEXT,"1");
+                  startActivity(intent);
+              }
+              else {
+                  Toast.makeText(getContext(), position + "", Toast.LENGTH_SHORT).show();
+              }
+          }
+      });
+            return view;
+        }
 
     public void setUp(int viewById, DrawerLayout drawerLayout, Toolbar toolbar) {
         mDrawerLayout = drawerLayout;

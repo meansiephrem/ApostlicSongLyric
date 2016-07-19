@@ -359,5 +359,21 @@ public class MyDbHandler extends SQLiteOpenHelper {
 
         return ret;
     }
+
+    public ArrayList<String> SelectAll() {
+
+        ArrayList<String> album = new ArrayList();
+
+        SQLiteDatabase db = getWritableDatabase();
+        String[] col = {MyDbHandler.ALBUM_ID};
+        Cursor cursor = db.query(true,MyDbHandler.TABLE_ALBUM, col, null, null, null, null, null,null);
+
+        while (cursor.moveToNext()) {
+            int index = cursor.getColumnIndex(MyDbHandler.ALBUM_ID);
+            album.add(cursor.getString(index));
+        }
+
+        return album;
+    }
 }
 
