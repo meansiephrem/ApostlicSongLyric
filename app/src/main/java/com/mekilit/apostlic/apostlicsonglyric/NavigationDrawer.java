@@ -81,21 +81,23 @@ public class NavigationDrawer extends Fragment {
         Integer[] array = {1, 2, 3, 4};
         navListView.setAdapter(new NavBarList(getContext(), array));
 
-      navListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-          @Override
-          public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-              if (position == 0) {
-                  Intent intent = new Intent(getContext(),DisplayALbums.class);
-                  intent.putExtra(Intent.EXTRA_TEXT,"1");
-                  startActivity(intent);
-              }
-              else {
-                  Toast.makeText(getContext(), position + "", Toast.LENGTH_SHORT).show();
-              }
-          }
-      });
-            return view;
-        }
+        navListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (position == 0) {
+                    Intent intent = new Intent(getContext(), DisplayALbums.class);
+                    intent.putExtra(Intent.EXTRA_TEXT, "1");
+                    startActivity(intent);
+                } else if (position == 3) {
+
+                    System.exit(0);
+                } else {
+                    Toast.makeText(getContext(), position + "", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        return view;
+    }
 
     public void setUp(int viewById, DrawerLayout drawerLayout, Toolbar toolbar) {
         mDrawerLayout = drawerLayout;

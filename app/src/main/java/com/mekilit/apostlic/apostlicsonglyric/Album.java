@@ -6,42 +6,6 @@ package com.mekilit.apostlic.apostlicsonglyric;
 public class Album {
 
 
-    private String Album_id;
-    private String Album_Title;
-    private String Album_Artist;
-    private String Album_Art;
-    private int _isSolo;
-
-
-
-    public Album(String album_id, String album_Title, String album_Artist, int _isSolo) {
-        Album_id = album_id;
-        Album_Title = album_Title;
-        Album_Artist = album_Artist;
-        Album_Art= album_id;
-        this._isSolo = _isSolo;
-    }
-
-    public String getAlbum_Art() {
-        return Album_Art;
-    }
-
-    public String getAlbum_id() {
-        return Album_id;
-    }
-
-    public String getAlbum_Title() {
-        return Album_Title;
-    }
-
-    public String getAlbum_Artist() {
-        return Album_Artist;
-    }
-
-    public int get_isSolo() {
-        return _isSolo;
-    }
-
     static Album[] insertAlbum =
             { new Album ("Aylew1","አምኜው ነው የተከተልኩት","አያሌው",1),
                     new Album ("Aylew2","እሱን ታምኖ","አያሌው",1),
@@ -84,6 +48,7 @@ public class Album {
                     new Album ("Tadne1","ያያልበ ዙፋን ያለው","ታድን እንግዳ",1),
                     new Album ("Tewlde1","የድል ሽታ","ተወልደ አበባየሁ",1),
                     new Album ("Teru1","ቀን ለቀን ነገርን ታወጣለች","ጥሩነሽ በቀለ",1),
+                    new Album ("wegene1","ምስጋናዬን አላቆምም","ወገኔ አለማየሁ",1),
                     new Album ("Yemserach1","ለክብርህ ካልሆነ መኖሬ","የምስራች ገ/ሚካኤል",1),
                     new Album ("Yemserach2","ማደሪያዎችህ","የምስራች ገ/ሚካኤል",1),
                     new Album ("Zenbech1","ኢትዮጵያን እግዚአብሔር ይባርክ","ዘነበች መህዲ",1),
@@ -110,5 +75,38 @@ public class Album {
                     new Album ("fishbermul","ባለብዙ ክብር","ፍሰሃ ሙሉጌታ እና ብርሃኑ",0),
 
             };
+    private String Album_id;
+    private String Album_Title;
+    private String Album_Artist;
+    private String Album_Art;
+    private int _isSolo;
+
+    public Album(String album_id, String album_Title, String album_Artist, int _isSolo) {
+        Album_id = album_id;
+        Album_Title = album_Title;
+        Album_Artist = album_Artist;
+        Album_Art= album_id;
+        this._isSolo = _isSolo;
+    }
+
+    public String getAlbum_Art() {
+        return Album_Art;
+    }
+
+    public String getAlbum_id() {
+        return Album_id;
+    }
+
+    public String getAlbum_Title() {
+        return Album_Title;
+    }
+
+    public String getAlbum_Artist() {
+        return Album_Artist;
+    }
+
+    public int get_isSolo() {
+        return _isSolo;
+    }
 
 }

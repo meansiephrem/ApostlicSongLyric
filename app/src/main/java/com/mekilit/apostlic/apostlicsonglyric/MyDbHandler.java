@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class MyDbHandler extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 3;
     private static final String DATABASE_NAME = "SongLyric.db";
     private static final String TABLE_ALBUM = "albums";
     private static final String TABLE_LYRIC = "lyric";
@@ -83,6 +83,15 @@ public class MyDbHandler extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
+        if (oldVersion != newVersion) {
+            String query = "drop table "+TABLE_ALBUM ;
+            String query1 = "drop table "+TABLE_LYRIC;
+            db.execSQL(query);
+            db.execSQL(query1);
+            onCreate(db);
+        }
+
 
     }
 

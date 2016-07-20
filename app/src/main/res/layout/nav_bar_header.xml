@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="#ececec"
+    android:background="#ccb"
     android:orientation="vertical">
  <RelativeLayout
      android:layout_width="wrap_content"
      android:layout_height="wrap_content"
-     android:layout_marginBottom="5dp"
-     android:background="#fff"
+     android:layout_marginBottom="1dp"
+     android:background="#fffefe"
      android:clickable="true"
      android:paddingBottom="10dp"
      >
@@ -21,10 +21,11 @@
             android:id="@+id/imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
             android:layout_gravity="center_horizontal"
-            android:src="@drawable/btn_star_big_on_selected" />
+            android:src="@drawable/new_logo" />
 
         <TextView
             android:id="@+id/textView4"
@@ -36,7 +37,7 @@
             android:paddingTop="15dp"
             android:text="የፂሆን መዝሙሮች"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#000"
+            android:textColor="#ffe"
             android:textSize="18dp"/>
     </RelativeLayout>
 
@@ -59,7 +60,7 @@
                 android:layout_centerHorizontal="true"
                 android:text="መዝሙሮች"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="#ccc" />
+                android:textColor="#001" />
 
             <TextView
                 android:id="@+id/totalSongs"
@@ -69,7 +70,7 @@
                 android:layout_centerHorizontal="true"
                 android:text="20"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="#000" />
+                android:textColor="#001" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -85,7 +86,7 @@
                 android:layout_centerHorizontal="true"
                 android:text="አልበሞች"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="#ccc" />
+                android:textColor="#001" />
 
             <TextView
                 android:id="@+id/totalAlbum"
@@ -95,7 +96,7 @@
                 android:layout_centerHorizontal="true"
                 android:text="120"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="#000" />
+                android:textColor="#001" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -111,7 +112,7 @@
                 android:layout_centerHorizontal="true"
                 android:text="ዘማሪዎች"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="#ccc" />
+                android:textColor="#001" />
 
             <TextView
                 android:id="@+id/totalSingers"
@@ -121,7 +122,7 @@
                 android:layout_centerHorizontal="true"
                 android:text="20"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="#000" />
+                android:textColor="#001" />
         </RelativeLayout>
     </LinearLayout>
  </RelativeLayout>
@@ -131,6 +132,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/heder"
-        android:background="#fff"
-        android:divider="#ffffff" />
+        android:layout_weight="1"
+        android:background="#fffefe"
+        android:divider="#001" />
 </LinearLayout>
