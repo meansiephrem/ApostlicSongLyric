@@ -2,13 +2,13 @@ package com.mekilit.apostlic.apostlicsonglyric;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 
@@ -18,24 +18,8 @@ import java.util.ArrayList;
 public class AlbumAdaptor extends
         RecyclerView.Adapter<AlbumAdaptor.ViewHoler>
 {
-    public static class ViewHoler extends RecyclerView.ViewHolder
-    {
-        public ImageView imageView;
-        public TextView AlbumName;
-        public TextView ArtistName;
-
-        public ViewHoler(View ItemView)
-        {
-            super(ItemView);
-            imageView = (ImageView) ItemView.findViewById(R.id.CardAlbumArt);
-            AlbumName = (TextView) ItemView.findViewById(R.id.CardAlbumName);
-            ArtistName = (TextView) ItemView.findViewById(R.id.CardAlbumArtist);
-        }
-    }
-
     private ArrayList<String> albums;
     private Context context;
-
     public AlbumAdaptor(Context context, ArrayList<String> albums) {
         this.context = context;
         this.albums = albums;
@@ -59,17 +43,14 @@ public class AlbumAdaptor extends
         TextView artistName = holder.ArtistName;
         albumName.setText(AlbumName);
         artistName.setText(ArtistName);
+        int AlbumArt = helper.getAlbumArt(AlbumID);
 
-        try {
-            String name = AlbumID.toLowerCase();
-            Class res = R.drawable.class;
-            Field field = res.getField(name);
-            int res1 =field.getInt(null);
-            albumArt.setImageResource(res1);
-        }catch (Exception e)
-        {
+        Log.e(AlbumID," art"+AlbumArt);
+        if (AlbumArt == 0)
             albumArt.setImageResource(R.drawable.defultpic);
-        }
+        else
+            albumArt.setImageResource(AlbumArt);
+
 
     }
 
@@ -85,5 +66,20 @@ public class AlbumAdaptor extends
     @Override
     public int getItemCount() {
         return albums.size();
+    }
+
+    public static class ViewHoler extends RecyclerView.ViewHolder
+    {
+        public ImageView imageView;
+        public TextView AlbumName;
+        public TextView ArtistName;
+
+        public ViewHoler(View ItemView)
+        {
+            super(ItemView);
+            imageView = (ImageView) ItemView.findViewById(R.id.CardAlbumArt);
+            AlbumName = (TextView) ItemView.findViewById(R.id.CardAlbumName);
+            ArtistName = (TextView) ItemView.findViewById(R.id.CardAlbumArtist);
+        }
     }
 }

@@ -1,17 +1,20 @@
 package com.mekilit.apostlic.apostlicsonglyric;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class Lyric extends ActionBarActivity {
+    private static String SECRET_MESSAGE="Menasi Ephrem 0912476374\n Eshcol Tefera 0920720821";
     Toolbar toolbar ;
+    String id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -19,7 +22,7 @@ public class Lyric extends ActionBarActivity {
         setContentView(R.layout.activity_lyric);
         final MyDbHandler helper = new MyDbHandler(this,null,null,1);
         Intent inten = getIntent();
-        String id = inten.getStringExtra(Intent.EXTRA_TEXT);
+       id = inten.getStringExtra(Intent.EXTRA_TEXT);
         toolbar= (Toolbar) findViewById(R.id.lyapp);
         final int lryicID=Integer.parseInt(id);
         String albumId= helper.getAlbumID(lryicID);
@@ -46,6 +49,7 @@ public class Lyric extends ActionBarActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 if (!fab.isSelected()) {
 
                     fab.setImageDrawable(getResources().getDrawable(R.drawable.btn_star_big_on_selected));
@@ -62,6 +66,20 @@ public class Lyric extends ActionBarActivity {
                     tost.show();
                 }
 
+            }
+        });
+
+        fab.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+
+                if(Integer.parseInt(id)!=53)
+                    return false;
+                Toast toast= Toast.makeText(Lyric.this, SECRET_MESSAGE, Toast.LENGTH_LONG);
+                toast.show();
+                toast.setGravity(Gravity.CENTER,0,0);
+
+                return true;
             }
         });
 

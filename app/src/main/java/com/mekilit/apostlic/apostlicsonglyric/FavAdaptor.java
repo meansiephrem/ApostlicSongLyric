@@ -5,10 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 /**
@@ -22,9 +19,17 @@ public class FavAdaptor  extends ArrayAdapter<Integer>
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final MyDbHandler helper = new MyDbHandler(getContext(),null,null,1);
-        LayoutInflater inflater = LayoutInflater.from(getContext());
-        View customView = inflater.inflate(R.layout.custom_album, parent, false);
+        View customView = convertView;
+        ViewHolders holders = null;
+        MyDbHandler helper = new MyDbHandler(getContext(), null, null, 1);
+        if (customView == null) {
+            LayoutInflater inflater = LayoutInflater.from(getContext());
+            customView = inflater.inflate(R.layout.custom_album, parent, false);
+            holders = new ViewHolders(customView);
+            customView.setTag(holders);
+        } else {
+            holders = (ViewHolders) customView.getTag();
+        }
 
         int LyricSongID = getItem(position);//find the lyric id
         String albumID = helper.getAlbumID(LyricSongID);//find the crossponding album id
@@ -33,22 +38,15 @@ public class FavAdaptor  extends ArrayAdapter<Integer>
 
 
 
-        ImageView albumArt = (ImageView) customView.findViewById(R.id.albumArt);
-        TextView albumName = (TextView) customView.findViewById(R.id.BigText);
-        TextView artistName = (TextView) customView.findViewById(R.id.SmallText);
 
-        albumName.setText(SongName);
-        artistName.setText(ArtistName);
-        try {
-            String name = albumID.toLowerCase();
-            Class res = R.drawable.class;
-            Field field = res.getField(name);
-            int res1 =field.getInt(null);
-            albumArt.setImageResource(res1);
-        }catch (Exception e)
-        {
-            albumArt.setImageResource(R.drawable.defultpic);
-        }
+        holders.BigText.setText(ArtistName);
+        holders.SmallText.setText(SongName);
+        int AlbumArt = helper.getAlbumArt(albumID);
+
+        if (AlbumArt == 0)
+            holders.albumArt.setImageResource(R.drawable.defultpic);
+        else
+            holders.albumArt.setImageResource(AlbumArt);
 
         return customView;
     }
