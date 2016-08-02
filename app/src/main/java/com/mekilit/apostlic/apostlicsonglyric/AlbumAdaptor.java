@@ -2,7 +2,6 @@ package com.mekilit.apostlic.apostlicsonglyric;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,11 +17,16 @@ import java.util.ArrayList;
 public class AlbumAdaptor extends
         RecyclerView.Adapter<AlbumAdaptor.ViewHoler>
 {
-    private ArrayList<String> albums;
+    private ArrayList<String> AlbumName;
+    private ArrayList<String> ArtistName;
+    private ArrayList<Integer> AlbumArt;
     private Context context;
-    public AlbumAdaptor(Context context, ArrayList<String> albums) {
+    public AlbumAdaptor(Context context, ArrayList<String> albumName,ArrayList<String> artistName,
+                        ArrayList<Integer> albumArt) {
         this.context = context;
-        this.albums = albums;
+        this.AlbumName = albumName;
+        this.ArtistName= artistName;
+        this.AlbumArt=albumArt;
     }
 
     public Context getContext() {
@@ -31,10 +35,11 @@ public class AlbumAdaptor extends
 
     @Override
     public void onBindViewHolder(ViewHoler holder, int position) {
-        final MyDbHandler helper = new MyDbHandler(getContext(),null,null,1);
-        String AlbumID = albums.get(position);
-        String AlbumName = helper.getAlbumName(AlbumID);
-        String ArtistName = helper.getArtistName(AlbumID);
+
+
+        String AlbumName = this.AlbumName.get(position);
+        String ArtistName = this.ArtistName.get(position);
+        int AlbumArt = this.AlbumArt.get(position);
 
 
 
@@ -43,9 +48,9 @@ public class AlbumAdaptor extends
         TextView artistName = holder.ArtistName;
         albumName.setText(AlbumName);
         artistName.setText(ArtistName);
-        int AlbumArt = helper.getAlbumArt(AlbumID);
 
-        Log.e(AlbumID," art"+AlbumArt);
+
+
         if (AlbumArt == 0)
             albumArt.setImageResource(R.drawable.defultpic);
         else
@@ -65,7 +70,7 @@ public class AlbumAdaptor extends
 
     @Override
     public int getItemCount() {
-        return albums.size();
+        return AlbumName.size();
     }
 
     public static class ViewHoler extends RecyclerView.ViewHolder

@@ -22,7 +22,7 @@ public class Lyric extends ActionBarActivity {
         setContentView(R.layout.activity_lyric);
         final MyDbHandler helper = new MyDbHandler(this,null,null,1);
         Intent inten = getIntent();
-       id = inten.getStringExtra(Intent.EXTRA_TEXT);
+        id = inten.getStringExtra(Intent.EXTRA_TEXT);
         toolbar= (Toolbar) findViewById(R.id.lyapp);
         final int lryicID=Integer.parseInt(id);
         String albumId= helper.getAlbumID(lryicID);
@@ -31,6 +31,8 @@ public class Lyric extends ActionBarActivity {
             toolbar.setSubtitle(helper.getArtistName(albumId));
 
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         boolean isFav =helper.isFav(id);
 
@@ -55,14 +57,16 @@ public class Lyric extends ActionBarActivity {
                     fab.setImageDrawable(getResources().getDrawable(R.drawable.btn_star_big_on_selected));
                     fab.setSelected(true);
                     helper.ChangeFavStat(false, lryicID);
-                    Toast tost = Toast.makeText(getApplicationContext(), "የተመረጡ ዝርዝር ውስጥ ተካቶል", Toast.LENGTH_SHORT);
+                    Toast tost = Toast.makeText(getApplicationContext(), "የተመረጡ ዝርዝር ውስጥ ተካቷል",
+                            Toast.LENGTH_SHORT);
                     tost.show();
                 } else {
 
                     fab.setImageDrawable(getResources().getDrawable(R.drawable.btn_star_big_off));
                     fab.setSelected(false);
                     helper.ChangeFavStat(true, lryicID);
-                    Toast tost = Toast.makeText(getApplicationContext(), "ከተመረጡ ዝርዝር ውስጥ ተወግዶል", Toast.LENGTH_SHORT);
+                    Toast tost = Toast.makeText(getApplicationContext(), "ከተመረጡ ዝርዝር ውስጥ ተወግዶል",
+                            Toast.LENGTH_SHORT);
                     tost.show();
                 }
 

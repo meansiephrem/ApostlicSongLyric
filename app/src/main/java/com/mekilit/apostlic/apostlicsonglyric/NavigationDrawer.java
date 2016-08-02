@@ -1,9 +1,7 @@
 package com.mekilit.apostlic.apostlicsonglyric;
 
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
@@ -15,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 /**
@@ -23,43 +20,24 @@ import android.widget.Toast;
  */
 public class NavigationDrawer extends Fragment {
 
-    public final static String PERF_FILE_NAME = "testperf";
-    public final static String KEY_USER_LEARN_DRAWER = "uselernkey";
+
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
     private View viewContainer;
-    private boolean mUserLearnNavBar;
-    private boolean mFromSavedIns = false;
+
 
     public NavigationDrawer() {
         // Required empty public constructor
     }
 
-    private static void writeToPerfence(Context context, String prefrenceName, String prefrenceValue) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences
-                (PERF_FILE_NAME, Context.MODE_PRIVATE);
 
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(prefrenceName, prefrenceValue);
-        editor.apply();
-    }
 
-    private static String readToPerfence(Context context, String prefrenceName, String DefualtValue) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences
-                (PERF_FILE_NAME, Context.MODE_PRIVATE);
 
-        return sharedPreferences.getString(prefrenceName, DefualtValue);
-
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mUserLearnNavBar = Boolean.
-                valueOf(readToPerfence(getActivity(), KEY_USER_LEARN_DRAWER, "false"));
-        if (!mFromSavedIns) {
-            mFromSavedIns = true;
-        }
+
     }
 
     @Override
@@ -78,7 +56,7 @@ public class NavigationDrawer extends Fragment {
         AllSong.setText(helper.CountAlL('b'));
 
 
-        Integer[] array = {1, 2, 3, 4};
+        Integer[] array = {1, 2, 3};
         navListView.setAdapter(new NavBarList(getContext(), array));
 
         navListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -88,11 +66,12 @@ public class NavigationDrawer extends Fragment {
                     Intent intent = new Intent(getContext(), DisplayALbums.class);
                     intent.putExtra(Intent.EXTRA_TEXT, "1");
                     startActivity(intent);
-                } else if (position == 3) {
+                } else if (position == 2) {
 
                     System.exit(0);
                 } else {
-                    Toast.makeText(getContext(), position + "", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getContext(), AboutTheApp.class);
+                    startActivity(intent);
                 }
             }
         });
@@ -107,10 +86,7 @@ public class NavigationDrawer extends Fragment {
             @Override
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
-                if (!mUserLearnNavBar) {
-                    mUserLearnNavBar = true;
-                    writeToPerfence(getActivity(), KEY_USER_LEARN_DRAWER, mUserLearnNavBar + "");
-                }
+
                 getActivity().invalidateOptionsMenu();
             }
 
@@ -122,7 +98,7 @@ public class NavigationDrawer extends Fragment {
 
 
         };
-        if (!mUserLearnNavBar && !mFromSavedIns)
+
             mDrawerToggle.onDrawerOpened(viewContainer);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 

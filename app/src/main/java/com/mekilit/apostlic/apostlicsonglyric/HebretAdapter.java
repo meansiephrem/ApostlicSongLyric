@@ -11,15 +11,23 @@ import java.util.ArrayList;
 /**
  * Created by Menasi on 7/9/2016.
  */
-public class HebretAdapter extends ArrayAdapter<String>
-{
-    public HebretAdapter(Context context, ArrayList<String> objects) {
-        super(context, R.layout.custom_album, objects);
+public class HebretAdapter extends ArrayAdapter<String> {
+    ArrayList<String> ArtistName;
+    ArrayList<String> AlbumName;
+    ArrayList<Integer> AlbumArt;
+
+    public HebretAdapter(Context context, ArrayList<String> ArtistName,
+                         ArrayList<String> albumName, ArrayList<Integer> albumArt) {
+        super(context, R.layout.custom_album, ArtistName);
+        this.ArtistName = ArtistName;
+        this.AlbumName = albumName;
+        this.AlbumArt = albumArt;
+
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final MyDbHandler helper = new MyDbHandler(getContext(),null,null,1);
+
         View customView = convertView;
         ViewHolders holders = null;
         if (customView == null) {
@@ -31,16 +39,15 @@ public class HebretAdapter extends ArrayAdapter<String>
             holders = (ViewHolders) customView.getTag();
         }
 
-        String albumID = getItem(position);
-        String ArtistName = helper.getArtistName(albumID);
-        String AlbumName = helper.getAlbumName(albumID);
+
+        String ArtistName = getItem(position);
+        String AlbumName = this.AlbumName.get(position);
+        int AlbumArt = this.AlbumArt.get(position);
 
 
-
-
-   holders.BigText.setText(AlbumName);
+        holders.BigText.setText(AlbumName);
         holders.SmallText.setText(ArtistName);
-        int AlbumArt = helper.getAlbumArt(albumID);
+
 
         if (AlbumArt == 0)
             holders.albumArt.setImageResource(R.drawable.defultpic);

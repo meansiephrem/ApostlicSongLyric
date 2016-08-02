@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class MyDbHandler extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 5;
+    private static final int DATABASE_VERSION = 9;
     private static final String DATABASE_NAME = "SongLyric.db";
     private static final String TABLE_ALBUM = "albums";
     private static final String TABLE_LYRIC = "lyric";
@@ -76,7 +76,7 @@ public class MyDbHandler extends SQLiteOpenHelper {
             db.insert(TABLE_LYRIC, null, ALL_Lyric);
         }
 
-   
+
 
     }
 
@@ -319,10 +319,7 @@ public class MyDbHandler extends SQLiteOpenHelper {
         while (cursor.moveToNext()) {
             int index = cursor.getColumnIndex(MyDbHandler.LYRIC_IS_FAV);
             int fav = cursor.getInt(index);
-            if (fav==0)
-                Song = false;
-            else
-                Song = true;
+            Song = fav != 0;
         }
 
         cursor.close();

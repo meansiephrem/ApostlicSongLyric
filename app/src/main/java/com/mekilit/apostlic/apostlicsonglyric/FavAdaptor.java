@@ -11,17 +11,26 @@ import java.util.ArrayList;
 /**
  * Created by Menasi on 6/28/2016.
  */
-public class FavAdaptor  extends ArrayAdapter<Integer>
-{
-    public FavAdaptor(Context context, ArrayList<Integer> objects) {
-        super(context, R.layout.custom_album, objects);
+public class FavAdaptor extends ArrayAdapter<String> {
+    ArrayList<String> SongName;
+    ArrayList<String> ArtistName;
+    ArrayList<Integer> AlbumArt;
+
+    public FavAdaptor(Context context, ArrayList<String> songName,
+                      ArrayList<String> artistName, ArrayList<Integer> albumArt
+    ) {
+        super(context, R.layout.custom_album, songName);
+        this.ArtistName = artistName;
+        this.SongName = songName;
+        this.AlbumArt = albumArt;
     }
+
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View customView = convertView;
         ViewHolders holders = null;
-        MyDbHandler helper = new MyDbHandler(getContext(), null, null, 1);
+
         if (customView == null) {
             LayoutInflater inflater = LayoutInflater.from(getContext());
             customView = inflater.inflate(R.layout.custom_album, parent, false);
@@ -31,17 +40,15 @@ public class FavAdaptor  extends ArrayAdapter<Integer>
             holders = (ViewHolders) customView.getTag();
         }
 
-        int LyricSongID = getItem(position);//find the lyric id
-        String albumID = helper.getAlbumID(LyricSongID);//find the crossponding album id
-        String SongName = helper.getSongName(LyricSongID + "" );//find the song name
-        String ArtistName = helper.getArtistName(albumID); //find the artist Name
+
+        String SongName = this.SongName.get(position);
+        String ArtistName = this.ArtistName.get(position);
+        int AlbumArt = this.AlbumArt.get(position);
 
 
+        holders.BigText.setText(SongName);
+        holders.SmallText.setText(ArtistName);
 
-
-        holders.BigText.setText(ArtistName);
-        holders.SmallText.setText(SongName);
-        int AlbumArt = helper.getAlbumArt(albumID);
 
         if (AlbumArt == 0)
             holders.albumArt.setImageResource(R.drawable.defultpic);

@@ -8,18 +8,22 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SelectAll">
+        <activity android:name=".SelectAll"></activity>
+        >
+        <activity android:name=".DisplayALbums" />
+        <activity android:name=".OneAlbum" />
+        <activity
+            android:name=".Lyric"
+            android:parentActivityName=".SelectAll" />
+        <activity android:name=".AlbumArt" />
+        <activity android:name=".IntroPage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        >
-        <activity android:name=".DisplayALbums" />
-        <activity android:name=".OneAlbum" />
-        <activity android:name=".Lyric" />
-        <activity android:name=".AlbumArt"></activity>
+        <activity android:name=".AboutTheApp"></activity>
     </application>
 
 </manifest>

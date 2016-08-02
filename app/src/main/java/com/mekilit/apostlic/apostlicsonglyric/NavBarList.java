@@ -29,22 +29,25 @@ public class NavBarList extends ArrayAdapter<Integer> {
         View returnView = inflater.inflate(R.layout.nav_bar_layout, parent, false);
         TextView textView = (TextView) returnView.findViewById(R.id.NavItemText);
         ImageView imageView = (ImageView) returnView.findViewById(R.id.NavItemImage);
-        imageView.setImageResource(android.R.drawable.btn_star_big_on);
+
         switch (position)
         {
             case 0:
                 textView.setText("ሁሉም አልበሞች");
+                imageView.setImageResource(R.drawable.all_album);
                 break;
             case 1:
                 textView.setText("ስለ አፑ");
+                imageView.setImageResource(R.drawable.abt_the_app);
                 break;
 
             case 2:
-                textView.setText("ሰሪዎቹ");
+                textView.setText("ውጣ");
+                imageView.setImageResource(R.drawable.exit);
                 break;
 
             case 3:
-                textView.setText("ውጣ");
+
                 break;
 
             case 4:
