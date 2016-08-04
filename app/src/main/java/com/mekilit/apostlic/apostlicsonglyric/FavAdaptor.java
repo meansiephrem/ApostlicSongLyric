@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 
@@ -30,16 +31,21 @@ public class FavAdaptor extends ArrayAdapter<String> {
     public View getView(int position, View convertView, ViewGroup parent) {
         View customView = convertView;
         ViewHolders holders = null;
-
+        ImageView iv = null;
         if (customView == null) {
             LayoutInflater inflater = LayoutInflater.from(getContext());
             customView = inflater.inflate(R.layout.custom_album, parent, false);
             holders = new ViewHolders(customView);
+            iv = (ImageView)customView.findViewById(R.id.albumArt);
             customView.setTag(holders);
         } else {
             holders = (ViewHolders) customView.getTag();
+            iv = (ImageView) convertView.findViewById(R.id.albumArt);
+            DecodeTask task = (DecodeTask)iv.getTag(R.id.albumArt);
+            if(task != null) {
+                task.cancel(true);
+            }
         }
-
 
         String SongName = this.SongName.get(position);
         String ArtistName = this.ArtistName.get(position);
@@ -49,11 +55,12 @@ public class FavAdaptor extends ArrayAdapter<String> {
         holders.BigText.setText(SongName);
         holders.SmallText.setText(ArtistName);
 
+        iv.setImageBitmap(null);
+        DecodeTask task = new DecodeTask(iv,getContext());
+        task.execute(AlbumArt /* File path to image */);
+        iv.setTag(R.id.albumArt, task);
 
-        if (AlbumArt == 0)
-            holders.albumArt.setImageResource(R.drawable.defultpic);
-        else
-            holders.albumArt.setImageResource(AlbumArt);
+
 
         return customView;
     }

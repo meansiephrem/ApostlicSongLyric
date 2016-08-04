@@ -35,26 +35,24 @@ public class AlbumAdaptor extends
 
     @Override
     public void onBindViewHolder(ViewHoler holder, int position) {
-
-
+        ImageView imageView = holder.imageView;
+        imageView.setImageDrawable(null);
         String AlbumName = this.AlbumName.get(position);
         String ArtistName = this.ArtistName.get(position);
         int AlbumArt = this.AlbumArt.get(position);
 
 
 
-        ImageView albumArt = holder.imageView;
-        TextView albumName = holder.AlbumName;
-        TextView artistName = holder.ArtistName;
-        albumName.setText(AlbumName);
-        artistName.setText(ArtistName);
+
+        holder.AlbumName.setText(AlbumName);
+         holder.ArtistName.setText(ArtistName);
+        DecodeTask task = new DecodeTask(imageView,getContext());
+        task.execute(AlbumArt /* File path to image */);
 
 
 
-        if (AlbumArt == 0)
-            albumArt.setImageResource(R.drawable.defultpic);
-        else
-            albumArt.setImageResource(AlbumArt);
+
+
 
 
     }

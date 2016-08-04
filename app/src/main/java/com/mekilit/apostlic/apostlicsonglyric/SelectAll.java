@@ -1,7 +1,6 @@
 package com.mekilit.apostlic.apostlicsonglyric;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -41,7 +40,7 @@ public class SelectAll extends ActionBarActivity implements AlbumListner {
 
         adapter.addFragment(new hebretFragmnt(), "የህብረት መዝሙሮች");
         adapter.addFragment(new artistFragment(), "ዘማርያን");
-        adapter.addFragment(new favFragment(), "የተመረጡ መዝሙሮች");
+       adapter.addFragment(new favFragment(), "የተመረጡ መዝሙሮች");
 
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(1);
@@ -78,11 +77,5 @@ public class SelectAll extends ActionBarActivity implements AlbumListner {
         }
     }
 
-    class SetUpNav extends AsyncTask<Void, Void, Void> {
-        @Override
-        protected Void doInBackground(Void... params) {
 
-            return null;
-        }
-    }
 }

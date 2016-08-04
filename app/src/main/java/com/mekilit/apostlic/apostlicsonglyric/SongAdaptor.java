@@ -13,29 +13,48 @@ import java.util.ArrayList;
 /**
  * Created by Menasi on 7/4/2016.
  */
-public class SongAdaptor extends ArrayAdapter<String > {
+public class SongAdaptor extends ArrayAdapter<String> {
+    ArrayList<Boolean> IsFav;
 
-    public SongAdaptor(Context context, ArrayList<String> objects) {
-        super(context, R.layout.song_adaptor, objects);
+    public SongAdaptor(Context context, ArrayList<String> SongName, ArrayList<Boolean> isFav) {
+        super(context, R.layout.song_adaptor, SongName);
+        this.IsFav = isFav;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final MyDbHandler helper = new MyDbHandler(getContext(),null,null,1);
-        LayoutInflater inflater = LayoutInflater.from(getContext());
-        View customView = inflater.inflate(R.layout.song_adaptor, parent, false);
+        View customView = convertView;
+        ViewHOOlder viewHOOlder=null;
+        if (customView==null)
+        {
+            LayoutInflater inflater = LayoutInflater.from(getContext());
+             customView = inflater.inflate(R.layout.song_adaptor, parent, false);
+            viewHOOlder= new ViewHOOlder(customView);
+            customView.setTag(viewHOOlder);
+        }
+        else {
+            viewHOOlder = (ViewHOOlder)customView.getTag();
+        }
 
-        TextView SongNumber = (TextView) customView.findViewById(R.id.SongNumber);
-        TextView SongTitle = (TextView) customView.findViewById(R.id.SongTitle);
-        ImageView isFav = (ImageView) customView.findViewById(R.id.SongFav);
+        viewHOOlder.SongNumber.setText("" + (position + 1));
+        viewHOOlder.SongTitle.setText(getItem(position));
+        if (IsFav.get(position))
+            viewHOOlder.isFav.setImageResource(android.R.drawable.btn_star_big_on);
+        else
+            viewHOOlder.isFav.setImageResource(android.R.drawable.btn_star_big_off);
 
-        SongNumber.setText(""+(position+1));
-        SongTitle.setText(helper.getSongName(getItem(position)));
-        if (helper.isFav(getItem(position)))
-            isFav.setImageResource(android.R.drawable.btn_star_big_on);
-           else
-            isFav.setImageResource(android.R.drawable.btn_star_big_off);
+        return customView;
+    }
 
-    return customView;
+    class ViewHOOlder {
+        TextView SongNumber;
+        TextView SongTitle;
+        ImageView isFav;
+
+        ViewHOOlder(View customView) {
+            SongNumber = (TextView) customView.findViewById(R.id.SongNumber);
+            SongTitle = (TextView) customView.findViewById(R.id.SongTitle);
+            isFav = (ImageView) customView.findViewById(R.id.SongFav);
+        }
     }
 }

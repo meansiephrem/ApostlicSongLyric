@@ -103,8 +103,7 @@ public class favFragment extends Fragment {
 
             }
 
-            ListAdapter adapter = new FavAdaptor(context, SongName,ArtistName,
-                    AlbumArt);
+            ListAdapter adapter = new FavAdaptor(context,SongName,ArtistName,AlbumArt);
             Log.e("Fav Adaptor ", "Finished bulding the Fav adaptor");
 
             return adapter;

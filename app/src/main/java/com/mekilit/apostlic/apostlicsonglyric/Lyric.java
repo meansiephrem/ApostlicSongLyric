@@ -31,7 +31,7 @@ public class Lyric extends ActionBarActivity {
             toolbar.setSubtitle(helper.getArtistName(albumId));
 
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
 
         boolean isFav =helper.isFav(id);

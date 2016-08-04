@@ -80,8 +80,7 @@ public class hebretFragmnt extends Fragment {
 
             }
 
-            ListAdapter adapter = new HebretAdapter(getContext(), ArtistName, AlbumName,
-                    AlbumArt);
+            ListAdapter adapter = new HebretAdapter(getContext(),AlbumName,ArtistName,AlbumArt);
             Log.e("Artist Adaptor ", "Finished bulding the Hebret adaptor");
 
             return adapter;

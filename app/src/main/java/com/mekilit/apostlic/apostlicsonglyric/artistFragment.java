@@ -95,8 +95,7 @@ public class artistFragment extends Fragment {
             }
 
 
-            ListAdapter adapter = new ArtistAdapter(getContext(), listAlbum, AlbumCount,
-                    AlbumArt);
+            ListAdapter adapter = new ArtistAdapter(getContext(),listAlbum,AlbumCount,AlbumArt);
             Log.e("Artist Adaptor ", "Finished bulding the artist adaptor");
 
             return adapter;
