@@ -1,52 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical"
     android:weightSum="1">
     <ImageView
+        android:id="@+id/oneAlbumArt"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:id="@+id/oneAlbumArt"
-        android:src="@drawable/aberhama1" />
+        />
 
     <LinearLayout
-        android:paddingTop="11dp"
-        android:orientation="horizontal"
+        android:id="@+id/hor"
         android:layout_width="match_parent"
         android:layout_height="72dp"
-        android:id="@+id/hor">
+        android:orientation="horizontal"
+        android:paddingTop="11dp">
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="208dp"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <TextView
+                android:id="@+id/oneAlbumName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Large Text"
-                android:id="@+id/oneAlbumName"
                 android:layout_gravity="center_horizontal"
+                android:text="Large Text"
+                android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textSize="18dp"/>
 
             <TextView
+                android:id="@+id/oneArtistName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_gravity="center_horizontal"
                 android:text="ArtistName"
-                android:id="@+id/oneArtistName"
-                android:layout_gravity="center_horizontal" />
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
         </LinearLayout>
 
         <TextView
+            android:id="@+id/oneNumberOfSongs"
             android:layout_width="161dp"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="N"
             android:layout_gravity="center_vertical"
-            android:id="@+id/oneNumberOfSongs" />
+            android:text="N"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
     </LinearLayout>
 
 

@@ -17,27 +17,29 @@
         android:layout_height="150dp"
         android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_gravity="center_horizontal"
-            android:src="@drawable/new_logo" />
+
 
         <TextView
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/imageView"
+
+            android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:paddingBottom="5dp"
             android:paddingTop="15dp"
-            android:text="የፂሆን መዝሙሮች"
+            android:text="@string/navBar_songs_of_zion"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="#001"
-            android:textSize="18dp"/>
+            android:textSize="18dp" />
+
+        <ImageView
+            android:id="@+id/navImage"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp" />
     </RelativeLayout>
 
     <LinearLayout
@@ -57,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:text="መዝሙሮች"
+                android:text="@string/navBar_songs"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="#a6a6a6" />
 
@@ -83,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:text="አልበሞች"
+                android:text="@string/navBar_Albums"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="#a6a6a6" />
 
@@ -109,7 +111,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:text="ዘማሪዎች"
+                android:text="@string/navBar_Artists"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="#a6a6a6" />
 
@@ -129,8 +131,8 @@
     <ListView
         android:id="@+id/navList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/heder"
+        android:layout_height="0dp"
+
         android:layout_weight="1"
         android:background="#fffefe"
         android:divider="#001" />

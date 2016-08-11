@@ -8,9 +8,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
 
+@SuppressWarnings("unchecked")
 public class MyDbHandler extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 9;
+    private static final int DATABASE_VERSION = 11;
     private static final String DATABASE_NAME = "SongLyric.db";
     private static final String TABLE_ALBUM = "albums";
     private static final String TABLE_LYRIC = "lyric";
@@ -26,8 +27,8 @@ public class MyDbHandler extends SQLiteOpenHelper {
     private static final String ALBUM_IS_SOLO = "_IsSolo";
      static Context context;
 
-    public MyDbHandler(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, DATABASE_NAME, factory, DATABASE_VERSION);
+    public MyDbHandler(Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.context = context;
     }
 
@@ -86,6 +87,8 @@ public class MyDbHandler extends SQLiteOpenHelper {
 
         String name2 = name.toLowerCase();
        res = context.getResources().getIdentifier("@drawable/"+name2,null,context.getPackageName());
+        if (res==0)
+            return context.getResources().getIdentifier("@drawable/defultpic",null,context.getPackageName());
 
         return res;
     }
@@ -343,11 +346,11 @@ public class MyDbHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
         String[] col = {MyDbHandler.LYRIC_ACTUAL_LYRIC};
         Cursor cursor = db.query(MyDbHandler.TABLE_LYRIC, col, MyDbHandler.LYRIC_ID + "= " + id + "", null, null, null, null);
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
         while (cursor.moveToNext()) {
             int index = cursor.getColumnIndex(MyDbHandler.LYRIC_ACTUAL_LYRIC);
             lyric = cursor.getString(index);
-            buffer.append(" " + lyric);
+            buffer.append(" ").append(lyric);
         }
 
         cursor.close();

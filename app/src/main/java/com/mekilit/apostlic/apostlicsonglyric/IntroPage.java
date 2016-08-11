@@ -7,16 +7,15 @@ import android.support.v7.app.AppCompatActivity;
 
 public class IntroPage extends AppCompatActivity {
 
-    private final int DISPLAY_LENGTH = 1500;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro_page);
-        MyDbHandler helper = new MyDbHandler(getApplicationContext(), null, null, 1);
+        MyDbHandler helper = new MyDbHandler(getApplicationContext());
         helper.getReadableDatabase();
+        int DISPLAY_LENGTH = 1500;
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

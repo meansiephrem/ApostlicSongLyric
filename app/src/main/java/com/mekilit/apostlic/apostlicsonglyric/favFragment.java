@@ -63,7 +63,7 @@ public class favFragment extends Fragment {
     public void onStart() {
         super.onStart();
         noFav = (TextView) view.findViewById(R.id.noFav);
-        final MyDbHandler helper = new MyDbHandler(getContext(),null,null,1);
+        final MyDbHandler helper = new MyDbHandler(getContext());
           final ArrayList<Integer> FavSongs =helper.getFav();
 
 
@@ -77,6 +77,7 @@ public class favFragment extends Fragment {
         });
     }
 
+    @SuppressWarnings("unchecked")
     public class FavLoder extends AsyncTask<Void, Integer, ListAdapter> {
 
         protected void onPreExecute() {
@@ -85,7 +86,7 @@ public class favFragment extends Fragment {
 
         @Override
         protected ListAdapter doInBackground(Void... params) {
-            final MyDbHandler helper = new MyDbHandler(getContext(), null, null, 1);
+            final MyDbHandler helper = new MyDbHandler(getContext());
             final ArrayList<Integer> listAlbum = helper.getFav();
 
             ArrayList<String> SongName = new ArrayList();

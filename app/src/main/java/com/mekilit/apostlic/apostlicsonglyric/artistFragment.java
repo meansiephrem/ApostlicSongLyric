@@ -47,7 +47,7 @@ public class artistFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        final MyDbHandler helper = new MyDbHandler(getContext(), null, null, 1);
+        final MyDbHandler helper = new MyDbHandler(getContext());
         View view = inflater.inflate(R.layout.fragment_album_fragmnt, container, false);
         listView = (ListView) view.findViewById(R.id.allLyric);
         progressBar=(ProgressBar) view.findViewById(R.id.progressBar);
@@ -66,6 +66,7 @@ public class artistFragment extends Fragment {
         return view;
     }
 
+    @SuppressWarnings("unchecked")
     public class ArtistLoder extends AsyncTask<Void, Integer, ListAdapter> {
 
 
@@ -79,13 +80,11 @@ public class artistFragment extends Fragment {
 
         @Override
         protected ListAdapter doInBackground(Void... params) {
-            final MyDbHandler helper = new MyDbHandler(getContext(), null, null, 1);
+            final MyDbHandler helper = new MyDbHandler(getContext());
             ArrayList<String> listAlbum = helper.SelectAllArtist();
 
             ArrayList<String> AlbumCount = new ArrayList();
-            ;
             ArrayList<Integer> AlbumArt = new ArrayList();
-            ;
             for (int i = 0; i < listAlbum.size(); i++) {
                 String albumID = helper.getAlbumID(listAlbum.get(i));
 

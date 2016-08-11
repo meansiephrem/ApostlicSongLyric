@@ -23,7 +23,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="19dp"
 
-        android:text="2016 Apostlic Church of Ethiopia\n All rights reserved"
+        android:text="@string/copyright_for_intro_page"
         android:textAlignment="center"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 </RelativeLayout>

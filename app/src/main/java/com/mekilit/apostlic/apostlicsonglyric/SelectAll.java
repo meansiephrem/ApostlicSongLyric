@@ -5,11 +5,11 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
-public class SelectAll extends ActionBarActivity implements AlbumListner {
-    MyDbHandler helper = new MyDbHandler(this, null, null, 1);
+public class SelectAll extends AppCompatActivity implements AlbumListner {
+    MyDbHandler helper = new MyDbHandler(this);
 
     Toolbar toolbar;
 
@@ -23,7 +23,7 @@ public class SelectAll extends ActionBarActivity implements AlbumListner {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_all);
-        ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
+       ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         setUpPager(viewPager);
         tabLayout.setupWithViewPager(viewPager);
@@ -40,7 +40,7 @@ public class SelectAll extends ActionBarActivity implements AlbumListner {
 
         adapter.addFragment(new hebretFragmnt(), "የህብረት መዝሙሮች");
         adapter.addFragment(new artistFragment(), "ዘማርያን");
-       adapter.addFragment(new favFragment(), "የተመረጡ መዝሙሮች");
+        adapter.addFragment(new favFragment(), "የተመረጡ መዝሙሮች");
 
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(1);
@@ -73,7 +73,6 @@ public class SelectAll extends ActionBarActivity implements AlbumListner {
             Intent intent = new Intent(SelectAll.this, OneAlbum.class).
                     putExtra(Intent.EXTRA_TEXT, name);
             startActivity(intent);
-            ;
         }
     }
 

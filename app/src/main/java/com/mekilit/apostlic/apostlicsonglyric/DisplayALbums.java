@@ -15,7 +15,7 @@ import android.widget.ProgressBar;
 import java.util.ArrayList;
 
 public class DisplayALbums extends AppCompatActivity {
-    MyDbHandler helper = new MyDbHandler(this,null,null,1);
+    MyDbHandler helper = new MyDbHandler(this);
     Toolbar toolbar;
     boolean all=false;//to know whether this activity is called to show all albums or not
     String ArtistName;
@@ -78,13 +78,13 @@ public class DisplayALbums extends AppCompatActivity {
         {
             arr[j]=data.charAt(j+1);
         }
-        for (int i=0;i<arr.length;i++)
-        {
-            ret+=arr[i];
+        for (char anArr : arr) {
+            ret += anArr;
         }
         return ret;
     }
 
+    @SuppressWarnings("unchecked")
     public class AlbumLoder extends AsyncTask<Void, Integer, AlbumAdaptor> {
 
         protected void onPreExecute() {

@@ -52,8 +52,8 @@ public class HebretAdapter extends ArrayAdapter<String> {
         int AlbumArt = this.AlbumArt.get(position);
 
 
-        holders.BigText.setText(AlbumName);
-        holders.SmallText.setText(ArtistName);
+        holders.BigText.setText(ArtistName);
+        holders.SmallText.setText(AlbumName);
         iv.setImageBitmap(null);
         DecodeTask task = new DecodeTask(iv,getContext());
         task.execute(AlbumArt /* File path to image */);

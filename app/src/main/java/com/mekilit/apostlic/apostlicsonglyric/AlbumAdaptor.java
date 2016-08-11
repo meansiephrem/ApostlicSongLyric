@@ -47,6 +47,7 @@ public class AlbumAdaptor extends
         holder.AlbumName.setText(AlbumName);
          holder.ArtistName.setText(ArtistName);
         DecodeTask task = new DecodeTask(imageView,getContext());
+
         task.execute(AlbumArt /* File path to image */);
 
 
@@ -62,8 +63,8 @@ public class AlbumAdaptor extends
 
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View customView = inflater.inflate(R.layout.album_card_layout, parent, false);
-        ViewHoler viewHoler = new ViewHoler(customView);
-        return viewHoler;
+
+        return new ViewHoler(customView);
     }
 
     @Override

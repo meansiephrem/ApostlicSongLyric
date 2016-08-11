@@ -12,7 +12,6 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 public class OneAlbum extends AppCompatActivity {
@@ -26,7 +25,7 @@ public class OneAlbum extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        final MyDbHandler helper = new MyDbHandler(this, null, null, 1);
+        final MyDbHandler helper = new MyDbHandler(this);
         Intent intent = getIntent();
         albumID = intent.getStringExtra(Intent.EXTRA_TEXT);
 
@@ -41,19 +40,11 @@ public class OneAlbum extends AppCompatActivity {
         numberOfSongs = (TextView) header.findViewById(R.id.oneNumberOfSongs);
 
 
-        try {
-            String name = albumID.toLowerCase();
-            Class res = R.drawable.class;
-            Field field = res.getField(name);
-            int res1 =field.getInt(null);
-            albumArt.setImageResource(res1);
-        }catch (Exception e)
-        {
-            albumArt.setImageResource(R.drawable.defultpic);
-        }
+
         albumName.setText(helper.getAlbumName(albumID));
         artistName.setText(helper.getArtistName(albumID));
         numberOfSongs.setText(helper.CountSongs(albumID));
+        albumArt.setImageResource(helper.getAlbumArt(albumID));
 
 
         final ArrayList<String> Songs = helper.SelectAllSongs(albumID);
@@ -86,12 +77,13 @@ public class OneAlbum extends AppCompatActivity {
         new SongLoder().execute();
     }
 
+    @SuppressWarnings("unchecked")
     public class SongLoder extends AsyncTask<Void, Integer, ListAdapter> {
 
 
         @Override
         protected ListAdapter doInBackground(Void... params) {
-            final MyDbHandler helper = new MyDbHandler(getApplicationContext(), null, null, 1);
+            final MyDbHandler helper = new MyDbHandler(getApplicationContext());
             final ArrayList<String> Songs = helper.SelectAllSongs(albumID);
 
             ArrayList<String> SongName = new ArrayList();

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Apostlic Songs</string>
+    <string name="app_name">Apostolic Songs</string>
     <string name="action_settings">Settings</string>
     <string name="SongSelect">Songs</string>
 
@@ -7,6 +7,14 @@
     <string name="hello_blank_fragment">New Fragment Hello World</string>
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
+    <string name="vers_for_intro">ሰዎች የዘመሩትን ሥራውን ታከብር ዘንድ አስብ።</string>
+    <string name="verus_no_for_intro">ኢዮብ 36:24</string>
+    <string name="copyright_for_intro_page">2016 Apostolic Church of Ethiopia\n All rights reserved</string>
+    <string name="navBar_songs_of_zion">የፂሆን መዝሙሮች</string>
+    <string name="navBar_songs">መዝሙሮች</string>
+    <string name="navBar_Albums">አልበሞች</string>
+    <string name="navBar_Artists">ዘማሪዎች</string>
+    <string name="contentDescforAbtPage">about the app image</string>
 
 
 </resources>

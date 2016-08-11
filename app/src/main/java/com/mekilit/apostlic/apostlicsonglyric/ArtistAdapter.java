@@ -64,6 +64,7 @@ public class ArtistAdapter extends ArrayAdapter<String> {
 
 
 
+
         return customView;
     }
 

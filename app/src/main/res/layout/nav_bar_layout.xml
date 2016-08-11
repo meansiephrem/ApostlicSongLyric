@@ -11,7 +11,7 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:padding="10dp"
-            android:src="@android:drawable/btn_star"/>
+         />
 
         <TextView
             android:id="@+id/NavItemText"

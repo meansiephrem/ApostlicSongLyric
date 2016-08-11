@@ -14,24 +14,23 @@ import android.widget.TextView;
 public class NavBarList extends ArrayAdapter<Integer> {
 
 
-
-
-
-    public NavBarList(Context context ,Integer[] arry) {
+    public NavBarList(Context context, Integer[] arry) {
         super(context, R.layout.nav_bar_layout, arry);
 
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        View returnView = convertView;
+        if (returnView == null) {
+            LayoutInflater inflater = LayoutInflater.from(getContext());
+            returnView = inflater.inflate(R.layout.nav_bar_layout, parent, false);
+        }
 
-        LayoutInflater inflater = LayoutInflater.from(getContext());
-        View returnView = inflater.inflate(R.layout.nav_bar_layout, parent, false);
         TextView textView = (TextView) returnView.findViewById(R.id.NavItemText);
         ImageView imageView = (ImageView) returnView.findViewById(R.id.NavItemImage);
 
-        switch (position)
-        {
+        switch (position) {
             case 0:
                 textView.setText("ሁሉም አልበሞች");
                 imageView.setImageResource(R.drawable.all_album);
@@ -57,11 +56,6 @@ public class NavBarList extends ArrayAdapter<Integer> {
             default:
                 break;
         }
-
-
-
-
-
 
 
         return returnView;

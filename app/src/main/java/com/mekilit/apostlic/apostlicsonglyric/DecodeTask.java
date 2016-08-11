@@ -11,8 +11,6 @@ import android.widget.ImageView;
  */
 public class DecodeTask extends AsyncTask<Integer, Void, Bitmap> {
 
-    private static int MaxTextureSize = 2048; /* True for most devices. */
-
     public ImageView v;
     public Context context;
 
@@ -33,17 +31,19 @@ public class DecodeTask extends AsyncTask<Integer, Void, Bitmap> {
         }
 
         opt.inJustDecodeBounds = true;
+        int maxTextureSize = 2048;
         do {
             opt.inSampleSize++;
             BitmapFactory.decodeResource(context.getResources(),params[0],opt);
-        } while(opt.outHeight > MaxTextureSize || opt.outWidth > MaxTextureSize);
+        } while(opt.outHeight > maxTextureSize || opt.outWidth > maxTextureSize);
         opt.inJustDecodeBounds = false;
+        opt.inSampleSize=3;
 
         bitmap =  BitmapFactory.decodeResource(context.getResources(), params[0], opt);
         if (bitmap!=null)
         return bitmap;
         else
-            return  BitmapFactory.decodeResource(context.getResources(), R.drawable.defultpic, opt);
+            return BitmapFactory.decodeResource(context.getResources(), R.drawable.defultpic, opt);
     }
 
     @Override

@@ -9,11 +9,10 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_alignParentLeft="true"
-
-
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="29dp"
+        android:contentDescription="@string/contentDescforAbtPage"
         android:src="@drawable/abt" />
 
     <TextView
@@ -23,7 +22,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/abtApp"
-        android:text="ሰዎች የዘመሩትን ሥራውን ታከብር ዘንድ አስብ። "
+        android:text="@string/vers_for_intro"
         android:textAlignment="center"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -37,6 +36,6 @@
         android:layout_marginEnd="26dp"
         android:layout_marginRight="26dp"
         android:layout_marginTop="13dp"
-        android:text="ኢዮብ 36:24"
+        android:text="@string/verus_no_for_intro"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 </RelativeLayout>

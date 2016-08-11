@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -22,8 +23,6 @@ public class NavigationDrawer extends Fragment {
 
 
     private ActionBarDrawerToggle mDrawerToggle;
-    private DrawerLayout mDrawerLayout;
-    private View viewContainer;
 
 
     public NavigationDrawer() {
@@ -35,26 +34,23 @@ public class NavigationDrawer extends Fragment {
 
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        MyDbHandler helper = new MyDbHandler(getActivity(), null, null, 1);
+        MyDbHandler helper = new MyDbHandler(getActivity());
         View view = inflater.inflate(R.layout.nav_bar_header, container, false);
         ListView navListView = (ListView) view.findViewById(R.id.navList);
         TextView AllAlbum = (TextView) view.findViewById(R.id.totalAlbum);
         TextView AllArtist = (TextView) view.findViewById(R.id.totalSingers);
         TextView AllSong = (TextView) view.findViewById(R.id.totalSongs);
-
+        ImageView imageView = (ImageView) view.findViewById(R.id.navImage);
         AllAlbum.setText(helper.CountAlL('a'));
         AllArtist.setText(helper.CountAlL('c'));
         AllSong.setText(helper.CountAlL('b'));
 
+        DecodeTask task = new DecodeTask(imageView,getContext());
+
+        task.execute( R.drawable.new_logo/* File path to image */);
 
         Integer[] array = {1, 2, 3};
         navListView.setAdapter(new NavBarList(getContext(), array));
@@ -79,8 +75,8 @@ public class NavigationDrawer extends Fragment {
     }
 
     public void setUp(int viewById, DrawerLayout drawerLayout, Toolbar toolbar) {
-        mDrawerLayout = drawerLayout;
-        viewContainer = getActivity().findViewById(viewById);
+        DrawerLayout mDrawerLayout = drawerLayout;
+        View viewContainer = getActivity().findViewById(viewById);
         mDrawerToggle = new ActionBarDrawerToggle(getActivity(), drawerLayout, toolbar,
                 R.string.drawer_open, R.string.drawer_close) {
             @Override

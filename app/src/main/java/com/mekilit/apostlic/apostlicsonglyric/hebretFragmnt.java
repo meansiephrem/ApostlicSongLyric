@@ -41,7 +41,7 @@ public class hebretFragmnt extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final MyDbHandler helper = new MyDbHandler(getContext(), null, null, 1);
+        final MyDbHandler helper = new MyDbHandler(getContext());
         View view = inflater.inflate(R.layout.fragment_album_fragmnt, container, false);
         listView = (ListView) view.findViewById(R.id.allLyric);
         final ArrayList<String> listAlbum = helper.SelectAllhebret();
@@ -56,6 +56,7 @@ public class hebretFragmnt extends Fragment {
         return view;
     }
 
+    @SuppressWarnings("unchecked")
     public class HebretLoder extends AsyncTask<Void, Integer, ListAdapter> {
 
         protected void onPreExecute() {
@@ -64,7 +65,7 @@ public class hebretFragmnt extends Fragment {
 
         @Override
         protected ListAdapter doInBackground(Void... params) {
-            final MyDbHandler helper = new MyDbHandler(getContext(), null, null, 1);
+            final MyDbHandler helper = new MyDbHandler(getContext());
             final ArrayList<String> listAlbum = helper.SelectAllhebret();
 
             ArrayList<String> ArtistName = new ArrayList();
