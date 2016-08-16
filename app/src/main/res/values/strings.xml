@@ -10,11 +10,21 @@
     <string name="vers_for_intro">ሰዎች የዘመሩትን ሥራውን ታከብር ዘንድ አስብ።</string>
     <string name="verus_no_for_intro">ኢዮብ 36:24</string>
     <string name="copyright_for_intro_page">2016 Apostolic Church of Ethiopia\n All rights reserved</string>
-    <string name="navBar_songs_of_zion">የፂሆን መዝሙሮች</string>
+    <string name="navBar_songs_of_zion">የጽዮን መዝሙሮች</string>
     <string name="navBar_songs">መዝሙሮች</string>
     <string name="navBar_Albums">አልበሞች</string>
     <string name="navBar_Artists">ዘማሪዎች</string>
     <string name="contentDescforAbtPage">about the app image</string>
+    <string name="apostlic_songs">Apostolic Songs</string>
+    <string name="developer">Developer</string>
+    <string name="menasi_ephrem">Menasi Ephrem</string>
+    <string name="graphic_designer">Graphic Designer</string>
+    <string name="miya">Eshcol Teferra</string>
+    <string name="lyric">Lyric</string>
+    <string name="dani_b">Daniel Berhanu</string>
+    <string name="not_usa_meklit">North America Youth Meklit</string>
+    <string name="app_emil">songsapostolic@gmail.com</string>
+    <string name="version">Version 1.1.7</string>
 
 
 </resources>

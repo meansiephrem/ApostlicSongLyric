@@ -11,7 +11,7 @@ import java.util.ArrayList;
 @SuppressWarnings("unchecked")
 public class MyDbHandler extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 11;
+    private static final int DATABASE_VERSION = 18;
     private static final String DATABASE_NAME = "SongLyric.db";
     private static final String TABLE_ALBUM = "albums";
     private static final String TABLE_LYRIC = "lyric";
@@ -25,7 +25,7 @@ public class MyDbHandler extends SQLiteOpenHelper {
     private static final String ALBUM_ARTIST = "album_artist";
     private static final String ALBUM_ART = "album_art";
     private static final String ALBUM_IS_SOLO = "_IsSolo";
-     static Context context;
+    static Context context;
 
     public MyDbHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -57,38 +57,34 @@ public class MyDbHandler extends SQLiteOpenHelper {
 
 
         ContentValues ALL_Albums = new ContentValues();
-        for (int i =0 ; i<Album.insertAlbum.length; i++ )
-        {
-            ALL_Albums.put(ALBUM_ID,Album.insertAlbum[i].getAlbum_id());
-            ALL_Albums.put(ALBUM_TITLE,Album.insertAlbum[i].getAlbum_Title());
-            ALL_Albums.put(ALBUM_ARTIST,Album.insertAlbum[i].getAlbum_Artist());
-            ALL_Albums.put(ALBUM_ART,getRes(Album.insertAlbum[i].getAlbum_Art()));
-            ALL_Albums.put(ALBUM_IS_SOLO,Album.insertAlbum[i].get_isSolo());
-            db.insert(TABLE_ALBUM,null,ALL_Albums);
+        for (int i = 0; i < Album.insertAlbum.length; i++) {
+            ALL_Albums.put(ALBUM_ID, Album.insertAlbum[i].getAlbum_id());
+            ALL_Albums.put(ALBUM_TITLE, Album.insertAlbum[i].getAlbum_Title());
+            ALL_Albums.put(ALBUM_ARTIST, Album.insertAlbum[i].getAlbum_Artist());
+            ALL_Albums.put(ALBUM_ART, getRes(Album.insertAlbum[i].getAlbum_Art()));
+            ALL_Albums.put(ALBUM_IS_SOLO, Album.insertAlbum[i].get_isSolo());
+            db.insert(TABLE_ALBUM, null, ALL_Albums);
         }
 
         ContentValues ALL_Lyric = new ContentValues();
-        for (int i =0 ; i<Song.InsertQuery.length; i++ )
-        {
+        for (int i = 0; i < Song.InsertQuery.length; i++) {
             ALL_Lyric.put(LYRIC_TITLE, Song.InsertQuery[i].get_title());
-            ALL_Lyric.put(LYRIC_ALBUM_ID,Song.InsertQuery[i].get_albumId());
-            ALL_Lyric.put(LYRIC_ACTUAL_LYRIC,Song.InsertQuery[i].get_actualLyric());
+            ALL_Lyric.put(LYRIC_ALBUM_ID, Song.InsertQuery[i].get_albumId());
+            ALL_Lyric.put(LYRIC_ACTUAL_LYRIC, Song.InsertQuery[i].get_actualLyric());
             ALL_Lyric.put(LYRIC_IS_FAV, Song.InsertQuery[i].get_isFav());
             db.insert(TABLE_LYRIC, null, ALL_Lyric);
         }
 
 
-
     }
 
-    public int getRes(String name)
-    {
-        int res=0;
+    public int getRes(String name) {
+        int res = 0;
 
         String name2 = name.toLowerCase();
-       res = context.getResources().getIdentifier("@drawable/"+name2,null,context.getPackageName());
-        if (res==0)
-            return context.getResources().getIdentifier("@drawable/defultpic",null,context.getPackageName());
+        res = context.getResources().getIdentifier("@drawable/" + name2, null, context.getPackageName());
+        if (res == 0)
+            return context.getResources().getIdentifier("@drawable/defultpic", null, context.getPackageName());
 
         return res;
     }
@@ -97,8 +93,8 @@ public class MyDbHandler extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
         if (oldVersion != newVersion) {
-            String query = "drop table "+TABLE_ALBUM ;
-            String query1 = "drop table "+TABLE_LYRIC;
+            String query = "drop table " + TABLE_ALBUM;
+            String query1 = "drop table " + TABLE_LYRIC;
             db.execSQL(query);
             db.execSQL(query1);
             onCreate(db);
@@ -143,7 +139,7 @@ public class MyDbHandler extends SQLiteOpenHelper {
         int index;
 
         String[] col = {MyDbHandler.ALBUM_ARTIST};
-        Cursor cur = db.query(true, MyDbHandler.TABLE_ALBUM, col,MyDbHandler.ALBUM_IS_SOLO+"="+1, null, null, null, null, null);
+        Cursor cur = db.query(true, MyDbHandler.TABLE_ALBUM, col, MyDbHandler.ALBUM_IS_SOLO + "=" + 1, null, null, null, null, null);
         while (cur.moveToNext()) {
             index = cur.getColumnIndex(MyDbHandler.ALBUM_ARTIST);
             ret.add(cur.getString(index));
@@ -153,34 +149,34 @@ public class MyDbHandler extends SQLiteOpenHelper {
     }
 
     public String CountAlbumF(String Artist) {
-        String ret ="";
+        String ret = "";
         ArrayList<String> album = new ArrayList();
 
         SQLiteDatabase db = getWritableDatabase();
         String[] col = {MyDbHandler.ALBUM_ID};
-        Cursor cursor = db.query(true,MyDbHandler.TABLE_ALBUM, col, MyDbHandler.ALBUM_ARTIST + "= '" +Artist + "'", null, null, null, null,null);
+        Cursor cursor = db.query(true, MyDbHandler.TABLE_ALBUM, col, MyDbHandler.ALBUM_ARTIST + "= '" + Artist + "'", null, null, null, null, null);
 
         while (cursor.moveToNext()) {
             int index = cursor.getColumnIndex(MyDbHandler.ALBUM_ID);
             album.add(cursor.getString(index));
         }
-        if (album.size()==1)
-            ret="1 አልበም";
+        if (album.size() == 1)
+            ret = "1 አልበም";
 
         else
-            ret= album.size()+" አልበሞች";
+            ret = album.size() + " አልበሞች";
 
         cursor.close();
         return ret;
     }
 
-    public String getAlbumID(String Artist){
-        String ret ="";
+    public String getAlbumID(String Artist) {
+        String ret = "";
         ArrayList<String> album = new ArrayList();
 
         SQLiteDatabase db = getWritableDatabase();
         String[] col = {MyDbHandler.ALBUM_ID};
-        Cursor cursor = db.query(true,MyDbHandler.TABLE_ALBUM, col, MyDbHandler.ALBUM_ARTIST + "= '" +Artist + "'", null, null, null, null,null);
+        Cursor cursor = db.query(true, MyDbHandler.TABLE_ALBUM, col, MyDbHandler.ALBUM_ARTIST + "= '" + Artist + "'", null, null, null, null, null);
 
         while (cursor.moveToNext()) {
             int index = cursor.getColumnIndex(MyDbHandler.ALBUM_ID);
@@ -198,7 +194,7 @@ public class MyDbHandler extends SQLiteOpenHelper {
         int index;
 
         String[] col = {MyDbHandler.ALBUM_ID};
-        Cursor cur = db.query(true, MyDbHandler.TABLE_ALBUM, col,MyDbHandler.ALBUM_ARTIST+"= '"+Artist+"'", null, null, null, null, null);
+        Cursor cur = db.query(true, MyDbHandler.TABLE_ALBUM, col, MyDbHandler.ALBUM_ARTIST + "= '" + Artist + "'", null, null, null, null, null);
         while (cur.moveToNext()) {
             index = cur.getColumnIndex(MyDbHandler.ALBUM_ID);
             ret.add(cur.getString(index));
@@ -213,7 +209,7 @@ public class MyDbHandler extends SQLiteOpenHelper {
         int index;
 
         String[] col = {MyDbHandler.LYRIC_ID};
-        Cursor cur = db.query(true, MyDbHandler.TABLE_LYRIC, col,MyDbHandler.LYRIC_IS_FAV+"="+1, null, null, null, null, null);
+        Cursor cur = db.query(true, MyDbHandler.TABLE_LYRIC, col, MyDbHandler.LYRIC_IS_FAV + "=" + 1, null, null, null, null, null);
         while (cur.moveToNext()) {
             index = cur.getColumnIndex(MyDbHandler.LYRIC_ID);
             ret.add(cur.getInt(index));
@@ -223,13 +219,13 @@ public class MyDbHandler extends SQLiteOpenHelper {
         return ret;
     }
 
-    public String getAlbumID(int LyricId){
-        String ret ="";
+    public String getAlbumID(int LyricId) {
+        String ret = "";
         ArrayList<String> album = new ArrayList();
 
         SQLiteDatabase db = getWritableDatabase();
         String[] col = {MyDbHandler.LYRIC_ALBUM_ID};
-        Cursor cursor = db.query(true,MyDbHandler.TABLE_LYRIC, col, MyDbHandler.LYRIC_ID + "= " +LyricId , null, null, null, null,null);
+        Cursor cursor = db.query(true, MyDbHandler.TABLE_LYRIC, col, MyDbHandler.LYRIC_ID + "= " + LyricId, null, null, null, null, null);
 
         while (cursor.moveToNext()) {
             int index = cursor.getColumnIndex(MyDbHandler.LYRIC_ALBUM_ID);
@@ -248,7 +244,7 @@ public class MyDbHandler extends SQLiteOpenHelper {
         int index;
 
         String[] col = {MyDbHandler.ALBUM_ID};
-        Cursor cur = db.query(true, MyDbHandler.TABLE_ALBUM, col,MyDbHandler.ALBUM_IS_SOLO+"="+0, null, null, null, null, null);
+        Cursor cur = db.query(true, MyDbHandler.TABLE_ALBUM, col, MyDbHandler.ALBUM_IS_SOLO + "=" + 0, null, null, null, null, null);
         while (cur.moveToNext()) {
             index = cur.getColumnIndex(MyDbHandler.ALBUM_ID);
             ret.add(cur.getString(index));
@@ -259,22 +255,22 @@ public class MyDbHandler extends SQLiteOpenHelper {
     }
 
     public String CountSongs(String AlbumID) {
-        String ret ="";
+        String ret = "";
         ArrayList<String> album = new ArrayList();
 
         SQLiteDatabase db = getWritableDatabase();
         String[] col = {MyDbHandler.LYRIC_ID};
-        Cursor cursor = db.query(true,MyDbHandler.TABLE_LYRIC, col, MyDbHandler.LYRIC_ALBUM_ID+ "= '" +AlbumID + "'", null, null, null, null,null);
+        Cursor cursor = db.query(true, MyDbHandler.TABLE_LYRIC, col, MyDbHandler.LYRIC_ALBUM_ID + "= '" + AlbumID + "'", null, null, null, null, null);
 
         while (cursor.moveToNext()) {
             int index = cursor.getColumnIndex(MyDbHandler.LYRIC_ID);
             album.add(cursor.getString(index));
         }
-        if (album.size()==1)
-            ret="1 መዝሙር";
+        if (album.size() == 1)
+            ret = "1 መዝሙር";
 
         else
-            ret= album.size()+" መዝሙሮች";
+            ret = album.size() + " መዝሙሮች";
 
         cursor.close();
         return ret;
@@ -286,7 +282,7 @@ public class MyDbHandler extends SQLiteOpenHelper {
 
         SQLiteDatabase db = getWritableDatabase();
         String[] col = {MyDbHandler.LYRIC_ID};
-        Cursor cursor = db.query(true,MyDbHandler.TABLE_LYRIC, col, MyDbHandler.LYRIC_ALBUM_ID+ "= '" +AlbumID + "'", null, null, null, null,null);
+        Cursor cursor = db.query(true, MyDbHandler.TABLE_LYRIC, col, MyDbHandler.LYRIC_ALBUM_ID + "= '" + AlbumID + "'", null, null, null, null, null);
 
         while (cursor.moveToNext()) {
             int index = cursor.getColumnIndex(MyDbHandler.LYRIC_ID);
@@ -296,7 +292,7 @@ public class MyDbHandler extends SQLiteOpenHelper {
         return album;
     }
 
-    public String getSongName(String id)  {
+    public String getSongName(String id) {
         String Song = "";
         int LyricID = Integer.parseInt(id);
         SQLiteDatabase db = getWritableDatabase();
@@ -358,36 +354,37 @@ public class MyDbHandler extends SQLiteOpenHelper {
     }
 
     public String CountAlL(char x) {//a for album b for songs and c for artists
-        String ret ="";
+        String ret = "";
         ArrayList<String> album = new ArrayList();
 
         SQLiteDatabase db = getWritableDatabase();
         String[] co0 = {MyDbHandler.ALBUM_ID};
         String[] co1 = {MyDbHandler.ALBUM_ARTIST};
         String[] co2 = {MyDbHandler.LYRIC_ID};
-        Cursor cursor ;
-        int index ;
-        if(x=='a')
-        {//count all albm
-            cursor = db.query(true,MyDbHandler.TABLE_ALBUM, co0,null, null, null, null, null,null);
-             index = cursor.getColumnIndex(MyDbHandler.ALBUM_ID);
+        Cursor cursor;
+        int index;
+        if (x == 'a') {//count all albm
+            cursor = db.query(true, MyDbHandler.TABLE_ALBUM, co0, null, null, null, null, null, null);
+            index = cursor.getColumnIndex(MyDbHandler.ALBUM_ID);
+        } else if (x == 'b') {//count all Songs
+            cursor = db.query(true, MyDbHandler.TABLE_LYRIC, co2, null, null, null, null, null, null);
+            index = cursor.getColumnIndex(MyDbHandler.LYRIC_ID);
+        } else if (x == 'c') {//count all Artists
+            cursor = db.query(true, MyDbHandler.TABLE_ALBUM, co1, MyDbHandler.ALBUM_IS_SOLO + "=" + 1,
+                    null, null, null, null, null);
+            index = cursor.getColumnIndex(MyDbHandler.ALBUM_ARTIST);
         }
-        else if (x=='b')
-        {//count all Songs
-             cursor = db.query(true,MyDbHandler.TABLE_LYRIC, co2,null, null, null, null, null,null);
-             index = cursor.getColumnIndex(MyDbHandler.LYRIC_ID);
-        }
-        else
-        {//count all Artists
-            cursor = db.query(true,MyDbHandler.TABLE_ALBUM, co1,MyDbHandler.ALBUM_IS_SOLO+"="+1, null, null, null, null,null);
-             index = cursor.getColumnIndex(MyDbHandler.ALBUM_ARTIST);
+        else { //count all FavSongs
+            cursor = db.query(true, MyDbHandler.TABLE_LYRIC, co2, MyDbHandler.LYRIC_IS_FAV + "=" + 1,
+                    null, null, null, null, null);
+            index = cursor.getColumnIndex(MyDbHandler.LYRIC_ID);
         }
 
         while (cursor.moveToNext()) {
             album.add(cursor.getString(index));
         }
 
-            ret= album.size()+"";
+        ret = album.size() + "";
 
         cursor.close();
         return ret;
@@ -399,7 +396,7 @@ public class MyDbHandler extends SQLiteOpenHelper {
 
         SQLiteDatabase db = getWritableDatabase();
         String[] col = {MyDbHandler.ALBUM_ID};
-        Cursor cursor = db.query(true,MyDbHandler.TABLE_ALBUM, col, null, null, null, null, null,null);
+        Cursor cursor = db.query(true, MyDbHandler.TABLE_ALBUM, col, null, null, null, null, null, null);
 
         while (cursor.moveToNext()) {
             int index = cursor.getColumnIndex(MyDbHandler.ALBUM_ID);
@@ -411,7 +408,7 @@ public class MyDbHandler extends SQLiteOpenHelper {
     }
 
     public int getAlbumArt(String id) {
-      int Album = -1;
+        int Album = -1;
         SQLiteDatabase db = getWritableDatabase();
         String[] col = {MyDbHandler.ALBUM_ART};
         Cursor cursor = db.query(MyDbHandler.TABLE_ALBUM, col, MyDbHandler.ALBUM_ID + "= '" + id + "'", null, null, null, null);

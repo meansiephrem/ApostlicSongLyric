@@ -17,6 +17,7 @@ public class Lyric extends AppCompatActivity {
 
     Toolbar toolbar;
     String id;
+    int FavCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,7 @@ public class Lyric extends AppCompatActivity {
 
 
         boolean isFav = helper.isFav(id);
+        FavCount = Integer.parseInt(helper.CountAlL('d'));
 
         final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         if (!isFav) {
@@ -82,26 +84,40 @@ public class Lyric extends AppCompatActivity {
 
             @Override
             public boolean onLongClick(View v) {
-
+              //  Toast.makeText(Lyric.this, id, Toast.LENGTH_SHORT).show();
                 int idd = Integer.parseInt(id);
-
-                if (idd == 50||idd == 569||idd == 735||idd == 845) {
-                    Intent intent = new Intent(Lyric.this, Sec_Activity.class).putExtra(Intent.EXTRA_TEXT, "" + 0);
-                    ActivityOptionsCompat compat = ActivityOptionsCompat.makeSceneTransitionAnimation(Lyric.this, null);
+                if ((idd == 50 || idd == 568 || idd == 734 || idd == 844) && FavCount > 4) {
+                    Intent intent = new Intent(Lyric.this, Sec_Activity.class)
+                            .putExtra(Intent.EXTRA_TEXT, "" + 0);
+                    ActivityOptionsCompat compat = ActivityOptionsCompat
+                            .makeSceneTransitionAnimation(Lyric.this, null);
                     startActivity(intent, compat.toBundle());
 
 
                     return true;
-                } else if (idd == 468) {
-                    Intent intent = new Intent(Lyric.this, Sec_Activity.class).putExtra(Intent.EXTRA_TEXT, "" + 1);
-                    ActivityOptionsCompat compat = ActivityOptionsCompat.makeSceneTransitionAnimation(Lyric.this, null);
+                } else if (idd == 467 && FavCount > 4) {
+                    Intent intent = new Intent(Lyric.this, Sec_Activity.class)
+                            .putExtra(Intent.EXTRA_TEXT, "" + 1);
+                    ActivityOptionsCompat compat = ActivityOptionsCompat
+                            .makeSceneTransitionAnimation(Lyric.this, null);
                     startActivity(intent, compat.toBundle());
 
 
                     return true;
-                } else if (idd == 561) {
-                    Intent intent = new Intent(Lyric.this, Sec_Activity.class).putExtra(Intent.EXTRA_TEXT, "" + 2);
-                    ActivityOptionsCompat compat = ActivityOptionsCompat.makeSceneTransitionAnimation(Lyric.this, null);
+                } else if (idd == 433 && FavCount > 4) {
+                    Intent intent = new Intent(Lyric.this, Sec_Activity.class)
+                            .putExtra(Intent.EXTRA_TEXT, "" + 3);
+                    ActivityOptionsCompat compat = ActivityOptionsCompat
+                            .makeSceneTransitionAnimation(Lyric.this, null);
+                    startActivity(intent, compat.toBundle());
+
+
+                    return true;
+                } else if (idd == 560 && FavCount > 4) {
+                    Intent intent = new Intent(Lyric.this, Sec_Activity.class)
+                            .putExtra(Intent.EXTRA_TEXT, "" + 2);
+                    ActivityOptionsCompat compat = ActivityOptionsCompat
+                            .makeSceneTransitionAnimation(Lyric.this, null);
                     startActivity(intent, compat.toBundle());
 
 

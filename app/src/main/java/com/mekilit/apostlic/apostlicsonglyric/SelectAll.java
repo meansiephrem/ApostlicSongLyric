@@ -31,7 +31,7 @@ public class SelectAll extends AppCompatActivity implements AlbumListner {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         SetUpNav();
-        getSupportActionBar().setTitle("የፂሆን መዝሙሮች");
+        getSupportActionBar().setTitle("የጽዮን መዝሙሮች");
 
     }
 

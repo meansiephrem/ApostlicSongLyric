@@ -9,10 +9,12 @@ import android.widget.TextView;
 
 public class Sec_Activity extends AppCompatActivity {
 
-    String[] Name = {"Menasi Ephrem", "Tehut Ephrem","Eshcol Teferra"},
-             Email = {"menasiephrem@gmail.com", "tehutephrem@gmail.com","eshcol.teferra@gmail.com"},
-             Phone = {"+251912476374", "+251948242726","+251920720821"},
-             Church = {"Koteb Netsant Atbeya", "Koteb Netsant Atbeya","Semen Atebeya"};
+    String[] Name = {"Menasi Ephrem", "Tehut Ephrem","Eshcol Teferra","Natnael Solomon"},
+             Email = {"menasiephrem@gmail.com", "tehutephrem@gmail.com","eshcol.teferra@gmail.com",
+                     "natnaelsolomon52@yahoo.com"},
+             Phone = {"+251912476374", "+251948242726","+251920720821","+251921931185"},
+             Church = {"Kotebe Netsant Atbeya", "Kotebe Netsant Atbeya","Semen Atebeya",
+                     "Kotebe Netsant Atbeya"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

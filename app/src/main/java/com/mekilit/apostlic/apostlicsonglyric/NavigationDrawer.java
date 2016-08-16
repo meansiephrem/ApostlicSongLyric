@@ -30,9 +30,6 @@ public class NavigationDrawer extends Fragment {
     }
 
 
-
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -48,11 +45,11 @@ public class NavigationDrawer extends Fragment {
         AllArtist.setText(helper.CountAlL('c'));
         AllSong.setText(helper.CountAlL('b'));
 
-        DecodeTask task = new DecodeTask(imageView,getContext());
+        DecodeTask task = new DecodeTask(imageView, getContext());
 
-        task.execute( R.drawable.new_logo/* File path to image */);
+        task.execute(R.drawable.new_logo/* File path to image */);
 
-        Integer[] array = {1, 2, 3};
+        Integer[] array = {1, 2, 3,4};
         navListView.setAdapter(new NavBarList(getContext(), array));
 
         navListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -62,12 +59,16 @@ public class NavigationDrawer extends Fragment {
                     Intent intent = new Intent(getContext(), DisplayALbums.class);
                     intent.putExtra(Intent.EXTRA_TEXT, "1");
                     startActivity(intent);
-                } else if (position == 2) {
-
-                    System.exit(0);
-                } else {
+                }
+                if (position == 1) {
                     Intent intent = new Intent(getContext(), AboutTheApp.class);
                     startActivity(intent);
+                } else if (position == 2) {
+                    Intent intent = new Intent(getContext(), AboutUs.class);
+                    startActivity(intent);
+
+                } else {
+                    System.exit(0);
                 }
             }
         });
@@ -95,7 +96,7 @@ public class NavigationDrawer extends Fragment {
 
         };
 
-            mDrawerToggle.onDrawerOpened(viewContainer);
+        mDrawerToggle.onDrawerOpened(viewContainer);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
         mDrawerLayout.post(new Runnable() {

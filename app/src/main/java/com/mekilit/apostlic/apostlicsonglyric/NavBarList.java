@@ -41,12 +41,13 @@ public class NavBarList extends ArrayAdapter<Integer> {
                 break;
 
             case 2:
-                textView.setText("ውጣ");
-                imageView.setImageResource(R.drawable.exit);
+                textView.setText("ሰለ እኛ");
+                imageView.setImageResource(R.drawable.abt_the_app);
                 break;
 
             case 3:
-
+                textView.setText("ውጣ");
+                imageView.setImageResource(R.drawable.exit);
                 break;
 
             case 4:
