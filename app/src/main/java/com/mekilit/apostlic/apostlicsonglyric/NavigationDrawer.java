@@ -60,7 +60,7 @@ public class NavigationDrawer extends Fragment {
                     intent.putExtra(Intent.EXTRA_TEXT, "1");
                     startActivity(intent);
                 }
-                if (position == 1) {
+               else if (position == 1) {
                     Intent intent = new Intent(getContext(), AboutTheApp.class);
                     startActivity(intent);
                 } else if (position == 2) {
