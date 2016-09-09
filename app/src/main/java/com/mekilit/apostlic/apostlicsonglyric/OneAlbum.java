@@ -23,6 +23,7 @@ public class OneAlbum extends AppCompatActivity {
     TextView artistName;
     TextView numberOfSongs;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         final MyDbHandler helper = new MyDbHandler(this);
@@ -73,7 +74,6 @@ public class OneAlbum extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-
         new SongLoder().execute();
     }
 
@@ -98,7 +98,7 @@ public class OneAlbum extends AppCompatActivity {
 
 
             }
-            ListAdapter adapter = new SongAdaptor(getApplicationContext(),SongName,IsFav);
+            ListAdapter adapter = new SongAdaptor(getApplicationContext(),SongName,IsFav,Songs);
             Log.e("Song Adaptor ", "Finished bulding the Song adaptor");
 
             return adapter;

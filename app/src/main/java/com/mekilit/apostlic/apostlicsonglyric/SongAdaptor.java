@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -15,33 +16,67 @@ import java.util.ArrayList;
  */
 public class SongAdaptor extends ArrayAdapter<String> {
     ArrayList<Boolean> IsFav;
+    ArrayList<String> Songs;
 
-    public SongAdaptor(Context context, ArrayList<String> SongName, ArrayList<Boolean> isFav) {
+    public SongAdaptor(Context context, ArrayList<String> SongName, ArrayList<Boolean> isFav,
+                       ArrayList<String> songs) {
         super(context, R.layout.song_adaptor, SongName);
         this.IsFav = isFav;
+        this.Songs=songs;
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         View customView = convertView;
-        ViewHOOlder viewHOOlder=null;
-        if (customView==null)
-        {
+         ViewHOOlder viewHOOlder = null;
+        if (customView == null) {
             LayoutInflater inflater = LayoutInflater.from(getContext());
-             customView = inflater.inflate(R.layout.song_adaptor, parent, false);
-            viewHOOlder= new ViewHOOlder(customView);
+            customView = inflater.inflate(R.layout.song_adaptor, parent, false);
+            viewHOOlder = new ViewHOOlder(customView);
             customView.setTag(viewHOOlder);
+        } else {
+            viewHOOlder = (ViewHOOlder) customView.getTag();
         }
-        else {
-            viewHOOlder = (ViewHOOlder)customView.getTag();
-        }
-
+        final ViewHOOlder viewHOOlder1 =viewHOOlder;
         viewHOOlder.SongNumber.setText("" + (position + 1));
         viewHOOlder.SongTitle.setText(getItem(position));
-        if (IsFav.get(position))
+        if (IsFav.get(position)) {
             viewHOOlder.isFav.setImageResource(android.R.drawable.btn_star_big_on);
-        else
+            viewHOOlder.isFav.setSelected(true);
+        } else {
             viewHOOlder.isFav.setImageResource(android.R.drawable.btn_star_big_off);
+            viewHOOlder.isFav.setSelected(false);
+        }
+
+
+        viewHOOlder.isFav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final MyDbHandler helper = new MyDbHandler(getContext());
+                if (! viewHOOlder1.isFav.isSelected()) {
+
+                     viewHOOlder1.isFav.setImageResource(android.R.drawable.btn_star_big_on);
+                     viewHOOlder1.isFav.setSelected(true);
+
+                    Toast tost = Toast.makeText(getContext(),
+                            "መዝሙር "+(position+1)+" የተመረጡ ዝርዝር ውስጥ ተካቷል",
+                            Toast.LENGTH_SHORT);
+                    tost.show();
+                    helper.ChangeFavStat(false,Integer.parseInt(Songs.get(position)));
+                } else {
+
+                     viewHOOlder1.isFav.setImageResource(android.R.drawable.btn_star_big_off);
+                    viewHOOlder1.isFav.setSelected(false);
+
+                    Toast tost = Toast.makeText(getContext(),
+                            "መዝሙር "+(position+1)+ "ከተመረጡ ዝርዝር ውስጥ ተወግዶል",
+                            Toast.LENGTH_SHORT);
+                    tost.show();
+                    helper.ChangeFavStat(true, Integer.parseInt(Songs.get(position)));
+                }
+            }
+        });
+
 
         return customView;
     }
