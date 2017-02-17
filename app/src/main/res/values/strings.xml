@@ -25,6 +25,8 @@
     <string name="not_usa_meklit">North America Youth Meklit</string>
     <string name="app_emil">songsapostolic@gmail.com</string>
     <string name="version">Version 1.1.9</string>
+    <string name="hint">በመዝሙር ርዕስ ይፈልጉ</string>
+    <string name="action_search">ፈልግ</string>
 
 
 </resources>

@@ -51,11 +51,6 @@ public class AlbumAdaptor extends
         task.execute(AlbumArt /* File path to image */);
 
 
-
-
-
-
-
     }
 
     @Override

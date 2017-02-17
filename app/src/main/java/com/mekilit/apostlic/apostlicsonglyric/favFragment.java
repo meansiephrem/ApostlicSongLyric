@@ -114,6 +114,7 @@ public class favFragment extends Fragment {
         protected void onPostExecute(ListAdapter listAdapter) {
 
             listView.setAdapter(listAdapter);
+
             if(listAdapter.getCount()==0)
                 noFav.setText("ምንም የተመረጡ መዝሙሮች የሉም");
             else

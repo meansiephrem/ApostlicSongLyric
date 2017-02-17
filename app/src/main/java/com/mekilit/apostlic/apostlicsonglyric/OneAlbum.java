@@ -99,7 +99,7 @@ public class OneAlbum extends AppCompatActivity {
 
             }
             ListAdapter adapter = new SongAdaptor(getApplicationContext(),SongName,IsFav,Songs);
-            Log.e("Song Adaptor ", "Finished bulding the Song adaptor");
+            Log.e("Song Adaptor ", "Finished building the Song adaptor");
 
             return adapter;
         }

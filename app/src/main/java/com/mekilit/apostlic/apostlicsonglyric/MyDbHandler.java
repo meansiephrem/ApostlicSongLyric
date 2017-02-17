@@ -15,11 +15,15 @@ public class MyDbHandler extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "SongLyric.db";
     private static final String TABLE_ALBUM = "albums";
     private static final String TABLE_LYRIC = "lyric";
+
+
     private static final String LYRIC_ID = "_id";
     private static final String LYRIC_TITLE = "lyric_title";
     private static final String LYRIC_ALBUM_ID = "lyric_album_id";
     private static final String LYRIC_ACTUAL_LYRIC = "lyric_actual_lyric";
     private static final String LYRIC_IS_FAV = "lyric_is_fav";
+
+
     private static final String ALBUM_ID = "_id";
     private static final String ALBUM_TITLE = "album_title";
     private static final String ALBUM_ARTIST = "album_artist";
@@ -438,6 +442,24 @@ public class MyDbHandler extends SQLiteOpenHelper {
         }
         cursor.close();
         return Album;
+    }
+
+    public ArrayList<Integer> SearchQuery(String query) {
+
+        ArrayList<Integer> ret = new ArrayList();
+        SQLiteDatabase db = getWritableDatabase();
+        int index;
+
+        String[] col = {MyDbHandler.LYRIC_ID};
+        Cursor cur = db.query(true, MyDbHandler.TABLE_LYRIC, col, MyDbHandler.LYRIC_TITLE + " LIKE '%"
+                +query +"%'", null, null, null, null, null);
+        while (cur.moveToNext()) {
+            index = cur.getColumnIndex(MyDbHandler.LYRIC_ID);
+            ret.add(cur.getInt(index));
+        }
+
+        cur.close();
+        return ret;
     }
 }
 
