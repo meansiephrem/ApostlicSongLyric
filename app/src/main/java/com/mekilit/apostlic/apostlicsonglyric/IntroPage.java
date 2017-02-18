@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 
 public class IntroPage extends AppCompatActivity {
 
+    ApostolicSongs app;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -14,6 +15,7 @@ public class IntroPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro_page);
         MyDbHandler helper = new MyDbHandler(getApplicationContext());
+
         helper.getReadableDatabase();
         int DISPLAY_LENGTH = 1500;
         new Handler().postDelayed(new Runnable() {

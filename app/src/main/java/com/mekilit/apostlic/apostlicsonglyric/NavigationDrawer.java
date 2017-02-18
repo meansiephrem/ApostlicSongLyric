@@ -49,7 +49,7 @@ public class NavigationDrawer extends Fragment {
 
         task.execute(R.drawable.new_logo/* File path to image */);
 
-        Integer[] array = {1, 2, 3,4};
+        Integer[] array = {1, 2, 3,4,5};
         navListView.setAdapter(new NavBarList(getContext(), array));
 
         navListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -66,7 +66,9 @@ public class NavigationDrawer extends Fragment {
                 } else if (position == 2) {
                     Intent intent = new Intent(getContext(), AboutUs.class);
                     startActivity(intent);
-
+                }else if (position == 3) {
+                    Intent intent = new Intent(getContext(), Settings.class);
+                    startActivity(intent);
                 } else {
                     System.exit(0);
                 }

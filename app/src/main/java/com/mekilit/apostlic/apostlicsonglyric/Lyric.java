@@ -11,6 +11,8 @@ import android.support.v7.widget.Toolbar;
 import android.transition.Transition;
 import android.transition.TransitionInflater;
 import android.view.GestureDetector;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -23,11 +25,12 @@ public class Lyric extends AppCompatActivity implements OnClickListener {
     private static final int SWIPE_MIN_DISTANCE=120;
     private static final int SWIPE_MAX_OFF_PATH=350;
     private static final int SWIPE_THRESHOLD_VELOCITY=150;
+    protected ApostolicSongs app;
     Toolbar toolbar;
-    String id;
+    String id, ActualLyric, Promotion;
     int FavCount;
     View.OnTouchListener gestureListener;
-   FloatingActionButton fab;
+    FloatingActionButton fab;
     TextView textView;
     MyDbHandler helper = new MyDbHandler(Lyric.this);
     private GestureDetector gestureDetector;
@@ -35,6 +38,7 @@ public class Lyric extends AppCompatActivity implements OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+        getApplication().setTheme(R.style.MenasiInfo);
         super.onCreate(savedInstanceState);
         gestureDetector = new GestureDetector(this,new MyGesDec());
         gestureListener = new View.OnTouchListener()
@@ -111,10 +115,13 @@ public class Lyric extends AppCompatActivity implements OnClickListener {
 
 
         textView = (TextView) findViewById(R.id.Azmach);
+        app = (ApostolicSongs)getApplication();
+        textView.setTextSize(app.getLyricTextSize());
         ScrollView scrollView =(ScrollView) findViewById(R.id.scrollView);
 
-
-        textView.setText(helper.getLyric(lryicID));
+        Promotion = "\n\n"+toolbar.getTitle()+"\n"+toolbar.getSubtitle()+"\n"+"Apostolic Songs";
+        ActualLyric =helper.getLyric(lryicID);
+        textView.setText(ActualLyric);
         scrollView.setOnClickListener(Lyric.this);
         scrollView.setOnTouchListener(gestureListener);
 
@@ -124,6 +131,30 @@ public class Lyric extends AppCompatActivity implements OnClickListener {
 
     @Override
     public void onClick(View v) {
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.lyric_menu,menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id==R.id.action_share)
+        {
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setType("text/plain");
+            intent.putExtra(Intent.EXTRA_TEXT, ActualLyric+Promotion);
+            startActivity(Intent.createChooser(intent,"ለማጋራት ማንን ይጠቀሙ"));
+
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     private void NxtSwapPrev(boolean nxt){

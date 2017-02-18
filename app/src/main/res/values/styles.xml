@@ -9,10 +9,12 @@
     </style>
     <style name="MenasiInfo" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@android:color/holo_orange_dark </item>
-        <item name="colorAccent">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/Orange</item>
+        <item name="colorPrimaryDark">@color/DarkOrange</item>
+        <item name="colorAccent">@color/FOrange</item>
     </style>
+
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

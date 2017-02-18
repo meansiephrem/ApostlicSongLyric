@@ -27,6 +27,11 @@
     <string name="version">Version 1.1.9</string>
     <string name="hint">በመዝሙር ርዕስ ይፈልጉ</string>
     <string name="action_search">ፈልግ</string>
+    <string name="textSize">የፅሁፍ መጠን</string>
+    <string name="text_size_big">ትልቅ</string>
+    <string name="text_size_mid">መካከለኛ</string>
+    <string name="text_size_small">ትንሽ</string>
+    <string name="settings">ቅንብሮች</string>
 
 
 </resources>
