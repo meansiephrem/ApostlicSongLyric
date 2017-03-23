@@ -102,6 +102,7 @@ public class Lyric extends AppCompatActivity implements OnClickListener {
                     tost.show();
                 }
 
+                app.setUpdateAlbum("10");
             }
         });
 
@@ -119,9 +120,9 @@ public class Lyric extends AppCompatActivity implements OnClickListener {
         textView.setTextSize(app.getLyricTextSize());
         ScrollView scrollView =(ScrollView) findViewById(R.id.scrollView);
 
-        Promotion = "\n\n"+toolbar.getTitle()+"\n"+toolbar.getSubtitle()+"\n"+"Apostolic Songs";
-        ActualLyric =helper.getLyric(lryicID);
-        textView.setText(ActualLyric);
+        textView.setText(helper.getLyric(lryicID));
+
+
         scrollView.setOnClickListener(Lyric.this);
         scrollView.setOnTouchListener(gestureListener);
 
@@ -148,8 +149,8 @@ public class Lyric extends AppCompatActivity implements OnClickListener {
         {
             Intent intent = new Intent(Intent.ACTION_SEND);
             intent.setType("text/plain");
-            intent.putExtra(Intent.EXTRA_TEXT, ActualLyric+Promotion);
-            startActivity(Intent.createChooser(intent,"ለማጋራት ማንን ይጠቀሙ"));
+            intent.putExtra(Intent.EXTRA_TEXT, getShareStr());
+            startActivity(Intent.createChooser(intent,"በ... አጋራ"));
 
             return true;
         }
@@ -221,6 +222,13 @@ public class Lyric extends AppCompatActivity implements OnClickListener {
             return true;
         } else
             return false;}
+
+    private String getShareStr()
+    {
+        Promotion = "\n\n"+toolbar.getTitle()+"\n"+toolbar.getSubtitle()+"\n"+"Apostolic Songs";
+        ActualLyric =(String)textView.getText();
+        return ActualLyric+Promotion;
+    }
 
 
     class MyGesDec extends GestureDetector.SimpleOnGestureListener

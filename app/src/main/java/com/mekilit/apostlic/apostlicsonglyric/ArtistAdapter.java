@@ -15,15 +15,16 @@ import java.util.ArrayList;
 public class ArtistAdapter extends ArrayAdapter<String> {
 
     ArrayList<String> ArtistName;
-
+    ArrayList<String> AlbumId;
     ArrayList<String> AlbumCount;
     ArrayList<Integer> AlbumArt;
 
     public ArtistAdapter(Context context, ArrayList<String> objects,
-                         ArrayList<String> albumCount,ArrayList<Integer> albumArt)  {
+                         ArrayList<String> albumCount,ArrayList<Integer> albumArt,ArrayList<String>
+                        albumId )  {
         super(context, R.layout.custom_album, objects);
         this.ArtistName = objects;
-
+        this.AlbumId=albumId;
         this.AlbumCount=albumCount;
         this.AlbumArt=albumArt;
 
@@ -50,7 +51,7 @@ public class ArtistAdapter extends ArrayAdapter<String> {
         }
 
         String ArtistName =  this.ArtistName.get(position);
-
+        String AlbumID =  this.AlbumId.get(position);
         String AlbumCount = this.AlbumCount.get(position);
 
 
@@ -58,7 +59,7 @@ public class ArtistAdapter extends ArrayAdapter<String> {
         holders.SmallText.setText(AlbumCount);
         int AlbumArt = this.AlbumArt.get(position);
         iv.setImageBitmap(null);
-        DecodeTask task = new DecodeTask(iv,getContext());
+        DecodeTask task = new DecodeTask(iv,getContext(),AlbumID);
         task.execute(AlbumArt /* File path to image */);
         iv.setTag(R.id.albumArt, task);
 

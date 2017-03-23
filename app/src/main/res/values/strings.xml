@@ -23,15 +23,17 @@
     <string name="lyric">Lyric</string>
     <string name="dani_b">Daniel Berhanu</string>
     <string name="not_usa_meklit">North America Youth Meklit</string>
-    <string name="app_emil">songsapostolic@gmail.com</string>
-    <string name="version">Version 1.1.9</string>
+    <string name="app_web">apostolicsongs.ml</string>
+    <string name="version">Version 2.3</string>
     <string name="hint">በመዝሙር ርዕስ ይፈልጉ</string>
     <string name="action_search">ፈልግ</string>
     <string name="textSize">የፅሁፍ መጠን</string>
     <string name="text_size_big">ትልቅ</string>
     <string name="text_size_mid">መካከለኛ</string>
     <string name="text_size_small">ትንሽ</string>
-    <string name="settings">ቅንብሮች</string>
+    <string name="settings">የፊደል መጠን</string>
+    <string name="url">http://apostolicsongs.000webhostapp.com/Application_Sync/</string>
+    <string name="path">sdcard/Apostolic Songs/Album Arts/</string>
 
 
 </resources>

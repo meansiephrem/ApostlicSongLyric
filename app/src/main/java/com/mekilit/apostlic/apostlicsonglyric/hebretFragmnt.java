@@ -11,7 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ListAdapter;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
@@ -22,15 +22,18 @@ import java.util.ArrayList;
  */
 public class hebretFragmnt extends Fragment {
 
+    protected ApostolicSongs app;
     AlbumListner albumListner;
     ListView listView;
     ProgressBar progressBar;
+    ArrayAdapter adapter;
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {
             albumListner = (AlbumListner) activity;
+            app = (ApostolicSongs)activity.getApplication();
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString());
         }
@@ -41,30 +44,47 @@ public class hebretFragmnt extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final MyDbHandler helper = new MyDbHandler(getContext());
+
         View view = inflater.inflate(R.layout.fragment_album_fragmnt, container, false);
         listView = (ListView) view.findViewById(R.id.allLyric);
-        final ArrayList<String> listAlbum = helper.SelectAllhebret();
+
         progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
         new HebretLoder().execute();
+
+        return view;
+    }
+
+    @Override
+    public void onStart() {
+
+
+        if (app.getUpdateAlbum().equalsIgnoreCase("0"))
+        {
+            adapter.clear();
+            new HebretLoder().execute();
+            app.setUpdateAlbum("-1");
+        }
+        final MyDbHandler helper = new MyDbHandler(getContext());
+        final ArrayList<String> listAlbum = helper.SelectAllhebret();
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 albumListner.goToAlbum('A', listAlbum.get(position));
             }
         });
-        return view;
+
+        super.onStart();
     }
 
     @SuppressWarnings("unchecked")
-    public class HebretLoder extends AsyncTask<Void, Integer, ListAdapter> {
+    public class HebretLoder extends AsyncTask<Void, Integer, ArrayAdapter> {
 
         protected void onPreExecute() {
             progressBar.setVisibility(View.VISIBLE);
         }
 
         @Override
-        protected ListAdapter doInBackground(Void... params) {
+        protected ArrayAdapter doInBackground(Void... params) {
             final MyDbHandler helper = new MyDbHandler(getContext());
             final ArrayList<String> listAlbum = helper.SelectAllhebret();
 
@@ -81,14 +101,15 @@ public class hebretFragmnt extends Fragment {
 
             }
 
-            ListAdapter adapter = new HebretAdapter(getContext(),AlbumName,ArtistName,AlbumArt);
+             adapter = new HebretAdapter(getContext(),AlbumName,ArtistName,AlbumArt
+                    ,listAlbum);
             Log.e("Artist Adaptor ", "Finished bulding the Hebret adaptor");
 
             return adapter;
         }
 
         @Override
-        protected void onPostExecute(ListAdapter listAdapter) {
+        protected void onPostExecute(ArrayAdapter listAdapter) {
             listView.setAdapter(listAdapter);
             progressBar.setVisibility(View.GONE);
             super.onPostExecute(listAdapter);

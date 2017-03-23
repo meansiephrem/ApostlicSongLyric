@@ -45,11 +45,11 @@ public class NavigationDrawer extends Fragment {
         AllArtist.setText(helper.CountAlL('c'));
         AllSong.setText(helper.CountAlL('b'));
 
-        DecodeTask task = new DecodeTask(imageView, getContext());
+        DecodeTask task = new DecodeTask(imageView, getContext(),null);
 
-        task.execute(R.drawable.new_logo/* File path to image */);
+        task.execute(R.drawable.nav_bar_img/* File path to image */);
 
-        Integer[] array = {1, 2, 3,4,5};
+        Integer[] array = {1, 2, 3,4,5,6};
         navListView.setAdapter(new NavBarList(getContext(), array));
 
         navListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -69,9 +69,12 @@ public class NavigationDrawer extends Fragment {
                 }else if (position == 3) {
                     Intent intent = new Intent(getContext(), Settings.class);
                     startActivity(intent);
-                } else {
-                    System.exit(0);
-                }
+                }else if (position == 4) {
+                    Intent intent = new Intent(getContext(), Sync.class);
+                    startActivity(intent); }
+                else{
+                        System.exit(0);
+                    }
             }
         });
         return view;

@@ -1,6 +1,7 @@
 package com.mekilit.apostlic.apostlicsonglyric;
 
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class OneAlbum extends AppCompatActivity {
+    protected  ApostolicSongs app ;
     String albumID = "";
     ListView listView;
     View header;
@@ -23,13 +25,12 @@ public class OneAlbum extends AppCompatActivity {
     TextView artistName;
     TextView numberOfSongs;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         final MyDbHandler helper = new MyDbHandler(this);
         Intent intent = getIntent();
         albumID = intent.getStringExtra(Intent.EXTRA_TEXT);
-
+        app = (ApostolicSongs) getApplication();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.one_album_list);
@@ -45,7 +46,15 @@ public class OneAlbum extends AppCompatActivity {
         albumName.setText(helper.getAlbumName(albumID));
         artistName.setText(helper.getArtistName(albumID));
         numberOfSongs.setText(helper.CountSongs(albumID));
-        albumArt.setImageResource(helper.getAlbumArt(albumID));
+
+            int res =helper.getAlbumArt(albumID);
+        if (res != 0)
+            albumArt.setImageResource(res);
+        else
+            albumArt.setImageBitmap(BitmapFactory.decodeFile(getResources().getString(R.string.path)
+                    +albumID+".jpg"));
+
+
 
 
         final ArrayList<String> Songs = helper.SelectAllSongs(albumID);
@@ -53,6 +62,8 @@ public class OneAlbum extends AppCompatActivity {
 
         listView.addHeaderView(header);
 
+
+        new SongLoder().execute();
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -74,7 +85,12 @@ public class OneAlbum extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        new SongLoder().execute();
+        if (app.getUpdateAlbum().equalsIgnoreCase("10"))
+        {
+            new SongLoder().execute();
+            app.setUpdateAlbum("-1");
+        }
+
     }
 
     @SuppressWarnings("unchecked")

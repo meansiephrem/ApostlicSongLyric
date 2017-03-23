@@ -114,7 +114,7 @@ public class DisplayALbums extends AppCompatActivity {
             }
 
             AlbumAdaptor adapter = new AlbumAdaptor(context, AlbumName,ArtistName,
-                    AlbumArt);
+                    AlbumArt,listAlbum);
             Log.e("Album Adaptor ", "Finished bulding the AlbumAdaptor adaptor");
 
             return adapter;

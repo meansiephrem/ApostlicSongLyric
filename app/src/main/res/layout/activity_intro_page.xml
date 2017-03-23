@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#c5ceeb"
+    android:background="#cdcdcd"
     tools:context="com.mekilit.apostlic.apostlicsonglyric.IntroPage">
 
     <ImageView
@@ -13,7 +13,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="60dp"
-        android:src="@drawable/into_ii" />
+        android:src="@drawable/logo_ver_two" />
 
     <TextView
         android:id="@+id/textView5"

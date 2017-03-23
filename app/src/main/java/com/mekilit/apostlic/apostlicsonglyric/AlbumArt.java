@@ -1,14 +1,15 @@
 package com.mekilit.apostlic.apostlicsonglyric;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 
 import java.lang.reflect.Field;
 
 public class AlbumArt extends AppCompatActivity {
-
+    String name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,14 +18,16 @@ public class AlbumArt extends AppCompatActivity {
         Intent intent = getIntent();
         String AlbumID = intent.getStringExtra(Intent.EXTRA_TEXT);
         try {
-            String name = AlbumID.toLowerCase();
+           name = AlbumID.toLowerCase();
             Class res = R.drawable.class;
             Field field = res.getField(name);
             int res1 =field.getInt(null);
             albumArt.setImageResource(res1);
         }catch (Exception e)
         {
-            albumArt.setImageResource(R.drawable.defultpic);
+            albumArt.setImageBitmap(BitmapFactory.decodeFile(getResources().getString(R.string.path)
+                    +name+".jpg"));
+
         }
     }
 }

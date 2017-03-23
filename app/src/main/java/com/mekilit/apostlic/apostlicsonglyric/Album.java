@@ -26,7 +26,6 @@ public class Album {
                     new Album ("Elfu3","አለው ሕዝብ እግዚአብሔር","እልፉ ኩርፉ",1),
                     new Album ("Jerry1","ከምንም በላይ መዳኔ ይበልጣል","ኢየሩሳሌም ሞላ",1),
                     new Album ("Erkenesh1","ኢየሱስ ብቻ","እርቅነሽ ሰጋሮ",1),
-                    new Album ("EbenzerF","እጅህ በእኔ ትሁን","አቤንኤዘር ፈቃዱ",1),
                     new Album ("EbenzerM1","ሊመጣ ያለው ይመጣል","አቤንኤዘር መኩሪያ",1),
                     new Album ("Fish1","ኑ ልንገራችሁ","ፍስሃ ይርጋ",1),
                     new Album ("Fish2","ጠላት እስከ መቼ","ፍስሃ ይርጋ",1),
@@ -54,7 +53,7 @@ public class Album {
                     new Album ("Tadne1","ያያልበ ዙፋን ያለው","ታድን እንግዳ",1),
                     new Album ("Tewlde1","የድል ሽታ","ተወልደ አበባየሁ",1),
                     new Album ("Teru1","ቀን ለቀን ነገርን ታወጣለች","ጥሩነሽ በቀለ",1),
-                    new Album ("wegene1","ምስጋናዬን አላቆምም","ወገኔ አለማየሁ",1),
+                    new Album ("Wegene1","ምስጋናዬን አላቆምም","ወገኔ አለማየሁ",1),
                     new Album ("Yemserach1","ለክብርህ ካልሆነ መኖሬ","የምስራች ገ/ሚካኤል",1),
                     new Album ("Yemserach2","ማደሪያዎችህ","የምስራች ገ/ሚካኤል",1),
                     new Album ("Yesal1","ሲያቅላላ ሊነጋ ነው","ይሳለሙሽ ከበደ",1),
@@ -79,6 +78,7 @@ public class Album {
                     new Album ("wedding1","ጋብቻ ክቡር ቅዱስ"," የጋብቻ መዝሙር",0),
                     new Album ("kehulu1","ከሁሉ በላይ","የህብረት መዝሙር",0),
                     new Album ("hosana1","ሃሌሉያ","የሆሳእና ማራናታ መዘምራን",0),
+                    new Album ("EbenzerF","እጅህ በእኔ ትሁን","አቤንኤዘር ፈቃዱ",1),
                     new Album ("fishbermul","ባለብዙ ክብር","ፍሰሃ ሙሉጌታ እና ብርሃኑ",0),
 
             };
@@ -93,6 +93,13 @@ public class Album {
         Album_Title = album_Title;
         Album_Artist = album_Artist;
         Album_Art= album_id;
+        this._isSolo = _isSolo;
+    }
+    public Album(String album_id, String album_Title, String album_Artist,String album_Art, int _isSolo) {
+        Album_id = album_id;
+        Album_Title = album_Title;
+        Album_Artist = album_Artist;
+        Album_Art= album_Art;
         this._isSolo = _isSolo;
     }
 

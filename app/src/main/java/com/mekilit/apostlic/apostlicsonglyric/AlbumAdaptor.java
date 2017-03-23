@@ -18,14 +18,16 @@ public class AlbumAdaptor extends
         RecyclerView.Adapter<AlbumAdaptor.ViewHoler>
 {
     private ArrayList<String> AlbumName;
+    private ArrayList<String> AlbumId;
     private ArrayList<String> ArtistName;
     private ArrayList<Integer> AlbumArt;
     private Context context;
     public AlbumAdaptor(Context context, ArrayList<String> albumName,ArrayList<String> artistName,
-                        ArrayList<Integer> albumArt) {
+                        ArrayList<Integer> albumArt,ArrayList<String> albumId) {
         this.context = context;
         this.AlbumName = albumName;
         this.ArtistName= artistName;
+        this.AlbumId=albumId;
         this.AlbumArt=albumArt;
     }
 
@@ -38,6 +40,7 @@ public class AlbumAdaptor extends
         ImageView imageView = holder.imageView;
         imageView.setImageDrawable(null);
         String AlbumName = this.AlbumName.get(position);
+        String AlbumId = this.AlbumId.get(position);
         String ArtistName = this.ArtistName.get(position);
         int AlbumArt = this.AlbumArt.get(position);
 
@@ -46,7 +49,7 @@ public class AlbumAdaptor extends
 
         holder.AlbumName.setText(AlbumName);
          holder.ArtistName.setText(ArtistName);
-        DecodeTask task = new DecodeTask(imageView,getContext());
+        DecodeTask task = new DecodeTask(imageView,getContext(),AlbumId);
 
         task.execute(AlbumArt /* File path to image */);
 

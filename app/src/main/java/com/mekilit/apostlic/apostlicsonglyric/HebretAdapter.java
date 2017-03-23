@@ -15,14 +15,18 @@ import java.util.ArrayList;
 public class HebretAdapter extends ArrayAdapter<String> {
     ArrayList<String> ArtistName;
     ArrayList<String> AlbumName;
+    ArrayList<String> AlbumID;
     ArrayList<Integer> AlbumArt;
 
     public HebretAdapter(Context context, ArrayList<String> ArtistName,
-                         ArrayList<String> albumName, ArrayList<Integer> albumArt) {
+                         ArrayList<String> albumName, ArrayList<Integer> albumArt,
+                         ArrayList<String> albumId
+    ) {
         super(context, R.layout.custom_album, ArtistName);
         this.ArtistName = ArtistName;
         this.AlbumName = albumName;
         this.AlbumArt = albumArt;
+        this.AlbumID = albumId;
 
     }
 
@@ -49,13 +53,14 @@ public class HebretAdapter extends ArrayAdapter<String> {
 
         String ArtistName = getItem(position);
         String AlbumName = this.AlbumName.get(position);
+        String AlbumID = this.AlbumID.get(position);
         int AlbumArt = this.AlbumArt.get(position);
 
 
         holders.BigText.setText(ArtistName);
         holders.SmallText.setText(AlbumName);
         iv.setImageBitmap(null);
-        DecodeTask task = new DecodeTask(iv,getContext());
+        DecodeTask task = new DecodeTask(iv,getContext(),AlbumID);
         task.execute(AlbumArt /* File path to image */);
         iv.setTag(R.id.albumArt, task);
 

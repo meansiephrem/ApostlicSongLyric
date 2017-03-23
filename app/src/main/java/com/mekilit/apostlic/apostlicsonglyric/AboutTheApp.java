@@ -11,14 +11,14 @@ public class AboutTheApp extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.abt_page);
-        ImageView bigPic = (ImageView) findViewById(R.id.abtApp);
+        ImageView bigPic = (ImageView) findViewById(R.id.aboutApp);
         ImageView logForUs = (ImageView) findViewById(R.id.logoForUs);
-        DecodeTask task = new DecodeTask(bigPic, this);
+        DecodeTask task = new DecodeTask(bigPic, this,null);
 
-        task.execute(R.drawable.abt/* File path to image */);
-        DecodeTask task1 = new DecodeTask(logForUs, this);
+        task.execute(R.drawable.about_app_two/* File path to image */);
+        DecodeTask task1 = new DecodeTask(logForUs, this,null);
 
-        task1.execute(R.drawable.logo_for_us/* File path to image */);
+        task1.execute(R.drawable.logo_ver_two/* File path to image */);
 
     }
 }

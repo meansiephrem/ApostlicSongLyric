@@ -2,7 +2,6 @@ package com.mekilit.apostlic.apostlicsonglyric;
 
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,7 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ListAdapter;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
@@ -23,9 +22,12 @@ import java.util.ArrayList;
 public class artistFragment extends Fragment {
 
 
+    protected ApostolicSongs app;
     AlbumListner albumListner;
     ListView listView;
     ProgressBar progressBar;
+    ArrayAdapter adapter;
+
 
 
     public artistFragment() {
@@ -37,6 +39,7 @@ public class artistFragment extends Fragment {
         super.onAttach(activity);
         try {
             albumListner = (AlbumListner) activity;
+            app = (ApostolicSongs) activity.getApplication();
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString());
         }
@@ -47,31 +50,47 @@ public class artistFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        final MyDbHandler helper = new MyDbHandler(getContext());
+
+
         View view = inflater.inflate(R.layout.fragment_album_fragmnt, container, false);
         listView = (ListView) view.findViewById(R.id.allLyric);
         progressBar=(ProgressBar) view.findViewById(R.id.progressBar);
 
 
-        final ArrayList<String> listAlbum = helper.SelectAllArtist();
+
 
         new ArtistLoder().execute();
 
+
+        return view;
+    }
+
+    @Override
+    public void onStart() {
+
+
+        if (app.getUpdateAlbum().equalsIgnoreCase("1"))
+        {
+            adapter.clear();
+            new ArtistLoder().execute();
+            app.setUpdateAlbum("-1");
+        }
+
+        final MyDbHandler helper = new MyDbHandler(getContext());
+        final ArrayList<String> listAlbum = helper.SelectAllArtist();
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 albumListner.goToAlbum('D', listAlbum.get(position));
             }
         });
-        return view;
+
+        super.onStart();
     }
 
     @SuppressWarnings("unchecked")
-    public class ArtistLoder extends AsyncTask<Void, Integer, ListAdapter> {
+    public class ArtistLoder extends AsyncTask<Void, Integer, ArrayAdapter> {
 
-
-        private final ProgressDialog dialog = new ProgressDialog(
-                getContext());
 
         // can use UI thread here
         protected void onPreExecute() {
@@ -79,22 +98,24 @@ public class artistFragment extends Fragment {
         }
 
         @Override
-        protected ListAdapter doInBackground(Void... params) {
+        protected ArrayAdapter doInBackground(Void... params) {
             final MyDbHandler helper = new MyDbHandler(getContext());
             ArrayList<String> listAlbum = helper.SelectAllArtist();
-
+            ArrayList<String> AlbumId = new ArrayList();
             ArrayList<String> AlbumCount = new ArrayList();
             ArrayList<Integer> AlbumArt = new ArrayList();
             for (int i = 0; i < listAlbum.size(); i++) {
                 String albumID = helper.getAlbumID(listAlbum.get(i));
-
+                AlbumId.add(albumID);
                 AlbumCount.add(helper.CountAlbumF(listAlbum.get(i)));
                 AlbumArt.add(helper.getAlbumArt(albumID));
 
             }
 
 
-            ListAdapter adapter = new ArtistAdapter(getContext(),listAlbum,AlbumCount,AlbumArt);
+
+             adapter = new ArtistAdapter(getContext(),listAlbum,AlbumCount,
+                                        AlbumArt,AlbumId);
             Log.e("Artist Adaptor ", "Finished bulding the artist adaptor");
 
             return adapter;
@@ -102,7 +123,7 @@ public class artistFragment extends Fragment {
         }
 
         @Override
-        protected void onPostExecute(ListAdapter listAdapter) {
+        protected void onPostExecute(ArrayAdapter listAdapter) {
             listView.setAdapter(listAdapter);
             progressBar.setVisibility(View.GONE);
             super.onPostExecute(listAdapter);

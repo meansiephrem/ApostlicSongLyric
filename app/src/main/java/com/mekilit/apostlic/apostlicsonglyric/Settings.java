@@ -55,15 +55,15 @@ public class Settings extends AppCompatActivity {
                         RadioButton radioButton = (RadioButton) findViewById(checkedId);
                         if(radioButton.getId()==R.id.rb_text_big)
                         {
-                         app.setLyricTextSize(24);
+                         app.setLyricTextSize(24+"");
                         }
                         else if(radioButton.getId()==R.id.rb_text_mid)
                         {
-                         app.setLyricTextSize(20);
+                         app.setLyricTextSize(20+"");
                         }
                         else if(radioButton.getId()==R.id.rb_text_small)
                         {
-                            app.setLyricTextSize(16);
+                            app.setLyricTextSize(16+"");
                         }
                     }
                 }

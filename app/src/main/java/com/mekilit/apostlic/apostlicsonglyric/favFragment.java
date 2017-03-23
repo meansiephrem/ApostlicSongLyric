@@ -91,20 +91,21 @@ public class favFragment extends Fragment {
 
             ArrayList<String> SongName = new ArrayList();
             ArrayList<String> ArtistName = new ArrayList();
+            ArrayList<String> AlbumID = new ArrayList();
             ArrayList<Integer> AlbumArt = new ArrayList();
 
             for (int i=0;i<listAlbum.size();i++)
             {
                 int LyricId=listAlbum.get(i);
                 String albumId = helper.getAlbumID(LyricId);
-
-              SongName.add(helper.getSongName(LyricId+""));
+                AlbumID.add(albumId);
+               SongName.add(helper.getSongName(LyricId+""));
                 ArtistName.add(helper.getArtistName(albumId));
                 AlbumArt.add(helper.getAlbumArt(albumId));
 
             }
 
-            ListAdapter adapter = new FavAdaptor(context,SongName,ArtistName,AlbumArt);
+            ListAdapter adapter = new FavAdaptor(context,SongName,ArtistName,AlbumArt,AlbumID);
             Log.e("Fav Adaptor ", "Finished bulding the Fav adaptor");
 
             return adapter;

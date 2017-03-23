@@ -11,7 +11,7 @@ import java.util.ArrayList;
 @SuppressWarnings("unchecked")
 public class MyDbHandler extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 20;
+    private static final int DATABASE_VERSION = 23;
     private static final String DATABASE_NAME = "SongLyric.db";
     private static final String TABLE_ALBUM = "albums";
     private static final String TABLE_LYRIC = "lyric";
@@ -148,7 +148,7 @@ public class MyDbHandler extends SQLiteOpenHelper {
 
         String[] col = {MyDbHandler.ALBUM_ARTIST};
         Cursor cur = db.query(true, MyDbHandler.TABLE_ALBUM, col, MyDbHandler.ALBUM_IS_SOLO + "=" +
-                1, null, null, null, null, null);
+                1, null, null, null, MyDbHandler.ALBUM_ID, null);
         while (cur.moveToNext()) {
             index = cur.getColumnIndex(MyDbHandler.ALBUM_ARTIST);
             ret.add(cur.getString(index));
@@ -222,7 +222,7 @@ public class MyDbHandler extends SQLiteOpenHelper {
 
         String[] col = {MyDbHandler.LYRIC_ID};
         Cursor cur = db.query(true, MyDbHandler.TABLE_LYRIC, col, MyDbHandler.LYRIC_IS_FAV + "=" + 1
-                , null, null, null, null, null);
+                , null, null, null, MyDbHandler.LYRIC_ALBUM_ID, null);
         while (cur.moveToNext()) {
             index = cur.getColumnIndex(MyDbHandler.LYRIC_ID);
             ret.add(cur.getInt(index));
@@ -259,7 +259,7 @@ public class MyDbHandler extends SQLiteOpenHelper {
 
         String[] col = {MyDbHandler.ALBUM_ID};
         Cursor cur = db.query(true, MyDbHandler.TABLE_ALBUM, col, MyDbHandler.ALBUM_IS_SOLO + "=" +
-                0, null, null, null, null, null);
+                0, null, null, null, MyDbHandler.ALBUM_ID, null);
         while (cur.moveToNext()) {
             index = cur.getColumnIndex(MyDbHandler.ALBUM_ID);
             ret.add(cur.getString(index));
@@ -416,7 +416,8 @@ public class MyDbHandler extends SQLiteOpenHelper {
 
         SQLiteDatabase db = getWritableDatabase();
         String[] col = {MyDbHandler.ALBUM_ID};
-        Cursor cursor = db.query(true, MyDbHandler.TABLE_ALBUM, col, null, null, null, null, null,
+        Cursor cursor = db.query(true, MyDbHandler.TABLE_ALBUM, col, null, null, null, null,
+                MyDbHandler.ALBUM_ID,
                 null);
 
         while (cursor.moveToNext()) {
@@ -460,6 +461,31 @@ public class MyDbHandler extends SQLiteOpenHelper {
 
         cur.close();
         return ret;
+    }
+
+    public void InsertNewAlbum(Album album,ArrayList<Song> song)
+    {
+        SQLiteDatabase db = getWritableDatabase();
+
+        ContentValues ALL_Albums = new ContentValues();
+
+            ALL_Albums.put(ALBUM_ID, album.getAlbum_id());
+            ALL_Albums.put(ALBUM_TITLE, album.getAlbum_Title());
+            ALL_Albums.put(ALBUM_ARTIST, album.getAlbum_Artist());
+            ALL_Albums.put(ALBUM_ART, album.getAlbum_Art());
+            ALL_Albums.put(ALBUM_IS_SOLO,album.get_isSolo());
+            db.insert(TABLE_ALBUM, null, ALL_Albums);
+
+
+        ContentValues ALL_Lyric = new ContentValues();
+            for (int i = 0; i<song.size();i++) {
+                ALL_Lyric.put(LYRIC_TITLE, song.get(i).get_title());
+                ALL_Lyric.put(LYRIC_ALBUM_ID, song.get(i).get_albumId());
+                ALL_Lyric.put(LYRIC_ACTUAL_LYRIC, song.get(i).get_actualLyric());
+                ALL_Lyric.put(LYRIC_IS_FAV, song.get(i).get_isFav());
+                db.insert(TABLE_LYRIC, null, ALL_Lyric);
+            }
+
     }
 }
 

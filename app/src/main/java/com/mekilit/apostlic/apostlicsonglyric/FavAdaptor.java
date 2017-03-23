@@ -15,15 +15,18 @@ import java.util.ArrayList;
 public class FavAdaptor extends ArrayAdapter<String> {
     ArrayList<String> SongName;
     ArrayList<String> ArtistName;
+    ArrayList<String> AlbumID;
     ArrayList<Integer> AlbumArt;
 
     public FavAdaptor(Context context, ArrayList<String> songName,
-                      ArrayList<String> artistName, ArrayList<Integer> albumArt
+                      ArrayList<String> artistName, ArrayList<Integer> albumArt,
+                      ArrayList<String> albumID
     ) {
         super(context, R.layout.custom_album, songName);
         this.ArtistName = artistName;
         this.SongName = songName;
         this.AlbumArt = albumArt;
+        this.AlbumID= albumID;
     }
 
 
@@ -49,6 +52,7 @@ public class FavAdaptor extends ArrayAdapter<String> {
 
         String SongName = this.SongName.get(position);
         String ArtistName = this.ArtistName.get(position);
+        String AlbumID = this.AlbumID.get(position);
         int AlbumArt = this.AlbumArt.get(position);
 
 
@@ -56,7 +60,7 @@ public class FavAdaptor extends ArrayAdapter<String> {
         holders.SmallText.setText(ArtistName);
 
         iv.setImageBitmap(null);
-        DecodeTask task = new DecodeTask(iv,getContext());
+        DecodeTask task = new DecodeTask(iv,getContext(),AlbumID);
         task.execute(AlbumArt /* File path to image */);
         iv.setTag(R.id.albumArt, task);
 

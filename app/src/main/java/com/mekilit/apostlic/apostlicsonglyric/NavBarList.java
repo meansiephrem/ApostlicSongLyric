@@ -51,6 +51,10 @@ public class NavBarList extends ArrayAdapter<Integer> {
                 break;
 
             case 4:
+                textView.setText("አዲስ መዝሙሮች");
+                new DecodeTask(imageView,getContext(),null).execute(R.drawable.sync);
+                break;
+            case 5:
                 textView.setText("ውጣ");
                 imageView.setImageResource(R.drawable.exit);
                 break;
