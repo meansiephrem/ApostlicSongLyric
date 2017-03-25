@@ -69,11 +69,14 @@ public class artistFragment extends Fragment {
     public void onStart() {
 
 
-        if (app.getUpdateAlbum().equalsIgnoreCase("1"))
+        if ((app.getUpdateAlbum().contains("1")||app.getUpdateAlbum().contains("3"))&&adapter!=null)
         {
             adapter.clear();
             new ArtistLoder().execute();
-            app.setUpdateAlbum("-1");
+            if (app.getUpdateAlbum().contains("1"))
+                app.setUpdateAlbum("-1");
+            else
+                app.setUpdateAlbum("0");
         }
 
         final MyDbHandler helper = new MyDbHandler(getContext());

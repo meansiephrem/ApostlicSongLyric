@@ -1,6 +1,7 @@
 package com.mekilit.apostlic.apostlicsonglyric;
 
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -43,6 +44,9 @@ public class Sync extends AppCompatActivity {
     ArrayList<Album> AlbumList;
     ArrayAdapter<Album> adapter;
     Album  currAlbumId;
+    boolean can_back = true,sema=true;
+    int sync = -100;
+    ProgressDialog dialog;
 
     @Nullable
     private static String fixEncoding(String response)
@@ -56,6 +60,14 @@ public class Sync extends AppCompatActivity {
             return null;
         }
         return response;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(can_back)
+        super.onBackPressed();
+        else
+            Toast.makeText(context, "አውርዶ እስኪጨርስ እባኮ ይታገሱ", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -77,6 +89,9 @@ public class Sync extends AppCompatActivity {
         toolbar.setTitle("አዳዲስ አልበሞች");
         toolbar.setSubtitle("እየፈለገ ነው...");
         Bar.setVisibility(View.VISIBLE);
+        dialog = new ProgressDialog(Sync.this);
+        dialog.setMessage("እያወረደ ነው... ");
+        dialog.setCancelable(false);
 
         String url = getResources().getString(R.string.url)+"Albums.json";
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -92,15 +107,16 @@ public class Sync extends AppCompatActivity {
 
 
                         listView.setAdapter(adapter);
-                        if(AlbumList.isEmpty())
-                            textView.setText("ምንም አዲስ መዝሙር የለም :)\n ሌላ ጊዜ ይሞክሩ");
                         subTitle();
+                        if(AlbumList.isEmpty())
+                            textView.setText("ምንም አዲስ መዝሙር የለም :(\n ሌላ ጊዜ ይሞክሩ");
+
                         Bar.setVisibility(View.INVISIBLE);
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                textView.setText("ከኢንተርኔት ጋር መገናኘት አልተቻለም :)\n ትንሽ ቆይተው ይሞክሩ");
+                textView.setText("ከኢንተርኔት ጋር መገናኘት አልተቻለም :(\n ትንሽ ቆይተው ይሞክሩ");
                 toolbar.setSubtitle("መገናኘት አልተቻለም");
                 Bar.setVisibility(View.INVISIBLE);
             }
@@ -112,24 +128,28 @@ public class Sync extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-
+                if(sema){
+                    sema=false;
+                dialog.show();
+                can_back = false;
+                sync = -100;
                 currAlbumId = AlbumList.get(position);
 
-                String urlForSong = getResources().getString(R.string.url)+"lyric/"+
+
+
+           String urlForSong = getResources().getString(R.string.url)+"lyric/"+
                       currAlbumId.getAlbum_id()+".json";
-                final String urlForPic = getResources().getString(R.string.url)+
+           final String urlForPic = getResources().getString(R.string.url)+
                         currAlbumId.getAlbum_id()+".jpg";
 
                 StringRequest stringRequest1 = new StringRequest(Request.Method.GET, urlForSong,
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
-                                response = fixEncoding(response);
-                             ArrayList<Song> songs = JsonToSongList(response);
-                             new MyDbHandler(context).InsertNewAlbum(currAlbumId,songs);
-                             songs.clear();
-                             app.writeSyncedAlbum(albumNO.get(position));
-                             app.setUpdateAlbum(currAlbumId.get_isSolo()+"");
+
+                             response = fixEncoding(response);
+                                saveToDatabase(response,currAlbumId,position);
+
 
                                 MySingleton.getInstance(context).getmImageLoader().get(urlForPic,
                                         new ImageLoader.ImageListener() {
@@ -139,6 +159,18 @@ public class Sync extends AppCompatActivity {
 
                                         Bitmap bitmap= response.getBitmap();
                                         SaveImage(bitmap);
+                                        if(sync!=position){
+                                        AlbumList.remove(position);
+                                        adapter.notifyDataSetChanged();
+                                        subTitle();
+                                        sync=position;
+                                            sema=true;
+                                            dialog.dismiss();
+                                            can_back =true;
+                                            Toast.makeText(Sync.this,  currAlbumId.getAlbum_Title()+
+                                                    " የአልበሞች ዝርዝር ውስጥ ተካቷል", Toast.LENGTH_SHORT).show();
+                                        }
+
 
                                     }
 
@@ -146,29 +178,26 @@ public class Sync extends AppCompatActivity {
                                     public void onErrorResponse(VolleyError error) {
                                      error.printStackTrace();
                                     }
+
+
                                 });
                             }
                         }, new Response.ErrorListener() {
                     @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(context, "Can't save to database "+error.getMessage(),
-                                Toast.LENGTH_SHORT).show();
-
-
-                    }
+                    public void onErrorResponse(VolleyError error) {}
 
                 }
 
                 );
 
                 MySingleton.getInstance(context).addToRequestQueue(stringRequest1);
-                AlbumList.remove(position);
-                adapter.notifyDataSetChanged();
                 subTitle();
+                if(AlbumList.isEmpty())
+                    textView.setText("ምንም አዲስ መዝሙር የለም :(\n ሌላ ጊዜ ይሞክሩ");
 
 
             }
-        });
+        }});
 
 
 
@@ -231,6 +260,11 @@ public class Sync extends AppCompatActivity {
     {
         if(AlbumList.size()==1)
             toolbar.setSubtitle("1 አልበም");
+        else if(AlbumList.size()==0)
+        {
+            toolbar.setSubtitle( AlbumList.size()+ " አልበሞች");
+            textView.setText("ሁሉም አልበሞች ወርደዋል :)");
+        }
         else
             toolbar.setSubtitle( AlbumList.size()+ " አልበሞች");
     }
@@ -255,7 +289,23 @@ public class Sync extends AppCompatActivity {
 
         }catch (Exception e)
         {
-            e.printStackTrace();
+           // e.printStackTrace();
         }
+    }
+
+    private synchronized void saveToDatabase(String res,Album album,int pos)
+    {
+        ArrayList<Song> songs = JsonToSongList(res);
+        new MyDbHandler(context).InsertNewAlbum(album,songs);
+        songs.clear();
+        app.writeSyncedAlbum(albumNO.get(pos));
+        albumNO.remove(pos);
+        if(app.getUpdateAlbum().contains("1")||app.getUpdateAlbum().contains("2"))
+        app.setUpdateAlbum("3");
+        else
+            app.setUpdateAlbum(album.get_isSolo()+"");
+        dialog.dismiss();
+        can_back = true;
+
     }
 }

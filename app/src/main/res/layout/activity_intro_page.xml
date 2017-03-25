@@ -3,27 +3,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#cdcdcd"
+    android:background="@android:color/white"
     tools:context="com.mekilit.apostlic.apostlicsonglyric.IntroPage">
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="60dp"
-        android:src="@drawable/logo_ver_two" />
+        android:layout_marginTop="89dp"
+        android:src="@drawable/into_ii" />
 
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="19dp"
 
-        android:text="@string/copyright_for_intro_page"
-        android:textAlignment="center"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
 </RelativeLayout>

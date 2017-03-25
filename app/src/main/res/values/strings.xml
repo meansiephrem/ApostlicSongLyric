@@ -2,8 +2,6 @@
     <string name="app_name">Apostolic Songs</string>
     <string name="action_settings">Settings</string>
     <string name="SongSelect">Songs</string>
-
-
     <string name="hello_blank_fragment">New Fragment Hello World</string>
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
@@ -24,7 +22,7 @@
     <string name="dani_b">Daniel Berhanu</string>
     <string name="not_usa_meklit">North America Youth Meklit</string>
     <string name="app_web">apostolicsongs.ml</string>
-    <string name="version">Version 2.3</string>
+    <string name="version">Apostolic Songs 2.3</string>
     <string name="hint">በመዝሙር ርዕስ ይፈልጉ</string>
     <string name="action_search">ፈልግ</string>
     <string name="textSize">የፅሁፍ መጠን</string>

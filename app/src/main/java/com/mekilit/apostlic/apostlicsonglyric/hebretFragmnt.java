@@ -58,11 +58,14 @@ public class hebretFragmnt extends Fragment {
     public void onStart() {
 
 
-        if (app.getUpdateAlbum().equalsIgnoreCase("0"))
+        if ((app.getUpdateAlbum().contains("0")||app.getUpdateAlbum().contains("3"))&&adapter!=null)
         {
             adapter.clear();
             new HebretLoder().execute();
+            if (app.getUpdateAlbum().contains("0"))
             app.setUpdateAlbum("-1");
+            else
+                app.setUpdateAlbum("1");
         }
         final MyDbHandler helper = new MyDbHandler(getContext());
         final ArrayList<String> listAlbum = helper.SelectAllhebret();

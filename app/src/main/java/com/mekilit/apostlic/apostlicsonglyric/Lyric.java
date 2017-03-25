@@ -72,10 +72,10 @@ public class Lyric extends AppCompatActivity implements OnClickListener {
 
        fab = (FloatingActionButton) findViewById(R.id.fab);
         if (!isFav) {
-            fab.setImageDrawable(getResources().getDrawable(R.drawable.btn_star_big_off));
+            fab.setImageResource(android.R.drawable.btn_star_big_off);
             fab.setSelected(false);
         } else {
-            fab.setImageDrawable(getResources().getDrawable(R.drawable.btn_star_big_on_selected));
+            fab.setImageResource(android.R.drawable.btn_star_big_on);
             fab.setSelected(true);
         }
 
@@ -85,8 +85,7 @@ public class Lyric extends AppCompatActivity implements OnClickListener {
             final int lryicID1 = Integer.parseInt(id);
                 if (!fab.isSelected()) {
 
-                    fab.setImageDrawable(getResources().getDrawable
-                            (R.drawable.btn_star_big_on_selected));
+                    fab.setImageResource(android.R.drawable.btn_star_big_on);
                     fab.setSelected(true);
                     helper.ChangeFavStat(false, lryicID1);
                     Toast tost = Toast.makeText(getApplicationContext(), "የተመረጡ ዝርዝር ውስጥ ተካቷል",
@@ -94,7 +93,7 @@ public class Lyric extends AppCompatActivity implements OnClickListener {
                     tost.show();
                 } else {
 
-                    fab.setImageDrawable(getResources().getDrawable(R.drawable.btn_star_big_off));
+                    fab.setImageResource(android.R.drawable.btn_star_big_off);
                     fab.setSelected(false);
                     helper.ChangeFavStat(true, lryicID1);
                     Toast tost = Toast.makeText(getApplicationContext(), "ከተመረጡ ዝርዝር ውስጥ ተወግዶል",
@@ -171,10 +170,10 @@ public class Lyric extends AppCompatActivity implements OnClickListener {
 
         boolean isFav = helper.isFav(PrevID+"");
         if (!isFav) {
-            fab.setImageDrawable(getResources().getDrawable(R.drawable.btn_star_big_off));
+            fab.setImageResource(android.R.drawable.btn_star_big_off);
             fab.setSelected(false);
         } else {
-            fab.setImageDrawable(getResources().getDrawable(R.drawable.btn_star_big_on_selected));
+            fab.setImageResource(android.R.drawable.btn_star_big_on);
             fab.setSelected(true);
         }
         textView.setText(helper.getLyric(PrevID));

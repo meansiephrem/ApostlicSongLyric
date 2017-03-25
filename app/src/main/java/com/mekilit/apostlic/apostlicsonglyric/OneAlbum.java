@@ -1,9 +1,12 @@
 package com.mekilit.apostlic.apostlicsonglyric;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -13,6 +16,11 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageLoader;
+
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 
 public class OneAlbum extends AppCompatActivity {
@@ -24,14 +32,15 @@ public class OneAlbum extends AppCompatActivity {
     TextView albumName;
     TextView artistName;
     TextView numberOfSongs;
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        final MyDbHandler helper = new MyDbHandler(this);
+        context=this;
+        final MyDbHandler helper = new MyDbHandler(context);
         Intent intent = getIntent();
         albumID = intent.getStringExtra(Intent.EXTRA_TEXT);
         app = (ApostolicSongs) getApplication();
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.one_album_list);
         header = getLayoutInflater().inflate(R.layout.one_album_layout, null);
@@ -50,10 +59,14 @@ public class OneAlbum extends AppCompatActivity {
             int res =helper.getAlbumArt(albumID);
         if (res != 0)
             albumArt.setImageResource(res);
-        else
-            albumArt.setImageBitmap(BitmapFactory.decodeFile(getResources().getString(R.string.path)
-                    +albumID+".jpg"));
-
+        else {
+            Bitmap bitmap = BitmapFactory.decodeFile(getResources().getString(R.string.path)
+                    + albumID + ".jpg");
+            if (bitmap!=null)
+            albumArt.setImageBitmap(bitmap);
+            else
+                getImageFromServer(albumID+".jpg");
+        }
 
 
 
@@ -80,6 +93,55 @@ public class OneAlbum extends AppCompatActivity {
             }
 
         });
+    }
+
+    private void getImageFromServer(final String picName) {
+
+        final String urlForPic = getResources().getString(R.string.url)+picName;
+
+        MySingleton.getInstance(context).getmImageLoader().get(urlForPic,
+                new ImageLoader.ImageListener() {
+                    @Override
+                    public void onResponse(ImageLoader.ImageContainer response,
+                                           boolean isImmediate) {
+
+                       Bitmap bitmap1= response.getBitmap();
+                        albumArt.setImageBitmap(bitmap1);
+                        SaveImage(bitmap1,picName);
+                        }
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        albumArt.setImageBitmap(BitmapFactory.decodeResource(getResources(),
+                                R.drawable.defultpic));
+                    }
+
+
+                });
+
+    }
+
+    private  void SaveImage(Bitmap bitmap,String name)
+    {
+        File direct = new File(Environment.getExternalStorageDirectory() +
+                "/Apostolic Songs/Album Arts");
+
+        String filename=name;
+        if (!direct.exists()) {
+            File AlbumArt = new File("sdcard/Apostolic Songs/Album Arts/");
+            AlbumArt.mkdirs();
+        }
+        File file = new File(new File(getResources().getString(R.string.path)), filename);
+
+        try {
+            FileOutputStream out = new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.JPEG,90,out);
+            out.flush();
+            out.close();
+
+        }catch (Exception e)
+        {
+            // e.printStackTrace();
+        }
     }
 
     @Override
