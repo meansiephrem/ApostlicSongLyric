@@ -63,7 +63,7 @@ public class hebretFragmnt extends Fragment {
             adapter.clear();
             new HebretLoder().execute();
             if (app.getUpdateAlbum().contains("0"))
-            app.setUpdateAlbum("-1");
+            app.setUpdateAlbum("-8");
             else
                 app.setUpdateAlbum("1");
         }

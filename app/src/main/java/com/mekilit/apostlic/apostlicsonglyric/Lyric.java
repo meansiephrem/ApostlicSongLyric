@@ -157,6 +157,7 @@ public class Lyric extends AppCompatActivity implements OnClickListener {
         return super.onOptionsItemSelected(item);
     }
 
+
     private void NxtSwapPrev(boolean nxt){
         int PrevID= Integer.parseInt(id);
         if (nxt)

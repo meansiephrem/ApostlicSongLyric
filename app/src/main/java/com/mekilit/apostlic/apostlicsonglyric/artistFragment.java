@@ -74,7 +74,7 @@ public class artistFragment extends Fragment {
             adapter.clear();
             new ArtistLoder().execute();
             if (app.getUpdateAlbum().contains("1"))
-                app.setUpdateAlbum("-1");
+                app.setUpdateAlbum("-8");
             else
                 app.setUpdateAlbum("0");
         }
