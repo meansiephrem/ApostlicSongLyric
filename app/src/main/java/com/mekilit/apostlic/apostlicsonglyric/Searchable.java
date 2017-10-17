@@ -29,10 +29,12 @@ public class Searchable extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(ApostolicSongs.theme);
         setContentView(R.layout.activity_searchable);
         textView = (TextView) findViewById(R.id.search_no_result);
         listView = (ListView) findViewById(R.id.search_result_list);
         toolbar = (Toolbar) findViewById(R.id.appBar);
+        toolbar.setBackgroundColor(ApostolicSongs.color);
         progressBar=(ProgressBar) findViewById(R.id.progressBar);
 
         Intent intent = getIntent();

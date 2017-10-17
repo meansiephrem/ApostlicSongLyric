@@ -38,7 +38,7 @@ public class Lyric extends AppCompatActivity implements OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        getApplication().setTheme(R.style.MenasiInfo);
+
         super.onCreate(savedInstanceState);
         gestureDetector = new GestureDetector(this,new MyGesDec());
         gestureListener = new View.OnTouchListener()
@@ -53,6 +53,7 @@ public class Lyric extends AppCompatActivity implements OnClickListener {
             getWindow().setExitTransition(transition);
 
         }
+        setTheme(app.theme);
         setContentView(R.layout.activity_lyric);
         final MyDbHandler helper = new MyDbHandler(this);
         Intent inten = getIntent();
@@ -63,6 +64,7 @@ public class Lyric extends AppCompatActivity implements OnClickListener {
 
         toolbar.setTitle(helper.getSongName(id));
         toolbar.setSubtitle(helper.getArtistName(albumId));
+        toolbar.setBackgroundColor(app.color);
 
         setSupportActionBar(toolbar);
 
@@ -255,5 +257,7 @@ public class Lyric extends AppCompatActivity implements OnClickListener {
     public boolean onDown(MotionEvent e) {
         return true;
     }
+
+
   }
 }

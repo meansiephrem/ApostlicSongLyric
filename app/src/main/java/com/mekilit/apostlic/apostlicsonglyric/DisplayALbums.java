@@ -33,12 +33,15 @@ public class DisplayALbums extends AppCompatActivity {
             all=true;//called to display all albums
         ArtistName= minusFirst(rawData);
 
+        setTheme(ApostolicSongs.theme);
         setContentView(R.layout.activity_display_albums);
         toolbar= (Toolbar) findViewById(R.id.appBar);
         recyclerView = (RecyclerView) findViewById(R.id.RC);
         progressBar = (ProgressBar) findViewById(R.id.progressBar2);
         GridLayoutManager layoutManager = new GridLayoutManager(this,2);
         recyclerView.setLayoutManager(layoutManager);
+
+        toolbar.setBackgroundColor(ApostolicSongs.color);
 
         if(!all)
         {

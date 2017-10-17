@@ -27,6 +27,7 @@ public class Sec_Activity extends AppCompatActivity {
         }
         Intent intent = this.getIntent();
         int id = Integer.parseInt(intent.getStringExtra(Intent.EXTRA_TEXT));
+        setTheme(R.style.MenasiInfo);
         setContentView(R.layout.activity_sec_);
         TextView mName = (TextView) findViewById(R.id.SecName);
         TextView mEmail = (TextView) findViewById(R.id.Email);

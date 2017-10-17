@@ -7,7 +7,7 @@ public class Album {
 
 
     static Album[] insertAlbum =
-            { new Album ("Aylew1","አምኜው ነው የተከተልኩት","አያሌው",1),
+            {       new Album ("Aylew1","አምኜው ነው የተከተልኩት","አያሌው",1),
                     new Album ("Aylew2","እሱን ታምኖ","አያሌው",1),
                     new Album ("AberhamA1","ገና እንበዛለን ገና","አብርሃም አጌና",1),
                     new Album ("AberhamT1","አድርገህልኛል","አብርሃምና እያሱ ተ/ማርያም",1),

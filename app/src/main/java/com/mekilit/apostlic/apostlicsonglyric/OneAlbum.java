@@ -42,6 +42,7 @@ public class OneAlbum extends AppCompatActivity {
         albumID = intent.getStringExtra(Intent.EXTRA_TEXT);
         app = (ApostolicSongs) getApplication();
         super.onCreate(savedInstanceState);
+        setTheme(ApostolicSongs.theme);
         setContentView(R.layout.one_album_list);
         header = getLayoutInflater().inflate(R.layout.one_album_layout, null);
 

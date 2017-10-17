@@ -14,11 +14,13 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class SelectAll extends AppCompatActivity implements AlbumListner {
     MyDbHandler helper = new MyDbHandler(this);
-
     Toolbar toolbar;
+    ApostolicSongs app ;
+    private long timeInMillsec;
 
     public SelectAll() {
 
@@ -28,17 +30,27 @@ public class SelectAll extends AppCompatActivity implements AlbumListner {
     protected void onCreate(Bundle savedInstanceState) {
 
 
+        app = (ApostolicSongs)getApplication();
+
         super.onCreate(savedInstanceState);
+        setTheme(app.theme);
         setContentView(R.layout.activity_select_all);
-       ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
+
+        ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         setUpPager(viewPager);
+
+        tabLayout.setBackgroundColor(app.color);
         tabLayout.setupWithViewPager(viewPager);
+
         toolbar = (Toolbar) findViewById(R.id.appBar2);
         setSupportActionBar(toolbar);
+        toolbar.setBackgroundColor(app.color);
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         SetUpNav();
         getSupportActionBar().setTitle("የጽዮን መዝሙሮች");
+        timeInMillsec = 0;
 
     }
 
@@ -97,4 +109,14 @@ public class SelectAll extends AppCompatActivity implements AlbumListner {
         return true;
     }
 
+    @Override
+    public void onBackPressed() {
+
+        if((System.currentTimeMillis()-timeInMillsec)<= 2000)
+        super.onBackPressed();
+        else {
+            timeInMillsec = System.currentTimeMillis();
+            Toast.makeText(this, "ለመውጣት ድጋሚ ይጫኑ", Toast.LENGTH_SHORT).show();
+        }
+    }
 }

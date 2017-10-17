@@ -14,6 +14,7 @@ public class AlbumArt extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_album_art);
+        setTheme(ApostolicSongs.theme);
         ImageView albumArt = (ImageView) findViewById(R.id.BigAlbumArt);
         Intent intent = getIntent();
         String AlbumID = intent.getStringExtra(Intent.EXTRA_TEXT);

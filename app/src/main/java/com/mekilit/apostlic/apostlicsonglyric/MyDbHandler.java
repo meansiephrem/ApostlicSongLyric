@@ -11,7 +11,7 @@ import java.util.ArrayList;
 @SuppressWarnings("unchecked")
 public class MyDbHandler extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 24;
+    private static final int DATABASE_VERSION = 25;
     private static final String DATABASE_NAME = "SongLyric.db";
     private static final String TABLE_ALBUM = "albums";
     private static final String TABLE_LYRIC = "lyric";
