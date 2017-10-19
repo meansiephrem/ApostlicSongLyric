@@ -36,6 +36,9 @@ public class DisplayALbums extends AppCompatActivity {
         setTheme(ApostolicSongs.theme);
         setContentView(R.layout.activity_display_albums);
         toolbar= (Toolbar) findViewById(R.id.appBar);
+        toolbar.setTitleTextColor(ApostolicSongs.toolbarColor);
+        toolbar.setSubtitleTextColor(ApostolicSongs.toolbarColor);
+
         recyclerView = (RecyclerView) findViewById(R.id.RC);
         progressBar = (ProgressBar) findViewById(R.id.progressBar2);
         GridLayoutManager layoutManager = new GridLayoutManager(this,2);

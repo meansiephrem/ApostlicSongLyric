@@ -33,8 +33,13 @@ public class Searchable extends AppCompatActivity {
         setContentView(R.layout.activity_searchable);
         textView = (TextView) findViewById(R.id.search_no_result);
         listView = (ListView) findViewById(R.id.search_result_list);
+
         toolbar = (Toolbar) findViewById(R.id.appBar);
         toolbar.setBackgroundColor(ApostolicSongs.color);
+        toolbar.setTitleTextColor(ApostolicSongs.toolbarColor);
+        toolbar.setSubtitleTextColor(ApostolicSongs.toolbarColor);
+
+
         progressBar=(ProgressBar) findViewById(R.id.progressBar);
 
         Intent intent = getIntent();

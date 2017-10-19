@@ -34,6 +34,9 @@ public class Settings extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.appBar);
         toolbar.setTitle(R.string.settings);
         toolbar.setBackgroundColor(app.color);
+        toolbar.setTitleTextColor(ApostolicSongs.toolbarColor);
+        toolbar.setSubtitleTextColor(ApostolicSongs.toolbarColor);
+
 
         textSizeRg = (RadioGroup) findViewById(R.id.rg_text_size);
         textSizeBig = (RadioButton) findViewById(R.id.rb_text_big);

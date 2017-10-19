@@ -89,6 +89,9 @@ public class Sync extends AppCompatActivity {
         toolbar.setTitle("አዳዲስ አልበሞች");
         toolbar.setSubtitle("እየፈለገ ነው...");
         toolbar.setBackgroundColor(app.color);
+        toolbar.setTitleTextColor(ApostolicSongs.toolbarColor);
+        toolbar.setSubtitleTextColor(ApostolicSongs.toolbarColor);
+
 
 
         Bar.setVisibility(View.VISIBLE);
@@ -213,12 +216,12 @@ public class Sync extends AppCompatActivity {
         JSONObject jsonObject = null;
         try {
             jsonObject = new JSONObject(rawJsonStr);
-            JSONArray jsonArray = jsonObject.getJSONArray("albums");
+            JSONArray jsonArray = jsonObject.getJSONArray("Album");
             for (int i = 0; i < jsonArray.length(); i++) {
-              JSONObject jobj = jsonArray.getJSONObject(i);
+                JSONObject jobj = jsonArray.getJSONObject(i);
                 int tempAlbumNo = Integer.parseInt(jobj.getString("Album_No"));
                 boolean temp=!(app.alredaySyncedAlbum(tempAlbumNo));
-                
+                if (temp) {
                     albumNO.add(tempAlbumNo+"");
                     String albumId =jobj.getString("Album_id");
                     String albumTitle = jobj.getString("Album_Title");
@@ -226,7 +229,7 @@ public class Sync extends AppCompatActivity {
                     String albumArt = jobj.getString("Album_Art");
                     int isSolo = Integer.parseInt(jobj.getString("_isSolo"));
                     album.add(new Album(albumId,albumTitle,albumArtist,albumArt,isSolo));
-
+                }
 
             }
 

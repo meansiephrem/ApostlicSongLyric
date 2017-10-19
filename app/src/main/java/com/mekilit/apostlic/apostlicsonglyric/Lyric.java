@@ -2,6 +2,7 @@ package com.mekilit.apostlic.apostlicsonglyric;
 
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -22,9 +23,9 @@ import android.widget.Toast;
 
 public class Lyric extends AppCompatActivity implements OnClickListener {
 
-    private static final int SWIPE_MIN_DISTANCE=120;
-    private static final int SWIPE_MAX_OFF_PATH=350;
-    private static final int SWIPE_THRESHOLD_VELOCITY=150;
+    private static final int SWIPE_MIN_DISTANCE = 120;
+    private static final int SWIPE_MAX_OFF_PATH = 350;
+    private static final int SWIPE_THRESHOLD_VELOCITY = 150;
     protected ApostolicSongs app;
     Toolbar toolbar;
     String id, ActualLyric, Promotion;
@@ -38,6 +39,7 @@ public class Lyric extends AppCompatActivity implements OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+        app = (ApostolicSongs) getApplication();
 
         super.onCreate(savedInstanceState);
         gestureDetector = new GestureDetector(this,new MyGesDec());
@@ -65,6 +67,9 @@ public class Lyric extends AppCompatActivity implements OnClickListener {
         toolbar.setTitle(helper.getSongName(id));
         toolbar.setSubtitle(helper.getArtistName(albumId));
         toolbar.setBackgroundColor(app.color);
+        toolbar.setTitleTextColor(ApostolicSongs.toolbarColor);
+        toolbar.setSubtitleTextColor(ApostolicSongs.toolbarColor);
+
 
         setSupportActionBar(toolbar);
 
@@ -139,6 +144,9 @@ public class Lyric extends AppCompatActivity implements OnClickListener {
     public boolean onCreateOptionsMenu(Menu menu) {
 
         getMenuInflater().inflate(R.menu.lyric_menu,menu);
+
+        if (ApostolicSongs.toolbarColor == Color.WHITE )
+            menu.getItem(0).setIcon(getResources().getDrawable(R.drawable.ic_share_white_24dp));
 
         return true;
     }

@@ -4,6 +4,7 @@ import android.app.SearchManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.MenuItemCompat;
@@ -14,6 +15,7 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewStub;
 import android.widget.Toast;
 
 public class SelectAll extends AppCompatActivity implements AlbumListner {
@@ -42,12 +44,28 @@ public class SelectAll extends AppCompatActivity implements AlbumListner {
 
         tabLayout.setBackgroundColor(app.color);
         tabLayout.setupWithViewPager(viewPager);
+        tabLayout.setTabTextColors(ApostolicSongs.toolbarColor,ApostolicSongs.toolbarColor);
 
-        toolbar = (Toolbar) findViewById(R.id.appBar2);
+        ViewStub sub = (ViewStub) findViewById(R.id.appBar2);
+        if (ApostolicSongs.toolbarColor == Color.BLACK)
+            sub.setLayoutResource(R.layout.app_bar);
+        else
+            sub.setLayoutResource(R.layout.app_bar_white);
+
+        toolbar = (Toolbar) sub.inflate();
         setSupportActionBar(toolbar);
         toolbar.setBackgroundColor(app.color);
+        toolbar.setTitleTextColor(ApostolicSongs.toolbarColor);
+
+
+
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        if (ApostolicSongs.toolbarColor == Color.WHITE)
+        {
+
+        }
         SetUpNav();
         getSupportActionBar().setTitle("የጽዮን መዝሙሮች");
         timeInMillsec = 0;
@@ -101,7 +119,10 @@ public class SelectAll extends AppCompatActivity implements AlbumListner {
         Context context = getApplicationContext();
         getMenuInflater().inflate(R.menu.menu_lyric,menu);
         MenuItem searchMenu = menu.findItem(R.id.action_search);
+        if (ApostolicSongs.toolbarColor == Color.WHITE )
+            searchMenu.setIcon(getResources().getDrawable(R.drawable.ic_search_white_24dp));
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchMenu);
+
 
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         ComponentName componentName = new ComponentName(context,Searchable.class);

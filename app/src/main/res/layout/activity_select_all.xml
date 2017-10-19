@@ -13,11 +13,13 @@
 
     tools:context="com.mekilit.apostlic.apostlicsonglyric.SelectAll">
 
-    <include
+    <ViewStub
         android:id="@+id/appBar2"
-        layout="@layout/app_bar">
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        >
 
-    </include>
+    </ViewStub>
 
 
     <android.support.design.widget.TabLayout

@@ -3,6 +3,7 @@ package com.mekilit.apostlic.apostlicsonglyric;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 
 
 /**
@@ -15,8 +16,13 @@ public class ApostolicSongs extends Application {
     private final static String PREF_SYNCED_ALBUMS = "syncedAlbums";
     private final static String PREF_UPDATE_ALBUM_LIST = "updateAlbums";
     private final static String PREF_THEME = "pref_theme";
+
     public static int color= 0xFFCCCCCC;
-    public  static int theme = R.style.AppTheme;
+    public static int toolbarColor= Color.BLACK;
+    public static int theme = R.style.AppTheme;
+
+
+
     public final int red =        0xffF44336;
     public final int pink =       0xffE91E63;
     public final int Purple =     0xff9C27B0;
@@ -138,32 +144,42 @@ public class ApostolicSongs extends Application {
         switch (this.color){
 
             case red:
-                this.theme = R.style.AppTheme_red;
+                ApostolicSongs.theme = R.style.AppTheme_red;
+                ApostolicSongs.toolbarColor = Color.WHITE;
+
                 break;
             case pink:
-                this.theme=R.style.AppTheme_pink;
+                ApostolicSongs.theme = R.style.AppTheme_pink;
+                ApostolicSongs.toolbarColor = Color.WHITE;
                 break;
             case DeepPurple:
-                this.theme=R.style.AppTheme_violet;
+                ApostolicSongs.theme = R.style.AppTheme_violet;
+                ApostolicSongs.toolbarColor = Color.WHITE;
                 break;
             case Blue:
-                this.theme=R.style.AppTheme_blue;
+                ApostolicSongs.theme = R.style.AppTheme_blue;
+                ApostolicSongs.toolbarColor = Color.WHITE;
                 break;
             case LightBlue:
-                this.theme=R.style.AppTheme_skybule;
+                ApostolicSongs.theme=R.style.AppTheme_skybule;
+                ApostolicSongs.toolbarColor = Color.BLACK;
                 break;
             case Green:
-                this.theme=R.style.AppTheme_green;
+                ApostolicSongs.theme=R.style.AppTheme_green;
+                ApostolicSongs.toolbarColor = Color.BLACK;
                 break;
             case Grey:
-                this.theme=R.style.AppTheme_grey;
+                ApostolicSongs.theme=R.style.AppTheme_grey;
+                ApostolicSongs.toolbarColor = Color.BLACK;
                 break;
             case Brown:
-                this.theme=R.style.AppTheme_brown;
+                ApostolicSongs.theme = R.style.AppTheme_red;
+                ApostolicSongs.toolbarColor = Color.WHITE;
                 break;
 
             case Yellow:
-                this.theme=R.style.AppTheme_Yellow;
+                ApostolicSongs.theme=R.style.AppTheme_Yellow;
+                ApostolicSongs.toolbarColor = Color.BLACK;
                 break;
 
  /*           case Purple:
@@ -189,32 +205,39 @@ public class ApostolicSongs extends Application {
    */
 
             case Amber:
-                this.theme=R.style.AppTheme_Amber;
+                ApostolicSongs.theme=R.style.AppTheme_Amber;
+                ApostolicSongs.toolbarColor = Color.BLACK;
                 break;
 
             case LightGreen:
-                this.theme=R.style.AppTheme_LightGreen;
+                ApostolicSongs.theme=R.style.AppTheme_LightGreen;
+                ApostolicSongs.toolbarColor = Color.BLACK;
                 break;
 
             case Orange:
-                this.theme=R.style.AppTheme_Orange;
+                ApostolicSongs.theme=R.style.AppTheme_Orange;
+                ApostolicSongs.toolbarColor = Color.BLACK;
                 break;
 
             case DeepOrange:
-                this.theme=R.style.AppTheme_DeepOrange;
+                ApostolicSongs.theme=R.style.AppTheme_DeepOrange;
+                ApostolicSongs.toolbarColor = Color.BLACK;
                 break;
 
             case BlueGray:
-                this.theme=R.style.AppTheme_BlueGray;
+
+                ApostolicSongs.theme=R.style.AppTheme_BlueGray;
+                ApostolicSongs.toolbarColor = Color.BLACK;
                 break;
 
             case Black:
-                this.theme=R.style.AppTheme;
-                this.color = 0xffCCCCCC;
+                ApostolicSongs.theme=R.style.AppTheme_Black;
+                ApostolicSongs.toolbarColor = Color.WHITE;
                 break;
 
             case White:
-                this.theme=R.style.AppTheme_White;
+                ApostolicSongs.theme=R.style.AppTheme_White;
+                ApostolicSongs.toolbarColor = Color.BLACK;
                 break;
 
             default:
