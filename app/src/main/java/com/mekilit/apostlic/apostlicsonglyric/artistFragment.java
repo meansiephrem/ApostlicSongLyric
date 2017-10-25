@@ -2,6 +2,7 @@ package com.mekilit.apostlic.apostlicsonglyric;
 
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -78,7 +79,11 @@ public class artistFragment extends Fragment {
             else
                 app.setUpdateAlbum("0");
         }
+        if(ApostolicSongs.theme == R.style.AppTheme_Black){
 
+            listView.setBackgroundColor(Color.BLACK);
+
+        }
         final MyDbHandler helper = new MyDbHandler(getContext());
         final ArrayList<String> listAlbum = helper.SelectAllArtist();
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

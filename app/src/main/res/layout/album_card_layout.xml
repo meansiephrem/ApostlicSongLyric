@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content" android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    >
 
     <android.support.v7.widget.CardView
         android:id="@+id/cv"
         android:layout_width="120dp"
-        android:layout_height="180dp">
+        android:layout_height="wrap_content">
 
         <RelativeLayout
+            android:id="@+id/card_view_relative_layout"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="180dp">
 
 
             <ImageView
@@ -19,8 +21,7 @@
                 android:layout_height="135dp"
                 android:layout_alignParentEnd="true"
 
-                android:layout_alignParentRight="true"
-                />
+                android:layout_alignParentRight="true" />
 
             <TextView
                 android:id="@+id/CardAlbumName"
@@ -31,7 +32,7 @@
                 android:maxLength="12"
                 android:text="Large Text"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textSize="13dp"/>
+                android:textSize="13dp" />
 
             <TextView
                 android:id="@+id/CardAlbumArtist"
@@ -42,8 +43,7 @@
                 android:maxLength="14"
                 android:text="Medium Text"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textSize="13dp"
-                />
+                android:textSize="13dp" />
 
 
         </RelativeLayout>

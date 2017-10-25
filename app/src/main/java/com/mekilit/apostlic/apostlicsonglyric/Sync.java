@@ -4,6 +4,7 @@ package com.mekilit.apostlic.apostlicsonglyric;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
@@ -14,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -85,9 +87,19 @@ public class Sync extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.newAlbums);
         textView = (TextView)findViewById(R.id.SyncTV);
         Bar = (ProgressBar) findViewById(R.id.progressBar2);
+        RelativeLayout layout = (RelativeLayout) findViewById(R.id.sync_relative_layout);
+
+        if (ApostolicSongs.theme == R.style.AppTheme_Black){
+
+
+
+            textView.setTextColor(Color.WHITE);
+            layout.setBackgroundColor(Color.BLACK);
+        }
 
         toolbar.setTitle("አዳዲስ አልበሞች");
         toolbar.setSubtitle("እየፈለገ ነው...");
+
         toolbar.setBackgroundColor(app.color);
         toolbar.setTitleTextColor(ApostolicSongs.toolbarColor);
         toolbar.setSubtitleTextColor(ApostolicSongs.toolbarColor);

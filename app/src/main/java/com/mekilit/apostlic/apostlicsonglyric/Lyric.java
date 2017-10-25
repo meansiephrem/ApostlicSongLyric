@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,13 +27,17 @@ public class Lyric extends AppCompatActivity implements OnClickListener {
     private static final int SWIPE_MIN_DISTANCE = 120;
     private static final int SWIPE_MAX_OFF_PATH = 350;
     private static final int SWIPE_THRESHOLD_VELOCITY = 150;
+
     protected ApostolicSongs app;
-    Toolbar toolbar;
+
     String id, ActualLyric, Promotion;
     int FavCount;
+
+    Toolbar toolbar;
     View.OnTouchListener gestureListener;
     FloatingActionButton fab;
     TextView textView;
+
     MyDbHandler helper = new MyDbHandler(Lyric.this);
     private GestureDetector gestureDetector;
 
@@ -49,7 +54,9 @@ public class Lyric extends AppCompatActivity implements OnClickListener {
                 return gestureDetector.onTouchEvent(event);
             }
         };
+
         if (Build.VERSION.SDK_INT >= 21) {
+
             TransitionInflater inflater = TransitionInflater.from(this);
             Transition transition = inflater.inflateTransition(R.transition.lyric_out);
             getWindow().setExitTransition(transition);
@@ -57,13 +64,17 @@ public class Lyric extends AppCompatActivity implements OnClickListener {
         }
         setTheme(app.theme);
         setContentView(R.layout.activity_lyric);
-        final MyDbHandler helper = new MyDbHandler(this);
-        Intent inten = getIntent();
-        id = inten.getStringExtra(Intent.EXTRA_TEXT);
-        toolbar = (Toolbar) findViewById(R.id.lyapp);
-        int lryicID = Integer.parseInt(id);
-        String albumId = helper.getAlbumID(lryicID);
 
+
+
+        final MyDbHandler helper = new MyDbHandler(this);
+        Intent intent = getIntent();
+        id = intent.getStringExtra(Intent.EXTRA_TEXT);
+
+        int lyricID = Integer.parseInt(id);
+        String albumId = helper.getAlbumID(lyricID);
+
+        toolbar = (Toolbar) findViewById(R.id.lyapp);
         toolbar.setTitle(helper.getSongName(id));
         toolbar.setSubtitle(helper.getArtistName(albumId));
         toolbar.setBackgroundColor(app.color);
@@ -77,7 +88,8 @@ public class Lyric extends AppCompatActivity implements OnClickListener {
         boolean isFav = helper.isFav(id);
         FavCount = Integer.parseInt(helper.CountAlL('d'));
 
-       fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
+
         if (!isFav) {
             fab.setImageResource(android.R.drawable.btn_star_big_off);
             fab.setSelected(false);
@@ -122,15 +134,24 @@ public class Lyric extends AppCompatActivity implements OnClickListener {
 
 
         textView = (TextView) findViewById(R.id.Azmach);
+
         app = (ApostolicSongs)getApplication();
         textView.setTextSize(app.getLyricTextSize());
         ScrollView scrollView =(ScrollView) findViewById(R.id.scrollView);
 
-        textView.setText(helper.getLyric(lryicID));
+        textView.setText(helper.getLyric(lyricID));
 
 
         scrollView.setOnClickListener(Lyric.this);
         scrollView.setOnTouchListener(gestureListener);
+
+
+        if(ApostolicSongs.theme == R.style.AppTheme_Black){
+
+            RelativeLayout layout = (RelativeLayout)findViewById(R.id.lyric_relative_layout);
+            layout.setBackgroundColor(Color.BLACK);
+            textView.setTextColor(Color.WHITE);
+        }
 
 
 
@@ -265,6 +286,8 @@ public class Lyric extends AppCompatActivity implements OnClickListener {
     public boolean onDown(MotionEvent e) {
         return true;
     }
+
+
 
 
   }

@@ -2,6 +2,7 @@ package com.mekilit.apostlic.apostlicsonglyric;
 
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -67,6 +68,12 @@ public class hebretFragmnt extends Fragment {
             else
                 app.setUpdateAlbum("1");
         }
+        if(ApostolicSongs.theme == R.style.AppTheme_Black){
+
+            listView.setBackgroundColor(Color.BLACK);
+
+        }
+
         final MyDbHandler helper = new MyDbHandler(getContext());
         final ArrayList<String> listAlbum = helper.SelectAllhebret();
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

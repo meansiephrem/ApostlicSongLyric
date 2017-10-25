@@ -8,11 +8,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
+
+import static android.graphics.Color.BLACK;
 
 public class DisplayALbums extends AppCompatActivity {
     MyDbHandler helper = new MyDbHandler(this);
@@ -26,15 +28,24 @@ public class DisplayALbums extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-      context = getApplicationContext();
+        context = getApplicationContext();
+
         Intent intent = getIntent();
-        String rawData = intent.getStringExtra(Intent.EXTRA_TEXT);//raw data name+Selcet type
+        String rawData = intent.getStringExtra(Intent.EXTRA_TEXT);//raw data name+Select type
+
         if (rawData.charAt(0)=='1')
             all=true;//called to display all albums
         ArtistName= minusFirst(rawData);
 
         setTheme(ApostolicSongs.theme);
         setContentView(R.layout.activity_display_albums);
+
+
+        RelativeLayout relativeView = (RelativeLayout) findViewById(R.id.display_album_relative_layout);
+
+
+
+
         toolbar= (Toolbar) findViewById(R.id.appBar);
         toolbar.setTitleTextColor(ApostolicSongs.toolbarColor);
         toolbar.setSubtitleTextColor(ApostolicSongs.toolbarColor);
@@ -43,6 +54,11 @@ public class DisplayALbums extends AppCompatActivity {
         progressBar = (ProgressBar) findViewById(R.id.progressBar2);
         GridLayoutManager layoutManager = new GridLayoutManager(this,2);
         recyclerView.setLayoutManager(layoutManager);
+
+        if(ApostolicSongs.theme == R.style.AppTheme_Black){
+              relativeView.setBackgroundColor(BLACK);
+              recyclerView.setBackgroundColor(BLACK);
+            }
 
         toolbar.setBackgroundColor(ApostolicSongs.color);
 
@@ -57,7 +73,7 @@ public class DisplayALbums extends AppCompatActivity {
 
         }
 
-        new AlbumLoder().execute();
+        new AlbumLoader().execute();
 
         recyclerView.addOnItemTouchListener(
                 new RecyclerItemClickListener(this, new RecyclerItemClickListener.OnItemClickListener() {
@@ -91,7 +107,7 @@ public class DisplayALbums extends AppCompatActivity {
     }
 
     @SuppressWarnings("unchecked")
-    public class AlbumLoder extends AsyncTask<Void, Integer, AlbumAdaptor> {
+    public class AlbumLoader extends AsyncTask<Void, Integer, AlbumAdaptor> {
 
         protected void onPreExecute() {
             progressBar.setVisibility(View.VISIBLE);
@@ -121,7 +137,6 @@ public class DisplayALbums extends AppCompatActivity {
 
             AlbumAdaptor adapter = new AlbumAdaptor(context, AlbumName,ArtistName,
                     AlbumArt,listAlbum);
-            Log.e("Album Adaptor ", "Finished bulding the AlbumAdaptor adaptor");
 
             return adapter;
         }

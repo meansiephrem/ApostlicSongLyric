@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -32,32 +34,52 @@ public class OneAlbum extends AppCompatActivity {
     TextView albumName;
     TextView artistName;
     TextView numberOfSongs;
+    LinearLayout layout;
     Context context;
+    int bgColor;
+    int txtColor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         context=this;
         final MyDbHandler helper = new MyDbHandler(context);
-        Intent intent = getIntent();
-        albumID = intent.getStringExtra(Intent.EXTRA_TEXT);
-        app = (ApostolicSongs) getApplication();
+
+        Intent intent       = getIntent();
+        albumID             = intent.getStringExtra(Intent.EXTRA_TEXT);
+        app                 = (ApostolicSongs) getApplication();
+
         super.onCreate(savedInstanceState);
         setTheme(ApostolicSongs.theme);
         setContentView(R.layout.one_album_list);
-        header = getLayoutInflater().inflate(R.layout.one_album_layout, null);
 
-        albumArt = (ImageView) header.findViewById(R.id.oneAlbumArt);
-        albumName = (TextView) header.findViewById(R.id.oneAlbumName);
-        artistName = (TextView) header.findViewById(R.id.oneArtistName);
-        numberOfSongs = (TextView) header.findViewById(R.id.oneNumberOfSongs);
+        header          = getLayoutInflater().inflate(R.layout.one_album_layout, null);
+        albumArt        = (ImageView) header.findViewById(R.id.oneAlbumArt);
+        albumName       = (TextView) header.findViewById(R.id.oneAlbumName);
+        artistName      = (TextView) header.findViewById(R.id.oneArtistName);
+        numberOfSongs   = (TextView) header.findViewById(R.id.oneNumberOfSongs);
+        layout          = (LinearLayout) findViewById(R.id.oneAlbumLinerLayout);
 
+
+
+        if (ApostolicSongs.theme == R.style.AppTheme_Black) {
+
+            bgColor = Color.BLACK;
+            txtColor = Color.WHITE;
+            layout.setBackgroundColor(bgColor);
+            header.setBackgroundColor(bgColor);
+            albumName.setTextColor(txtColor);
+            artistName.setTextColor(txtColor);
+            numberOfSongs.setTextColor(txtColor);
+
+        }
 
 
         albumName.setText(helper.getAlbumName(albumID));
         artistName.setText(helper.getArtistName(albumID));
         numberOfSongs.setText(helper.CountSongs(albumID));
 
-            int res =helper.getAlbumArt(albumID);
+        int res = helper.getAlbumArt(albumID);
+
         if (res != 0)
             albumArt.setImageResource(res);
         else {
@@ -70,14 +92,12 @@ public class OneAlbum extends AppCompatActivity {
         }
 
 
-
         final ArrayList<String> Songs = helper.SelectAllSongs(albumID);
         listView = (ListView) findViewById(R.id.Songs);
 
         listView.addHeaderView(header);
 
-
-        new SongLoder().execute();
+        new SongLoader().execute();
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -141,7 +161,7 @@ public class OneAlbum extends AppCompatActivity {
 
         }catch (Exception e)
         {
-            // e.printStackTrace();
+            e.printStackTrace();
         }
     }
 
@@ -150,14 +170,14 @@ public class OneAlbum extends AppCompatActivity {
         super.onStart();
         if (app.getUpdateAlbum().equalsIgnoreCase("10"))
         {
-            new SongLoder().execute();
+            new SongLoader().execute();
             app.setUpdateAlbum("-1");
         }
 
     }
 
     @SuppressWarnings("unchecked")
-    public class SongLoder extends AsyncTask<Void, Integer, ListAdapter> {
+    public class SongLoader extends AsyncTask<Void, Integer, ListAdapter> {
 
 
         @Override
@@ -185,9 +205,10 @@ public class OneAlbum extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(ListAdapter listAdapter) {
-            listView.setAdapter(listAdapter);
 
+            listView.setAdapter(listAdapter);
             super.onPostExecute(listAdapter);
+
         }
     }
 }

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    android:id="@+id/oneAlbumLinerLayout" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <ListView
-        android:paddingTop="11dp"
+        android:id="@+id/Songs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/Songs"
         android:layout_gravity="center_horizontal"
-        android:divider="@android:color/transparent"/>
+        android:divider="@android:color/transparent"
+        android:paddingTop="11dp"/>
 </LinearLayout>

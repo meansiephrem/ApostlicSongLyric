@@ -1,11 +1,14 @@
 package com.mekilit.apostlic.apostlicsonglyric;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -22,6 +25,7 @@ public class AlbumAdaptor extends
     private ArrayList<String> ArtistName;
     private ArrayList<Integer> AlbumArt;
     private Context context;
+
     public AlbumAdaptor(Context context, ArrayList<String> albumName,ArrayList<String> artistName,
                         ArrayList<Integer> albumArt,ArrayList<String> albumId) {
         this.context = context;
@@ -62,6 +66,7 @@ public class AlbumAdaptor extends
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View customView = inflater.inflate(R.layout.album_card_layout, parent, false);
 
+
         return new ViewHoler(customView);
     }
 
@@ -75,6 +80,7 @@ public class AlbumAdaptor extends
         public ImageView imageView;
         public TextView AlbumName;
         public TextView ArtistName;
+        public CardView cardView;
 
         public ViewHoler(View ItemView)
         {
@@ -82,6 +88,15 @@ public class AlbumAdaptor extends
             imageView = (ImageView) ItemView.findViewById(R.id.CardAlbumArt);
             AlbumName = (TextView) ItemView.findViewById(R.id.CardAlbumName);
             ArtistName = (TextView) ItemView.findViewById(R.id.CardAlbumArtist);
+            cardView   = (CardView) ItemView.findViewById(R.id.cv);
+
+            if (ApostolicSongs.theme == R.style.AppTheme_Black) {
+                RelativeLayout layout = (RelativeLayout)
+                        ItemView.findViewById(R.id.card_view_relative_layout);
+                layout.setBackgroundColor(Color.BLACK);
+                ArtistName.setTextColor(Color.WHITE);
+                AlbumName.setTextColor(Color.WHITE);
+            }
         }
     }
 }

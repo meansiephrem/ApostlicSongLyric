@@ -3,6 +3,7 @@ package com.mekilit.apostlic.apostlicsonglyric;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -115,6 +116,13 @@ public class favFragment extends Fragment {
         protected void onPostExecute(ListAdapter listAdapter) {
 
             listView.setAdapter(listAdapter);
+
+
+            if(ApostolicSongs.theme == R.style.AppTheme_Black){
+
+                listView.setBackgroundColor(Color.BLACK);
+
+            }
 
             if(listAdapter.getCount()==0)
                 noFav.setText("ምንም የተመረጡ መዝሙሮች የሉም");

@@ -62,10 +62,6 @@ public class SelectAll extends AppCompatActivity implements AlbumListner {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        if (ApostolicSongs.toolbarColor == Color.WHITE)
-        {
-
-        }
         SetUpNav();
         getSupportActionBar().setTitle("የጽዮን መዝሙሮች");
         timeInMillsec = 0;
@@ -96,9 +92,9 @@ public class SelectAll extends AppCompatActivity implements AlbumListner {
     public void goToAlbum(char select, String name) {
         if (select == 'C') {
 
-            Intent intt = new Intent(SelectAll.this, Lyric.class)
+            Intent intent = new Intent(SelectAll.this, Lyric.class)
                     .putExtra(Intent.EXTRA_TEXT, name);
-            startActivity(intt);
+            startActivity(intent);
 
         } else if (select == 'D') {
             //   form all artists to display all albums of that artist
@@ -116,18 +112,21 @@ public class SelectAll extends AppCompatActivity implements AlbumListner {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+
         Context context = getApplicationContext();
         getMenuInflater().inflate(R.menu.menu_lyric,menu);
         MenuItem searchMenu = menu.findItem(R.id.action_search);
+
         if (ApostolicSongs.toolbarColor == Color.WHITE )
             searchMenu.setIcon(getResources().getDrawable(R.drawable.ic_search_white_24dp));
+
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchMenu);
-
-
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         ComponentName componentName = new ComponentName(context,Searchable.class);
         searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName));
+
         return true;
+
     }
 
     @Override
