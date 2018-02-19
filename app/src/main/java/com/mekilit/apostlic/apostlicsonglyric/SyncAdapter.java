@@ -44,7 +44,7 @@ public class SyncAdapter extends ArrayAdapter<Album> {
         holders.BigText.setText(album.get(position).getAlbum_Title());
         holders.SmallText.setText(album.get(position).getAlbum_Artist());
         String imgUrl =getContext().getResources().getString(R.string.url)+
-                album.get(position).getAlbum_id()+".jpg";
+                album.get(position).getAlbum_Art();
         iv.setImageUrl(imgUrl,singleton.getmImageLoader());
 
         return customView;

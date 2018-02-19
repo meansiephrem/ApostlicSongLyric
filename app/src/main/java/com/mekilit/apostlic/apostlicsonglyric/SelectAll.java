@@ -18,11 +18,14 @@ import android.view.MenuItem;
 import android.view.ViewStub;
 import android.widget.Toast;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 public class SelectAll extends AppCompatActivity implements AlbumListner {
     MyDbHandler helper = new MyDbHandler(this);
     Toolbar toolbar;
     ApostolicSongs app ;
     private long timeInMillsec;
+    private FirebaseAnalytics mFirebaseAnalytics;
 
     public SelectAll() {
 

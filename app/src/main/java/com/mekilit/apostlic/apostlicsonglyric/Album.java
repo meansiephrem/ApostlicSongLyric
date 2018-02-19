@@ -86,6 +86,7 @@ public class Album {
     private String Album_Title;
     private String Album_Artist;
     private String Album_Art;
+    private String _ID;
     private int _isSolo;
 
     public Album(String album_id, String album_Title, String album_Artist, int _isSolo) {
@@ -122,5 +123,10 @@ public class Album {
     public int get_isSolo() {
         return _isSolo;
     }
+
+    public String get_ID() { return _ID; }
+
+    public void set_ID(String _ID) { this._ID = _ID; }
+
 
 }

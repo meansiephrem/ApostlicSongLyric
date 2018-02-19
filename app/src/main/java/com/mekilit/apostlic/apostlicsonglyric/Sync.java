@@ -10,6 +10,7 @@ import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -19,10 +20,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.JsonRequest;
 import com.android.volley.toolbox.StringRequest;
 
 import org.json.JSONArray;
@@ -33,6 +37,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Sync extends AppCompatActivity {
     protected ApostolicSongs app;
@@ -111,15 +117,18 @@ public class Sync extends AppCompatActivity {
         dialog.setMessage("እያወረደ ነው... ");
         dialog.setCancelable(false);
 
-        String url = getResources().getString(R.string.url)+"Albums.json";
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
+        String url = getResources().getString(R.string.url)+"albums/?page=8";
+        JsonObjectRequest req = new JsonObjectRequest(url, null,
+                new Response.Listener<JSONObject>() {
                     @Override
-                    public void onResponse(String response) {
-                        response = fixEncoding(response);
+                    public void onResponse(JSONObject response) {
+
 
 
                         AlbumList = JsonToAlbumList(response);
+
+
+
                          adapter = new SyncAdapter(getBaseContext()
                                 ,AlbumList);
 
@@ -139,9 +148,20 @@ public class Sync extends AppCompatActivity {
                 Bar.setVisibility(View.INVISIBLE);
             }
         }
-        );
 
-        MySingleton.getInstance(this).addToRequestQueue(stringRequest);
+
+        ){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Authorization", "Bearer " +
+                        "gywx3HoY2EChMuJvlAkMEx7M72hwu9OMv5czImgR3hK+SUFsJsb3244rEGJVQ6GopG+Sg7US64/7");
+                return headers;
+            }
+        };
+
+
+        MySingleton.getInstance(this).addToRequestQueue(req);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -155,18 +175,19 @@ public class Sync extends AppCompatActivity {
 
 
 
-           String urlForSong = getResources().getString(R.string.url)+"lyric/"+
-                      currAlbumId.getAlbum_id()+".json";
+           String urlForSong = getResources().getString(R.string.url)+"albums/"+
+                      currAlbumId.get_ID()+"/lyrics";
            final String urlForPic = getResources().getString(R.string.url)+
-                        currAlbumId.getAlbum_id()+".jpg";
+                        currAlbumId.getAlbum_Art();
+                    Log.d("urlForPic", urlForPic);
 
-                StringRequest stringRequest1 = new StringRequest(Request.Method.GET, urlForSong,
-                        new Response.Listener<String>() {
+                JsonObjectRequest stringRequest1 = new JsonObjectRequest(urlForSong, null,
+                        new Response.Listener<JSONObject>() {
                             @Override
-                            public void onResponse(String response) {
+                            public void onResponse(JSONObject response) {
 
-                             response = fixEncoding(response);
-                                saveToDatabase(response,currAlbumId,position);
+
+                                saveToDatabase(response,currAlbumId);
 
 
                                 MySingleton.getInstance(context).getmImageLoader().get(urlForPic,
@@ -206,9 +227,18 @@ public class Sync extends AppCompatActivity {
 
                 }
 
-                );
+                ){
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        HashMap<String, String> headers = new HashMap<String, String>();
+                        headers.put("Authorization", "Bearer " +
+                                "gywx3HoY2EChMuJvlAkMEx7M72hwu9OMv5czImgR3hK+SUFsJsb3244rEGJVQ6GopG+Sg7US64/7");
+                        return headers;
+                    }
+                };
 
-                MySingleton.getInstance(context).addToRequestQueue(stringRequest1);
+
+                    MySingleton.getInstance(context).addToRequestQueue(stringRequest1);
                 subTitle();
                 if(AlbumList.isEmpty())
                     textView.setText("ምንም አዲስ መዝሙር የለም :(\n ሌላ ጊዜ ይሞክሩ");
@@ -222,27 +252,26 @@ public class Sync extends AppCompatActivity {
 
     }
 
-    private ArrayList<Album> JsonToAlbumList(String rawJsonStr)
+    private ArrayList<Album> JsonToAlbumList(JSONObject rawJsonStr)
     {
         ArrayList<Album> album = new ArrayList();
-        JSONObject jsonObject = null;
+        JSONObject jsonObject = rawJsonStr;
+
         try {
-            jsonObject = new JSONObject(rawJsonStr);
-            JSONArray jsonArray = jsonObject.getJSONArray("Album");
+            JSONArray jsonArray = jsonObject.getJSONArray("docs");
+            Log.d("Respose",jsonArray.toString());
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jobj = jsonArray.getJSONObject(i);
-                int tempAlbumNo = Integer.parseInt(jobj.getString("Album_No"));
-                boolean temp=!(app.alredaySyncedAlbum(tempAlbumNo));
-                if (temp) {
-                    albumNO.add(tempAlbumNo+"");
-                    String albumId =jobj.getString("Album_id");
+
+                    String albumId =jobj.getString("Album_ID");
                     String albumTitle = jobj.getString("Album_Title");
                     String albumArtist = jobj.getString("Album_Artist");
                     String albumArt = jobj.getString("Album_Art");
-                    int isSolo = Integer.parseInt(jobj.getString("_isSolo"));
-                    album.add(new Album(albumId,albumTitle,albumArtist,albumArt,isSolo));
-                }
-
+                    String _id      = jobj.getString("_id");
+                    int isSolo = Integer.parseInt(jobj.getString("isSolo"));
+                    Album album1 = new Album(albumId,albumTitle,albumArtist,albumArt,isSolo);
+                    album1.set_ID(_id);
+                    album.add(album1);
             }
 
         } catch (JSONException e) {
@@ -253,17 +282,16 @@ public class Sync extends AppCompatActivity {
         return album;
     }
 
-    private ArrayList<Song> JsonToSongList(String rawJsonStr)
+    private ArrayList<Song> JsonToSongList(JSONObject rawJsonStr)
     {
         ArrayList<Song> song = new ArrayList();
-        JSONObject jsonObject = null;
+        JSONObject jsonObject = rawJsonStr;
         try {
-            jsonObject = new JSONObject(rawJsonStr);
-            JSONArray jsonArray = jsonObject.getJSONArray(currAlbumId.getAlbum_id());
+            JSONArray jsonArray = jsonObject.getJSONArray("docs");
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jobj = jsonArray.getJSONObject(i);
-                song.add(new Song(jobj.getString("Song_title"),jobj.getString("Album_id")
-                        ,jobj.getString("Song_lyric")));
+                song.add(new Song(jobj.getString("Lyric_Title"),jobj.getString("Album_id")
+                        ,jobj.getString("Lyric_Text")));
             }
 
         } catch (JSONException e) {
@@ -311,17 +339,10 @@ public class Sync extends AppCompatActivity {
         }
     }
 
-    private synchronized void saveToDatabase(String res,Album album,int pos)
+    private synchronized void saveToDatabase(JSONObject res,Album album)
     {
         ArrayList<Song> songs = JsonToSongList(res);
         new MyDbHandler(context).InsertNewAlbum(album,songs);
-        songs.clear();
-        app.writeSyncedAlbum(albumNO.get(pos));
-        albumNO.remove(pos);
-        if(app.getUpdateAlbum().contains("1")||app.getUpdateAlbum().contains("2"))
-        app.setUpdateAlbum("3");
-        else
-            app.setUpdateAlbum(album.get_isSolo()+"");
         dialog.dismiss();
         can_back = true;
 
