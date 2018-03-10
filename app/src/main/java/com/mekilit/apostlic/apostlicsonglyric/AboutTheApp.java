@@ -50,7 +50,7 @@ public class AboutTheApp extends AppCompatActivity {
         web.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToUrl("http://apostolicsongs.000webhostapp.com");
+                goToUrl("http://apostolicsong.com");
             }
         });
 

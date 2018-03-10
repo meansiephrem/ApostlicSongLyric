@@ -2,6 +2,7 @@ package com.mekilit.apostlic.apostlicsonglyric;
 
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
@@ -12,7 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
@@ -44,6 +47,19 @@ public class NavigationDrawer extends Fragment {
         AllAlbum.setText(helper.CountAlL('a'));
         AllArtist.setText(helper.CountAlL('c'));
         AllSong.setText(helper.CountAlL('b'));
+
+        if(ApostolicSongs.theme == R.style.AppTheme_Black){
+
+            RelativeLayout layout = (RelativeLayout) view.findViewById(R.id.navDrawerdRlativeLayout);
+
+            layout.setBackgroundColor(Color.BLACK);
+            navListView.setBackgroundColor(Color.BLACK);
+            AllAlbum.setTextColor(Color.WHITE);
+            AllArtist.setTextColor(Color.WHITE);
+            AllSong.setTextColor(Color.WHITE);
+        }
+
+
 
         DecodeTask task = new DecodeTask(imageView, getContext(),null);
 

@@ -463,8 +463,7 @@ public class MyDbHandler extends SQLiteOpenHelper {
         return ret;
     }
 
-    public void InsertNewAlbum(Album album,ArrayList<Song> song)
-    {
+    public void InsertNewAlbum(Album album,ArrayList<Song> song) {
         SQLiteDatabase db = getWritableDatabase();
 
         ContentValues ALL_Albums = new ContentValues();
@@ -486,6 +485,17 @@ public class MyDbHandler extends SQLiteOpenHelper {
                 db.insert(TABLE_LYRIC, null, ALL_Lyric);
             }
 
+    }
+
+    public void UpdateLyric(Song newLyric) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(LYRIC_ACTUAL_LYRIC,newLyric.get_actualLyric());
+
+        db.update(MyDbHandler.TABLE_LYRIC, contentValues,
+                MyDbHandler.LYRIC_ALBUM_ID + "= '" +newLyric.get_albumId()
+                +"' AND "+ MyDbHandler.LYRIC_TITLE + "= '" + newLyric.get_title() +"'", null);
     }
 }
 

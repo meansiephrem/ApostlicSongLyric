@@ -91,18 +91,6 @@ public class ApostolicSongs extends Application {
         super.onCreate();
     }
 
-    public void writeSyncedAlbum(String albumNO) {
-
-        int intAlbumNO=Integer.parseInt(albumNO);
-        boolean temp =syncedAlbum[intAlbumNO];
-        if(!temp)
-        {
-            syncedRawStr+=":"+albumNO;
-            saveToFile(getBaseContext(),PREF_SYNCED_ALBUMS,syncedRawStr);
-            syncedAlbum[intAlbumNO]=true;
-        }
-    }
-
     public void setSyncedRawStr(String syncedRawStr) {
         for (int j =0 ; j<syncedAlbum.length;j++)
         {
@@ -114,11 +102,6 @@ public class ApostolicSongs extends Application {
         {
             syncedAlbum[Integer.parseInt(tempStrArray[i])]=true;
         }
-    }
-
-    public boolean alredaySyncedAlbum(int albumNO)
-    {
-        return syncedAlbum[albumNO];
     }
 
     public float getLyricTextSize() {
@@ -173,7 +156,7 @@ public class ApostolicSongs extends Application {
                 ApostolicSongs.toolbarColor = Color.BLACK;
                 break;
             case Brown:
-                ApostolicSongs.theme = R.style.AppTheme_red;
+                ApostolicSongs.theme = R.style.AppTheme_brown;
                 ApostolicSongs.toolbarColor = Color.WHITE;
                 break;
 
@@ -182,27 +165,25 @@ public class ApostolicSongs extends Application {
                 ApostolicSongs.toolbarColor = Color.BLACK;
                 break;
 
- /*           case Purple:
-                this.theme=R.style.AppTheme_P;
+         case Purple:
+                this.theme=R.style.AppTheme_Purple;
                 break;
 
-            case Indigo:
-                this.theme=R.style.AppTheme_Indigo;
+               case Indigo:
+                this.theme=R.style.AppTheme_Indego;
                 break;
 
             case Cyan:
                 this.theme=R.style.AppTheme_Cyan;
                 break;
 
-           case Teal:
+            case Teal:
                 this.theme=R.style.AppTheme_Teal;
-                break;
 
+                break;
             case Lime:
-                this.theme=R.style.AppTheme_Lime;
+                this.theme=R.style.AppTheme_Liam;
                 break;
-
-   */
 
             case Amber:
                 ApostolicSongs.theme=R.style.AppTheme_Amber;

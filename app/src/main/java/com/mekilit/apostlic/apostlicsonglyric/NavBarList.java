@@ -1,11 +1,13 @@
 package com.mekilit.apostlic.apostlicsonglyric;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 /**
@@ -25,10 +27,19 @@ public class NavBarList extends ArrayAdapter<Integer> {
         if (returnView == null) {
             LayoutInflater inflater = LayoutInflater.from(getContext());
             returnView = inflater.inflate(R.layout.nav_bar_layout, parent, false);
+
         }
 
         TextView textView = (TextView) returnView.findViewById(R.id.NavItemText);
         ImageView imageView = (ImageView) returnView.findViewById(R.id.NavItemImage);
+
+        if(ApostolicSongs.theme == R.style.AppTheme_Black){
+
+            RelativeLayout layout = (RelativeLayout) returnView.findViewById(R.id.navBar_relative);
+            layout.setBackgroundColor(Color.BLACK);
+            textView.setTextColor(Color.WHITE);
+        }
+
 
         switch (position) {
             case 0:

@@ -6,6 +6,8 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 import android.view.WindowManager;
+import com.crashlytics.android.Crashlytics;
+import io.fabric.sdk.android.Fabric;
 
 public class IntroPage extends AppCompatActivity {
 
@@ -17,6 +19,7 @@ public class IntroPage extends AppCompatActivity {
 
 
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics());
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,

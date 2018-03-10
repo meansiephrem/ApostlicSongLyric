@@ -4,6 +4,7 @@ import android.app.SearchManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -18,14 +19,27 @@ import android.view.MenuItem;
 import android.view.ViewStub;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.firebase.analytics.FirebaseAnalytics;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SelectAll extends AppCompatActivity implements AlbumListner {
     MyDbHandler helper = new MyDbHandler(this);
     Toolbar toolbar;
     ApostolicSongs app ;
     private long timeInMillsec;
-    private FirebaseAnalytics mFirebaseAnalytics;
+
 
     public SelectAll() {
 
@@ -68,6 +82,46 @@ public class SelectAll extends AppCompatActivity implements AlbumListner {
         SetUpNav();
         getSupportActionBar().setTitle("የጽዮን መዝሙሮች");
         timeInMillsec = 0;
+
+        String date_created = app.ReadFromFile(this,"LAST_MODIFIED","2018-01-09T18:13:52.000Z");
+        String url = getResources().getString(R.string.url)+"/lyrics/?" +
+                "[query][last_modified][$gt]="+date_created;
+
+        JsonObjectRequest stringRequest1 = new JsonObjectRequest(url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                    ArrayList<Song> UPDATED_SONGS = JsonToSongList(response);
+
+                        for(Song songs : UPDATED_SONGS){
+                            helper.UpdateLyric(songs);
+                        }
+
+
+
+
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {}
+
+        }
+
+        ){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Authorization", "Bearer " +
+                        "259dDkFw2bWxmB3iVmxonGa+ZqG7ewjIHoLFwK/YY2pklhJf3NjBIqgq07scYIVzXYiVRObCFa7f");
+                return headers;
+            }
+        };
+
+
+        MySingleton.getInstance(this).addToRequestQueue(stringRequest1);
+
 
     }
 
@@ -141,5 +195,28 @@ public class SelectAll extends AppCompatActivity implements AlbumListner {
             timeInMillsec = System.currentTimeMillis();
             Toast.makeText(this, "ለመውጣት ድጋሚ ይጫኑ", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private ArrayList<Song> JsonToSongList(JSONObject rawJsonStr) {
+        ArrayList<Song> song = new ArrayList();
+        JSONObject jsonObject = rawJsonStr;
+        String Last_modified =app.ReadFromFile(this,"LAST_MODIFIED","2018-01-09T18:13:52.000Z"); ;
+        try {
+            JSONArray jsonArray = jsonObject.getJSONArray("docs");
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jobj = jsonArray.getJSONObject(i);
+                song.add(new Song(jobj.getString("Lyric_Title"),jobj.getString("Album_id")
+                        ,jobj.getString("Lyric_Text")));
+                Last_modified = jobj.getString("last_modified");
+            }
+
+            app.saveToFile(this,"LAST_MODIFIED",Last_modified);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        return song;
     }
 }

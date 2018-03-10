@@ -30,7 +30,7 @@
     <string name="text_size_mid">መካከለኛ</string>
     <string name="text_size_small">ትንሽ</string>
     <string name="settings">መቼት</string>
-    <string name="url">https://apostolic-songs.herokuapp.com/</string>
+    <string name="url">http://api.apostolicsongs.addislaunch.com</string>
     <string name="path">sdcard/Apostolic Songs/Album Arts/</string>
 
 
