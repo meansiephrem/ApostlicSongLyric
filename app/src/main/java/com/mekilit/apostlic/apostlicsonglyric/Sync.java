@@ -344,7 +344,8 @@ public class Sync extends AppCompatActivity {
             File AlbumArt = new File("sdcard/Apostolic Songs/Album Arts/");
             mkFolder("sdcard/Apostolic Songs/Album Arts/");
         }
-        File file = new File(new File(getResources().getString(R.string.path)), filename);
+        File file = new File(new File(Environment.getExternalStorageDirectory().getAbsolutePath()+
+                getResources().getString(R.string.path)), filename);
 
         try {
             FileOutputStream out = new FileOutputStream(file);

@@ -141,6 +141,22 @@ public class MyDbHandler extends SQLiteOpenHelper {
         return Album;
     }
 
+    public String getAlbumArtForServer(String id) {
+        String Album = null;
+        SQLiteDatabase db = getWritableDatabase();
+        String[] col = {MyDbHandler.ALBUM_ART};
+        Cursor cursor = db.query(MyDbHandler.TABLE_ALBUM, col, MyDbHandler.ALBUM_ID + "= '" + id +
+                "'", null, null, null, null);
+
+        while (cursor.moveToNext()) {
+            int index = cursor.getColumnIndex(MyDbHandler.ALBUM_ART);
+            Album = cursor.getString(index);
+
+        }
+        cursor.close();
+        return Album;
+    }
+
     public ArrayList<String> SelectAllArtist() {
         ArrayList<String> ret = new ArrayList();
         SQLiteDatabase db = getWritableDatabase();

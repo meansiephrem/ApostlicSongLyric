@@ -31,7 +31,7 @@
     <string name="text_size_small">ትንሽ</string>
     <string name="settings">መቼት</string>
     <string name="url">http://api.apostolicsongs.addislaunch.com</string>
-    <string name="path">sdcard/Apostolic Songs/Album Arts/</string>
+    <string name="path">/Apostolic Songs/Album Arts/</string>
 
 
 </resources>

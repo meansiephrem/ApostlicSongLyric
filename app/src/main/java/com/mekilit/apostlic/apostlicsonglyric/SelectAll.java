@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
@@ -14,6 +15,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewStub;
@@ -74,7 +76,10 @@ public class SelectAll extends AppCompatActivity implements AlbumListner {
         toolbar.setBackgroundColor(app.color);
         toolbar.setTitleTextColor(ApostolicSongs.toolbarColor);
 
+        String path  = getResources().getString(R.string.path);
+        String abous = Environment.getExternalStorageDirectory().getAbsolutePath();
 
+        Log.d("Path","path "+path+ " absoul"+ abous);
 
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

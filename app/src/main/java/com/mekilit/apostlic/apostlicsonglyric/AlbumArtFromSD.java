@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.os.Environment;
 import android.util.Log;
 import android.widget.ImageView;
 
@@ -34,7 +35,9 @@ public class AlbumArtFromSD extends AsyncTask<String, Void, Bitmap> {
         opt.inPreferQualityOverSpeed = false;
         opt.inSampleSize = 0;
         opt.inPreferredConfig = Bitmap.Config.ARGB_8888;
-        String path = context.getResources().getString(R.string.path)+params[0];
+        String path = Environment.getExternalStorageDirectory().getAbsolutePath()+
+                context.getResources().getString(
+                R.string.path)+params[0];
         Bitmap bitmap = null;
         if(isCancelled()) {
             return bitmap;
