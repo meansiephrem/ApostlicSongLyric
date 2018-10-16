@@ -10,6 +10,9 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 public class AboutTheApp extends AppCompatActivity {
 
@@ -28,10 +31,12 @@ public class AboutTheApp extends AppCompatActivity {
 
         setContentView(R.layout.abt_page);
 
-        ImageView bigPic = (ImageView) findViewById(R.id.aboutApp);
-        ImageView logForUs = (ImageView) findViewById(R.id.logoForUs);
-        ImageButton facebook = (ImageButton) findViewById(R.id.facebookLink);
-        ImageButton web = (ImageButton)findViewById(R.id.webLink);
+        ImageView   bigPic =        (ImageView)   findViewById(R.id.aboutApp);
+        ImageView   logForUs =      (ImageView)   findViewById(R.id.logoForUs);
+        ImageButton facebook =      (ImageButton) findViewById(R.id.facebookLink);
+        ImageButton web =           (ImageButton) findViewById(R.id.webLink);
+        ImageButton telegram =      (ImageButton) findViewById(R.id.telegram);
+        TextView    priviacyPolicy = (TextView)   findViewById(R.id.privatePolicy);
 
         DecodeTask task = new DecodeTask(bigPic, this,null);
         task.execute(R.drawable.about_app_two/* File path to image */);
@@ -48,9 +53,23 @@ public class AboutTheApp extends AppCompatActivity {
         });
 
         web.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        goToUrl("http://apostolicsong.com");
+            }
+        });
+
+        priviacyPolicy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToUrl("http://apostolicsong.com");
+                goToUrl("https://termsfeed.com/privacy-policy/645845dd6dd3546281505b69c05393dd");
+            }
+        });
+
+        telegram.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToUrl("https://telegram.me/ApostolicSongsBot");
             }
         });
 

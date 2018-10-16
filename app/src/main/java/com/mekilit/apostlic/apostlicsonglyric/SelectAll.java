@@ -103,10 +103,6 @@ public class SelectAll extends AppCompatActivity implements AlbumListner {
                             helper.UpdateLyric(songs);
                         }
 
-
-
-
-
                     }
                 }, new Response.ErrorListener() {
             @Override

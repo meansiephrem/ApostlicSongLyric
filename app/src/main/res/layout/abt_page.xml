@@ -20,14 +20,14 @@
 
         android:id="@+id/aboutApp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="218dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="297dp"/>
+        android:layout_marginTop="349dp" />
 
     <TextView
         android:id="@+id/aboutAppVer"
@@ -43,21 +43,40 @@
         android:id="@+id/facebookLink"
         android:layout_width="64dp"
         android:layout_height="64dp"
-        android:layout_alignLeft="@+id/logoForUs"
-        android:layout_alignStart="@+id/logoForUs"
-        android:layout_below="@+id/aboutAppVer"
-        android:layout_marginTop="23dp"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="75dp"
         android:background="#e5e5e5"
         app:srcCompat="@drawable/facebook" />
+
+    <ImageButton
+        android:id="@+id/telegram"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="75dp"
+        android:background="#e5e5e5"
+        app:srcCompat="@drawable/telegram" />
 
     <ImageButton
         android:id="@+id/webLink"
         android:layout_width="64dp"
         android:layout_height="64dp"
-        android:layout_alignEnd="@+id/logoForUs"
-        android:layout_alignRight="@+id/logoForUs"
-        android:layout_alignTop="@+id/facebookLink"
+        android:layout_centerInParent="true"
         android:background="#e5e5e5"
         app:srcCompat="@drawable/web_v2" />
+
+    <TextView
+        android:id="@+id/privatePolicy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/aboutApp"
+        android:layout_centerHorizontal="true"
+        android:textSize="10dp"
+        android:layout_marginBottom="-349dp"
+        android:text="privacy policy"
+        android:textAppearance="?android:textAppearanceSmall"
+        android:textColor="#0000FF" />
 
 </RelativeLayout>
