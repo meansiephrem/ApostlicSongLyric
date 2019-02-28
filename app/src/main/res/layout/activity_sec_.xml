@@ -9,7 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.mekilit.apostlic.apostlicsonglyric.Sec_Activity">
+    tools:context="com.mekilit.apostlic.apostlicsonglyric.utils.Sec_Activity">
 
     <TextView
         android:id="@+id/SecName"

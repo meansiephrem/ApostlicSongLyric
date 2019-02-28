@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.mekilit.apostlic.apostlicsonglyric">
     <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
-        android:name=".ApostolicSongs"
+        android:name=".application.ApostolicSongs"
         android:allowBackup="true"
         android:icon="@mipmap/logo_ver_two"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".SelectAll" />
-        <activity android:name=".DisplayALbums" />
-        <activity android:name=".OneAlbum" />
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".mainpage.SelectAll" />
+        <activity android:name=".album.DisplayALbums" />
+        <activity android:name=".album.OneAlbum" />
         <activity
-            android:name=".Lyric"
-            android:parentActivityName=".SelectAll"></activity>
-        <activity android:name=".AlbumArt" />
-        <activity android:name=".IntroPage">
+            android:name=".lyrics.Lyric"
+            android:parentActivityName=".mainpage.SelectAll" />
+        <activity android:name=".album.AlbumArt" />
+        <activity android:name=".appinfo.IntroPage">
             <meta-data
                 android:name="io.fabric.ApiKey"
                 android:value="a5092d1b29b5771331ffc10838cb87cdcaf5752d"
@@ -34,10 +34,10 @@
                 android:name="android.app.default_searchable"
                 android:value=".SearchableActivity" />
         </activity>
-        <activity android:name=".AboutTheApp" />
-        <activity android:name=".Sec_Activity" />
-        <activity android:name=".AboutUs" />
-        <activity android:name=".Searchable">
+        <activity android:name=".appinfo.AboutTheApp" />
+        <activity android:name=".utils.Sec_Activity" />
+        <activity android:name=".appinfo.AboutUs" />
+        <activity android:name=".mainpage.Searchable">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
@@ -46,8 +46,8 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
-        <activity android:name=".Settings" />
-        <activity android:name=".Sync"></activity>
+        <activity android:name=".settings.Settings" />
+        <activity android:name=".settings.Sync"></activity>
     </application>
 
 </manifest>

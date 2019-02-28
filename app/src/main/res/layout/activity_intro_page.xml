@@ -4,9 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
-    tools:context="com.mekilit.apostlic.apostlicsonglyric.IntroPage">
+    tools:context="com.mekilit.apostlic.apostlicsonglyric.appinfo.IntroPage">
 
     <ImageView
+        android:contentDescription="@string/about_us_page"
         android:id="@+id/imageView2"
         android:layout_width="250dp"
         android:layout_height="250dp"

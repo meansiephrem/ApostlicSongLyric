@@ -30,8 +30,10 @@
     <string name="text_size_mid">መካከለኛ</string>
     <string name="text_size_small">ትንሽ</string>
     <string name="settings">መቼት</string>
-    <string name="url">http://api.apostolicsongs.addislaunch.com</string>
+    <string name="url">http://178.62.247.200:5400</string>
     <string name="path">/Apostolic Songs/Album Arts/</string>
+    <string name="about_us_page">About Us Page</string>
+    <string name="privacy_policy">privacy policy</string>
 
 
 </resources>

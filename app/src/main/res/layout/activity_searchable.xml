@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    tools:context="com.mekilit.apostlic.apostlicsonglyric.Searchable">
+    tools:context="com.mekilit.apostlic.apostlicsonglyric.mainpage.Searchable">
 
     <include
         android:id="@+id/appBar"

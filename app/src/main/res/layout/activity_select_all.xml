@@ -11,7 +11,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
 
-    tools:context="com.mekilit.apostlic.apostlicsonglyric.SelectAll">
+    tools:context="com.mekilit.apostlic.apostlicsonglyric.mainpage.SelectAll">
 
     <ViewStub
         android:id="@+id/appBar2"
@@ -52,7 +52,7 @@
 </LinearLayout>
     <fragment
         android:id="@+id/Navfragmnt"
-        android:name="com.mekilit.apostlic.apostlicsonglyric.NavigationDrawer"
+        android:name="com.mekilit.apostlic.apostlicsonglyric.settings.NavigationDrawer"
         android:layout_width="280dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
