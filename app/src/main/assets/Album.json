@@ -60,6 +60,17 @@
     "last_modified": "2018-01-09 18:13:52"
   },
   {
+    "_id": "5aa3a722aa49180026164263",
+    "last_modified": "2018-03-10T09:37:19.384Z",
+    "date_created": "2018-03-10T09:36:34.760Z",
+    "Album_ID": "Baharu1",
+    "Album_Title": "ቃልህ እውነት ነው",
+    "Album_Artist": "ባህሩ ኬሼቦ",
+    "isSolo": 1,
+    "__v": 0,
+    "Album_Art": "/images/baharu.jpg"
+  },
+  {
     "_id": {
       "$oid": "5a96c554b1d5600477d8654f"
     },
@@ -144,6 +155,17 @@
     "last_modified": "2018-01-09 18:13:52"
   },
   {
+    "_id": "5d5a3994c1875a0026cdd80f",
+    "last_modified": "2019-08-19T06:17:50.712Z",
+    "date_created": "2019-08-19T05:54:28.439Z",
+    "Album_ID": "Berhanu5",
+    "Album_Title": "ዘመኔ አንተን በመፍራት ይለቅ",
+    "Album_Artist": "ብርሀኑ ተክሌ",
+    "isSolo": 1,
+    "__v": 0,
+    "Album_Art": "/images/berhanu5.jpg"
+  },
+  {
     "_id": {
       "$oid": "5a96c554b1d5600477d86556"
     },
@@ -202,6 +224,28 @@
     "isSolo": "1",
     "date_created": "2018-01-09 18:13:52",
     "last_modified": "2018-01-09 18:13:52"
+  },
+  {
+    "_id": "5aa2c1c7aa49180026164262",
+    "last_modified": "2018-03-10T08:10:32.361Z",
+    "date_created": "2018-03-09T17:17:59.014Z",
+    "Album_ID": "Eyasu1",
+    "Album_Title": "From Every Nation",
+    "Album_Artist": "እያሱ ተ/ማርያም",
+    "isSolo": 1,
+    "__v": 0,
+    "Album_Art": "/images/Webp.net-resizeimage.png"
+  },
+  {
+    "_id": "5aa3a7e2aa49180026164264",
+    "last_modified": "2018-03-10T09:40:31.504Z",
+    "date_created": "2018-03-10T09:39:46.222Z",
+    "Album_ID": "Fekere1",
+    "Album_Title": "የወንጌል አርበኛ",
+    "Album_Artist": "ፍቅረ ወንጌል አዲሴ",
+    "isSolo": 1,
+    "__v": 0,
+    "Album_Art": "/images/fiker.jpg"
   },
   {
     "_id": {
@@ -502,6 +546,17 @@
     "isSolo": "1",
     "date_created": "2018-01-09 18:13:52",
     "last_modified": "2018-01-09 18:13:52"
+  },
+  {
+    "_id": "5d5a6da1c1875a0026cdd911",
+    "last_modified": "2019-08-19T09:37:04.865Z",
+    "date_created": "2019-08-19T09:36:33.922Z",
+    "Album_ID": "Sebele1",
+    "Album_Title": "ፍለጋዬ አንተ ነህ",
+    "Album_Artist": "ሰብለ አለማየሁ",
+    "isSolo": 1,
+    "__v": 0,
+    "Album_Art": "/images/sebele1.jpg"
   },
   {
     "_id": {
