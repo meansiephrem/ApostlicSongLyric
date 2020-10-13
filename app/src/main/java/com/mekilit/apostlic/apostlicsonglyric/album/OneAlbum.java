@@ -9,9 +9,9 @@ import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -21,8 +21,6 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.ImageLoader;
 import com.mekilit.apostlic.apostlicsonglyric.R;
 import com.mekilit.apostlic.apostlicsonglyric.lyrics.SongAdaptor;
 import com.mekilit.apostlic.apostlicsonglyric.application.ApostolicSongs;
@@ -98,8 +96,6 @@ public class OneAlbum extends AppCompatActivity {
                     + albumID + ".jpg");
             if (bitmap!=null)
             albumArt.setImageBitmap(bitmap);
-            else
-                getImageFromServer(helper.getAlbumArtForServer(albumID));
         }
 
 
@@ -127,30 +123,6 @@ public class OneAlbum extends AppCompatActivity {
         });
     }
 
-    private void getImageFromServer(final String picName) {
-
-        final String urlForPic = getResources().getString(R.string.url)+picName;
-
-        MySingleton.getInstance(context).getmImageLoader().get(urlForPic,
-                new ImageLoader.ImageListener() {
-                    @Override
-                    public void onResponse(ImageLoader.ImageContainer response,
-                                           boolean isImmediate) {
-
-                       Bitmap bitmap1= response.getBitmap();
-                        albumArt.setImageBitmap(bitmap1);
-                        SaveImage(bitmap1,albumID);
-                        }
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        albumArt.setImageBitmap(BitmapFactory.decodeResource(getResources(),
-                                R.drawable.defultpic));
-                    }
-
-
-                });
-
-    }
 
     private  void SaveImage(Bitmap bitmap,String name)
     {

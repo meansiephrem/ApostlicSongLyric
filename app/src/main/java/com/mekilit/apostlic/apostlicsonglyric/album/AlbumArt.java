@@ -6,14 +6,12 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ImageView;
 
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.ImageLoader;
 import com.mekilit.apostlic.apostlicsonglyric.application.ApostolicSongs;
 import com.mekilit.apostlic.apostlicsonglyric.utils.MyDbHandler;
 import com.mekilit.apostlic.apostlicsonglyric.application.MySingleton;
@@ -48,35 +46,10 @@ public class AlbumArt extends AppCompatActivity {
                     + AlbumID + ".jpg");
             if (bitmap!=null)
                 albumArt.setImageBitmap(bitmap);
-            else
-                getImageFromServer(helper.getAlbumArtForServer(AlbumID));
         }
 
     }
-    private void getImageFromServer(final String picName) {
 
-        final String urlForPic = getResources().getString(R.string.url)+picName;
-
-        MySingleton.getInstance(this).getmImageLoader().get(urlForPic,
-                new ImageLoader.ImageListener() {
-                    @Override
-                    public void onResponse(ImageLoader.ImageContainer response,
-                                           boolean isImmediate) {
-
-                        Bitmap bitmap1= response.getBitmap();
-                        albumArt.setImageBitmap(bitmap1);
-                        SaveImage(bitmap1,AlbumID);
-                    }
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        albumArt.setImageBitmap(BitmapFactory.decodeResource(getResources(),
-                                R.drawable.defultpic));
-                    }
-
-
-                });
-
-    }
 
     private  void SaveImage(Bitmap bitmap,String name)
     {

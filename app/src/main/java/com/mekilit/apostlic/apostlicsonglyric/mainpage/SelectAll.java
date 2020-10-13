@@ -7,30 +7,25 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.SearchView;
-import android.support.v7.widget.Toolbar;
+import com.google.android.material.tabs.TabLayout;
+import androidx.core.view.MenuItemCompat;
+import androidx.viewpager.widget.ViewPager;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewStub;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.mekilit.apostlic.apostlicsonglyric.R;
 import com.mekilit.apostlic.apostlicsonglyric.lyrics.Song;
 import com.mekilit.apostlic.apostlicsonglyric.utils.ViewPagerAdapter;
 import com.mekilit.apostlic.apostlicsonglyric.album.DisplayALbums;
 import com.mekilit.apostlic.apostlicsonglyric.album.OneAlbum;
 import com.mekilit.apostlic.apostlicsonglyric.application.ApostolicSongs;
-import com.mekilit.apostlic.apostlicsonglyric.application.MySingleton;
 import com.mekilit.apostlic.apostlicsonglyric.lyrics.Lyric;
 import com.mekilit.apostlic.apostlicsonglyric.settings.NavigationDrawer;
 import com.mekilit.apostlic.apostlicsonglyric.utils.MyDbHandler;
@@ -98,38 +93,6 @@ public class SelectAll extends AppCompatActivity implements AlbumListner {
         String date_created = app.ReadFromFile(this,"LAST_MODIFIED","2018-01-09T18:13:52.000Z");
         String url = getResources().getString(R.string.url)+"/lyrics/?" +
                 "[query][last_modified][$gt]="+date_created;
-
-        JsonObjectRequest stringRequest1 = new JsonObjectRequest(url, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-
-                    ArrayList<Song> UPDATED_SONGS = JsonToSongList(response);
-
-                        for(Song songs : UPDATED_SONGS){
-                            helper.UpdateLyric(songs);
-                        }
-
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {}
-
-        }
-
-        ){
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> headers = new HashMap<String, String>();
-                headers.put("Authorization", "Bearer " +
-                        "259dDkFw2bWxmB3iVmxonGa+ZqG7ewjIHoLFwK/YY2pklhJf3NjBIqgq07scYIVzXYiVRObCFa7f");
-                return headers;
-            }
-        };
-
-
-        MySingleton.getInstance(this).addToRequestQueue(stringRequest1);
-
 
     }
 

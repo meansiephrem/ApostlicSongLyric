@@ -4,7 +4,7 @@
     android:orientation="horizontal"
     android:weightSum="1">
 
-    <com.android.volley.toolbox.NetworkImageView
+    <ImageViewCompat
         android:id="@+id/syncAdapteALbumArt"
         android:layout_width="60dp"
         android:layout_height="60dp"

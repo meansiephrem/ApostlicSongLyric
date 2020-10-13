@@ -3,7 +3,7 @@ package com.mekilit.apostlic.apostlicsonglyric.utils;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.transition.Slide;
 import android.widget.TextView;
 

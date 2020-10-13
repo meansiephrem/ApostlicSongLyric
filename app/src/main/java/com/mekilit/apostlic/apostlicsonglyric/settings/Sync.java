@@ -9,8 +9,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -21,11 +21,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.ImageLoader;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.mekilit.apostlic.apostlicsonglyric.R;
 import com.mekilit.apostlic.apostlicsonglyric.album.Album;
 import com.mekilit.apostlic.apostlicsonglyric.application.ApostolicSongs;
@@ -109,143 +104,6 @@ public class Sync extends AppCompatActivity {
         String date_created = app.ReadFromFile(this,"DATE_CREATED","2018-01-09T18:13:52.000Z");
         url = getResources().getString(R.string.url)+"/albums/?" +
                 "[sort][date_created]=-1&per_page=20&[query][date_created][$gte]="+date_created;
-
-
-
-        JsonObjectRequest req = new JsonObjectRequest(url, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-
-
-
-                        AlbumList = JsonToAlbumList(response);
-
-
-
-                         adapter = new SyncAdapter(getBaseContext()
-                                ,AlbumList);
-
-
-
-                        listView.setAdapter(adapter);
-                        subTitle();
-                        if(AlbumList.isEmpty())
-                            textView.setText("ምንም አዲስ መዝሙር የለም :(\n ሌላ ጊዜ ይሞክሩ");
-
-                        Bar.setVisibility(View.INVISIBLE);
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e("ERROR TO CONNECT", error.getMessage());
-                textView.setText("ከኢንተርኔት ጋር መገናኘት አልተቻለም :(\n ትንሽ ቆይተው ይሞክሩ");
-                toolbar.setSubtitle("መገናኘት አልተቻለም");
-                Bar.setVisibility(View.INVISIBLE);
-            }
-        }
-
-
-        ){
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> headers = new HashMap<String, String>();
-                headers.put("Authorization", "Bearer " +
-                        "259dDkFw2bWxmB3iVmxonGa+ZqG7ewjIHoLFwK/YY2pklhJf3NjBIqgq07scYIVzXYiVRObCFa7f");
-                return headers;
-            }
-        };
-
-
-        MySingleton.getInstance(this).addToRequestQueue(req);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                if(sema){
-                    sema=false;
-                dialog.show();
-                can_back = false;
-                sync = -100;
-                currAlbumId = AlbumList.get(position);
-
-
-
-           String urlForSong = getResources().getString(R.string.url)+"/albums/"+
-                      currAlbumId.get_ID()+"/lyrics?per_page=20";
-           final String urlForPic = getResources().getString(R.string.url)+
-                        currAlbumId.getAlbum_Art();
-                    Log.d("urlForPic", urlForPic);
-
-                JsonObjectRequest stringRequest1 = new JsonObjectRequest(urlForSong, null,
-                        new Response.Listener<JSONObject>() {
-                            @Override
-                            public void onResponse(JSONObject response) {
-
-
-                                saveToDatabase(response,currAlbumId);
-
-
-                                MySingleton.getInstance(context).getmImageLoader().get(urlForPic,
-                                        new ImageLoader.ImageListener() {
-                                    @Override
-                                        public void onResponse(ImageLoader.ImageContainer response,
-                                                           boolean isImmediate) {
-
-
-                                        Bitmap bitmap= response.getBitmap();
-                                        if(bitmap != null)
-                                          getLocalBitmapUri(bitmap, currAlbumId.getAlbum_ID());
-                                        if(sync!=position){
-                                        AlbumList.remove(position);
-                                        adapter.notifyDataSetChanged();
-                                        subTitle();
-                                        sync=position;
-                                            sema=true;
-                                            dialog.dismiss();
-                                            can_back =true;
-                                            Toast.makeText(Sync.this,  currAlbumId.getAlbum_Title()+
-                                                    " የአልበሞች ዝርዝር ውስጥ ተካቷል", Toast.LENGTH_SHORT).show();
-                                        }
-
-
-                                    }
-
-                                    @Override
-                                    public void onErrorResponse(VolleyError error) {
-                                     error.printStackTrace();
-                                    }
-
-
-                                });
-                            }
-                        }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {}
-
-                }
-
-                ){
-                    @Override
-                    public Map<String, String> getHeaders() throws AuthFailureError {
-                        HashMap<String, String> headers = new HashMap<String, String>();
-                        headers.put("Authorization", "Bearer " +
-                                "259dDkFw2bWxmB3iVmxonGa+ZqG7ewjIHoLFwK/YY2pklhJf3NjBIqgq07scYIVzXYiVRObCFa7f");
-                        return headers;
-                    }
-                };
-
-
-                    MySingleton.getInstance(context).addToRequestQueue(stringRequest1);
-                subTitle();
-                if(AlbumList.isEmpty())
-                    textView.setText("ምንም አዲስ መዝሙር የለም :(\n ሌላ ጊዜ ይሞክሩ");
-
-
-            }
-        }});
-
-
 
 
     }

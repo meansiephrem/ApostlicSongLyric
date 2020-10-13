@@ -6,7 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
-import com.android.volley.toolbox.NetworkImageView;
+import android.widget.ImageView;
+
 import com.mekilit.apostlic.apostlicsonglyric.R;
 import com.mekilit.apostlic.apostlicsonglyric.utils.ViewHolders;
 import com.mekilit.apostlic.apostlicsonglyric.album.Album;
@@ -32,16 +33,16 @@ public class SyncAdapter extends ArrayAdapter<Album> {
     public View getView(int position, View convertView, ViewGroup parent) {
         View customView = convertView;
         ViewHolders holders = null;
-        NetworkImageView iv = null;
+        ImageView iv = null;
         if (customView == null) {
             LayoutInflater inflater = LayoutInflater.from(getContext());
             customView = inflater.inflate(R.layout.sync_adapter, parent, false);
             holders = new ViewHolders(customView);
-            iv = (NetworkImageView) customView.findViewById(R.id.syncAdapteALbumArt);
+            iv = (ImageView) customView.findViewById(R.id.syncAdapteALbumArt);
             customView.setTag(holders);
         } else {
             holders = (ViewHolders) customView.getTag();
-            iv = (NetworkImageView) convertView.findViewById(R.id.syncAdapteALbumArt);
+            iv = (ImageView) convertView.findViewById(R.id.syncAdapteALbumArt);
 
 
         }
@@ -49,7 +50,7 @@ public class SyncAdapter extends ArrayAdapter<Album> {
         holders.SmallText.setText(album.get(position).getAlbum_Artist());
         String imgUrl =getContext().getResources().getString(R.string.url)+
                 album.get(position).getAlbum_Art();
-        iv.setImageUrl(imgUrl,singleton.getmImageLoader());
+
 
         return customView;
     }

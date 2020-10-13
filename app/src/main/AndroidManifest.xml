@@ -20,10 +20,6 @@
             android:parentActivityName=".mainpage.SelectAll" />
         <activity android:name=".album.AlbumArt" />
         <activity android:name=".appinfo.IntroPage">
-            <meta-data
-                android:name="io.fabric.ApiKey"
-                android:value="a5092d1b29b5771331ffc10838cb87cdcaf5752d"
-                />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
